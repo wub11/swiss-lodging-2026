@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 瑞士住宿與航班</title>
+<style>
+  :root {
+    --bg: #f6f3ec;
+    --paper: #ffffff;
+    --ink: #202426;
+    --muted: #66706b;
+    --line: #ded8cb;
+    --accent: #2f6f73;
+    --accent-soft: #e8f1ef;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  .wrap {
+    width: min(920px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 56px;
+  }
+
+  header {
+    display: grid;
+    gap: 8px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(30px, 6vw, 48px);
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 18px 0;
+  }
+
+  .metric {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .metric span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .metric strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 18px;
+  }
+
+  .flight-board {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0;
+  }
+
+  .flight {
+    display: grid;
+    grid-template-columns: 64px 92px 86px minmax(240px, 1fr) minmax(150px, 0.75fr);
+    gap: 12px;
+    align-items: center;
+    min-height: 76px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .flight-direction {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    padding: 5px 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  .flight-date {
+    border-right: 1px solid var(--line);
+    padding-right: 12px;
+  }
+
+  .flight-date strong,
+  .flight-code {
+    display: block;
+    font-size: 21px;
+    line-height: 1.05;
+  }
+
+  .flight-date span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .flight-code {
+    font-weight: 900;
+  }
+
+  .flight-time {
+    font-weight: 800;
+    font-size: 19px;
+  }
+
+  .flight-note {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .list {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .stay {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 16px;
+    align-items: center;
+    min-height: 74px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .date {
+    border-right: 1px solid var(--line);
+    padding-right: 12px;
+  }
+
+  .date strong {
+    display: block;
+    font-size: 21px;
+    line-height: 1.05;
+  }
+
+  .date span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .place {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .place strong {
+    font-size: 21px;
+    line-height: 1.2;
+  }
+
+  .place span {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .highlight {
+    background: var(--accent-soft);
+    border-color: #b9d1cd;
+  }
+
+  footer {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  @media (max-width: 680px) {
+    .summary {
+      grid-template-columns: 1fr;
+    }
+
+    .stay {
+      grid-template-columns: 76px 1fr;
+      gap: 12px;
+      padding: 13px;
+    }
+
+    .flight {
+      grid-template-columns: 76px 1fr;
+      gap: 12px;
+      padding: 13px;
+    }
+
+    .flight-direction {
+      grid-column: 1;
+      grid-row: 1 / span 3;
+      align-self: start;
+    }
+
+    .flight-date {
+      grid-column: 2;
+      border-right: 0;
+      padding-right: 0;
+    }
+
+    .flight-code,
+    .flight-time,
+    .flight-note {
+      grid-column: 2;
+    }
+
+    .place strong {
+      font-size: 18px;
+    }
+
+    .flight-date strong,
+    .flight-code,
+    .flight-time {
+      font-size: 18px;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">住宿簡版</p>
+    <h1>2026 瑞士住宿與航班</h1>
+  </header>
+
+  <section class="flight-board" aria-label="航班時間">
+    <article class="flight">
+      <div class="flight-direction">去程</div>
+      <div class="flight-date"><strong>6/16</strong><span>週二</span></div>
+      <div class="flight-code">BR75</div>
+      <div class="flight-time">TPE 07:50 → BKK 10:50</div>
+      <div class="flight-note">長榮航空 · Boeing 777-300ER</div>
+    </article>
+
+    <article class="flight">
+      <div class="flight-direction">去程</div>
+      <div class="flight-date"><strong>6/16</strong><span>週二</span></div>
+      <div class="flight-code">LX181</div>
+      <div class="flight-time">BKK 12:50 → ZRH 19:35</div>
+      <div class="flight-note">瑞士航空 · Boeing 777-300ER</div>
+    </article>
+
+    <article class="flight">
+      <div class="flight-direction">回程</div>
+      <div class="flight-date"><strong>6/30</strong><span>週二</span></div>
+      <div class="flight-code">LX122</div>
+      <div class="flight-time">ZRH 13:15 → ICN 07:30<sup>+1</sup></div>
+      <div class="flight-note">瑞士航空 · Airbus A350-900</div>
+    </article>
+
+    <article class="flight">
+      <div class="flight-direction">回程</div>
+      <div class="flight-date"><strong>7/1</strong><span>週三</span></div>
+      <div class="flight-code">BR169</div>
+      <div class="flight-time">ICN 12:00 → TPE 13:35</div>
+      <div class="flight-note">長榮航空 · Airbus A330-300</div>
+    </article>
+  </section>
+
+  <section class="summary" aria-label="住宿摘要">
+    <div class="metric">
+      <span>住宿日期</span>
+      <strong>2026/6/16-6/29</strong>
+    </div>
+    <div class="metric">
+      <span>晚數</span>
+      <strong>14 晚</strong>
+    </div>
+  </section>
+
+  <section class="list" aria-label="每日住宿地點">
+    <article class="stay">
+      <div class="date"><strong>6/16</strong><span>週二</span></div>
+      <div class="place"><strong>Zürich Airport 附近</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/17</strong><span>週三</span></div>
+      <div class="place"><strong>Grindelwald</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/18</strong><span>週四</span></div>
+      <div class="place"><strong>Grindelwald</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/19</strong><span>週五</span></div>
+      <div class="place"><strong>Grindelwald</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/20</strong><span>週六</span></div>
+      <div class="place"><strong>Grindelwald</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/21</strong><span>週日</span></div>
+      <div class="place"><strong>Spiez</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/22</strong><span>週一</span></div>
+      <div class="place"><strong>Spiez</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/23</strong><span>週二</span></div>
+      <div class="place"><strong>Brig</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/24</strong><span>週三</span></div>
+      <div class="place"><strong>Zermatt 鎮上</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/25</strong><span>週四</span></div>
+      <div class="place"><strong>Zermatt 鎮上</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/26</strong><span>週五</span></div>
+      <div class="place"><strong>Zermatt 鎮上</strong></div>
+    </article>
+
+    <article class="stay highlight">
+      <div class="date"><strong>6/27</strong><span>週六</span></div>
+      <div class="place"><strong>Gornergrat 3100</strong><span>山上住宿</span></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/28</strong><span>週日</span></div>
+      <div class="place"><strong>Montreux</strong></div>
+    </article>
+
+    <article class="stay">
+      <div class="date"><strong>6/29</strong><span>週一</span></div>
+      <div class="place"><strong>Zürich HB</strong><span>蘇黎世火車站附近</span></div>
+    </article>
+  </section>
+
+  <footer>版本日期：2026-06-05</footer>
+</main>
+</body>
+</html>
