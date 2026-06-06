@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 瑞士 15 日 · 行程地圖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F1E8;
+    --surface: #FFFFFF;
+    --ink: #1F2421;
+    --ink-soft: #657069;
+    --accent: #B8472D;
+    --line: #E5DFCE;
+    --green: #166534;
+    --green-bg: #dcfce7;
+    --amber: #92400e;
+    --amber-bg: #fef3c7;
+    --blue: #1d4ed8;
+    --blue-bg: #dbeafe;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+  body {
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .app { display: grid; grid-template-columns: minmax(360px, 430px) 1fr; height: 100vh; }
+  .panel {
+    padding: 22px 26px 28px;
+    overflow-y: auto;
+    border-right: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .panel-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .home-link, .small-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .small-link { color: var(--ink-soft); }
+  .home-link:hover, .small-link:hover { border-color: var(--accent); color: var(--accent); }
+  .day-tabs {
+    display: flex; flex-wrap: wrap; gap: 4px;
+    margin-bottom: 18px; padding: 6px 0 14px;
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: -22px; background: var(--bg); z-index: 10;
+  }
+  .day-tab {
+    font-family: inherit;
+    min-width: 54px;
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    cursor: pointer;
+    display: inline-flex; flex-direction: column; align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    line-height: 1.1;
+  }
+  .day-tab:hover { border-color: var(--accent); color: var(--accent); }
+  .day-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .day-tab-date { font-size: 11px; opacity: .76; }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.08;
+    margin: 0 0 12px;
+    letter-spacing: 0;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.58;
+    margin: 0 0 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 14px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .chip.good { background: var(--green-bg); color: var(--green); border-color: #86efac; }
+  .chip.warn { background: var(--amber-bg); color: var(--amber); border-color: #fcd34d; }
+  .chip.blue { background: var(--blue-bg); color: var(--blue); border-color: #93c5fd; }
+  .stop {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .stop:hover { background: rgba(184, 71, 45, .055); }
+  .stop-num {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 34px;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .stop-num.hotel { color: var(--ink); }
+  .stop-num.optional { color: var(--ink-soft); font-style: italic; }
+  .stop-time {
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .stop-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 21px;
+    line-height: 1.25;
+    margin-bottom: 5px;
+  }
+  .stop-note { color: var(--ink-soft); line-height: 1.52; font-size: 14.5px; }
+  .stop-hotel-extra {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+  }
+  .stop-nights {
+    font-size: 11.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .stop-address { color: var(--ink-soft); font-size: 13.5px; line-height: 1.45; margin-bottom: 8px; }
+  .stop-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+  .stop-actions a { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 700; }
+  .leg-connector {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin: 0 0 0 18px; padding: 3px 0;
+  }
+  .leg-rail { width: 3px; height: 20px; border-radius: 2px; flex-shrink: 0; }
+  .leg-text { font-size: 13px; color: var(--ink-soft); }
+  .leg-pass, .leg-lug {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .leg-lug-full { background: #fee2e2; color: #b91c1c; }
+  .leg-lug-light { background: #ecfccb; color: #4d7c0f; }
+  .leg-lug-overnight { background: #fef9c3; color: #a16207; }
+  .footer {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+  .map-wrap { position: relative; min-height: 100vh; background: #e8e2d3; }
+  #map { width: 100%; height: 100%; min-height: 100vh; }
+  .map-legend {
+    position: absolute; left: 16px; bottom: 16px; z-index: 2;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    max-width: min(720px, calc(100% - 32px));
+    padding: 9px;
+    border-radius: 7px;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  }
+  .legend-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--ink-soft); }
+  .legend-line { width: 18px; height: 3px; border-radius: 9px; }
+  .popup-title { font-family: 'Fraunces', Georgia, serif; font-size: 18px; margin-bottom: 5px; }
+  .popup-note { color: #5b6660; line-height: 1.45; max-width: 260px; }
+  .popup-actions { margin-top: 8px; }
+  .popup-actions a { color: var(--accent); text-decoration: none; font-weight: 700; }
+  @media (max-width: 860px) {
+    .app { display: block; height: auto; }
+    .panel { border-right: 0; border-bottom: 1px solid var(--line); max-height: none; }
+    .day-tabs { top: -18px; }
+    .map-wrap, #map { height: 58vh; min-height: 440px; }
+    h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="panel">
+    <div class="panel-top">
+      <a class="home-link" href="index.html">← 行程總覽</a>
+      <a class="small-link" href="ticket.html">票券</a>
+    </div>
+    <div class="day-tabs" id="dayTabs"></div>
+    <div class="eyebrow" id="eyebrow"></div>
+    <h1 id="title"></h1>
+    <p class="subtitle" id="subtitle"></p>
+    <div class="chips" id="chips"></div>
+    <div id="stops"></div>
+    <div class="footer" id="footer"></div>
+  </aside>
+  <main class="map-wrap">
+    <div id="map"></div>
+    <div class="map-legend" id="mapLegend"></div>
+  </main>
+</div>
+
+<script>
+const GOOGLE_MAPS_API_KEY = "AIzaSyAMVuNsYEOFY_J4m7jREil4EmoUkaUUuJU";
+
+const HOTELS = {
+  zrhAirport: {
+    name: "Radisson Blu Hotel, Zurich Airport",
+    displayName: "Radisson Blu 機場飯店",
+    address: "Rondellstrasse, 8058 Zürich-Flughafen, Switzerland",
+    nights: "1 晚 · 6/16",
+    link: "https://www.radissonhotels.com/en-us/hotels/radisson-blu-zurich-airport",
+    maps: "Radisson Blu Hotel Zurich Airport Rondellstrasse",
+    lat: 47.4498, lng: 8.5654
+  },
+  grindelwald: {
+    name: "Alpin Chic - Aare Jungfrau AG - Three-Bedroom Apartment",
+    displayName: "Grindelwald 公寓",
+    address: "Grindelwald 鎮上 · 座標 46.6243, 8.0358",
+    nights: "連住 4 晚 · 6/17-6/21",
+    link: "https://www.airbnb.com.tw/rooms/1275129086150054004",
+    maps: "Alpin Chic - Aare Jungfrau AG - Three-Bedroom Apartment",
+    lat: 46.624279, lng: 8.0358296
+  },
+  spiez: {
+    name: "Niesen Loft #353929",
+    displayName: "Niesen Loft",
+    address: "Kirchgasse 20, 3700 Spiez, Switzerland",
+    nights: "連住 2 晚 · 6/21-6/23",
+    link: "https://niesenloft.holidayfuture.com/listings/353929",
+    maps: "Niesen Loft Kirchgasse 20 Spiez",
+    lat: 46.6883, lng: 7.6814
+  },
+  brig: {
+    name: "Brig temporary placeholder",
+    displayName: "Brig 車站周邊住宿",
+    address: "Brig Bahnhof / Bahnhofplatz, 3900 Brig, Switzerland",
+    nights: "1 晚 · 6/23 · 暫以車站周邊定位",
+    maps: "Brig Bahnhof Switzerland",
+    lat: 46.3190, lng: 7.9880
+  },
+  zermatt: {
+    name: "Heinz Julen Loft by Zermatt",
+    displayName: "Heinz Julen Loft",
+    address: "Bachstrasse 110A, 3920 Zermatt, Switzerland",
+    nights: "連住 3 晚 · 6/24-6/27",
+    link: "https://www.airbnb.com.tw/rooms/17381831",
+    maps: "Heinz Julen Loft Bachstrasse Zermatt",
+    lat: 46.0193, lng: 7.7491
+  },
+  gornergrat: {
+    name: "3100 Kulmhotel Gornergrat",
+    displayName: "3100 Kulmhotel",
+    address: "Gornergrat 3100m, 3920 Zermatt, Switzerland",
+    nights: "1 晚 · 6/27",
+    link: "https://gornergrat-kulm.ch/?lang=en",
+    maps: "3100 Kulmhotel Gornergrat",
+    lat: 45.9836, lng: 7.7848
+  },
+  montreux: {
+    name: "Montreux temporary placeholder",
+    displayName: "Montreux 車站/湖畔住宿",
+    address: "Montreux Gare / Grand Rue, 1820 Montreux, Switzerland",
+    nights: "1 晚 · 6/28 · 暫以車站湖畔定位",
+    maps: "Montreux Gare Switzerland",
+    lat: 46.4351, lng: 6.9107
+  },
+  zurich: {
+    name: "Ruby Mimi Hotel Zurich",
+    displayName: "Ruby Mimi Zurich",
+    address: "Beatenplatz 4, 8001 Zürich, Switzerland",
+    nights: "1 晚 · 6/29",
+    link: "https://www.ruby-hotels.com/en/destinations/zurich/ruby-mimi",
+    maps: "Ruby Mimi Hotel Zurich Beatenplatz 4",
+    lat: 47.3743, lng: 8.5388
+  }
+};
+
+const DAYS = [
+  {
+    n: 1, date: "6/16", weekday: "二", kind: "長程飛行",
+    eyebrow: "Day 1 · 6/16(二) · 長程飛行",
+    title: "桃園 → 曼谷<br>→ 蘇黎世",
+    subtitle: "BR75 商務艙飛曼谷,轉 LX181 抵達蘇黎世。晚到後直接住機場旁,把第一晚做成恢復日。",
+    tags: ["BR75 07:50", "BKK 轉機 2h", "LX181 19:35 抵達"],
+    footer: '航班以航空公司訂位資料為準。住宿:Radisson Blu Zurich Airport。',
+    center: { lat: 33, lng: 82 }, zoom: 3, fit: true,
+    stops: [
+      { name: "桃園機場 TPE T2", lat: 25.0797, lng: 121.2342, time: "07:50", label: "起飛 · BR75", note: "長榮航空 BR75,商務艙 D,座位 11A/11D/11G。行李直掛 ZRH。" },
+      { name: "曼谷 BKK", lat: 13.6900, lng: 100.7501, time: "10:50", label: "轉機 · 2h", note: "Suvarnabhumi 轉機 2 小時,接同張票 LX181。" },
+      { name: "蘇黎世機場 ZRH", lat: 47.4502, lng: 8.5616, time: "19:35", label: "抵達 · LX181", note: "瑞士航空 LX181,商務艙 Z。入境取行李後前往機場飯店。" },
+      { ...hotelStop(HOTELS.zrhAirport, "晚上", "🏨 機場飯店") }
+    ],
+    hotel: HOTELS.zrhAirport
+  },
+  {
+    n: 2, date: "6/17", weekday: "三", kind: "進山",
+    eyebrow: "Day 2 · 6/17(三) · 琉森短停",
+    title: "黃金列車東段<br>進入 Grindelwald",
+    subtitle: "上午從機場到 Luzern 寄物短停,下午搭 Luzern-Interlaken Express 進少女峰區,抵達 Grindelwald 連住 4 晚。",
+    tags: ["HFC", "Luzern 短停", "15:06 主班"],
+    footer: 'SBB 班次出發前重查；主抓 15:06 Luzern → Interlaken Express。',
+    center: { lat: 47.0, lng: 8.2 }, zoom: 9, fit: true,
+    stops: [
+      { ...hotelStop(HOTELS.zrhAirport, "上午", "退房 · 出發") },
+      { name: "Luzern 琉森", lat: 47.0502, lng: 8.3093, time: "10:25", label: "寄物 · 午餐", note: "約 09:15 從 Zürich Flughafen 出發。Luzern 站寄大行李,卡貝爾橋、舊城、湖畔與午餐。" },
+      { name: "卡貝爾橋 Kapellbrücke", lat: 47.0517, lng: 8.3070, time: "午前", label: "湖畔散步", note: "站邊輕鬆散步,保留回車站時間。" },
+      { name: "Interlaken Ost", lat: 46.6907, lng: 7.8696, time: "16:54", label: "轉乘", note: "15:06 Luzern 出發,16:54 抵 Interlaken Ost,接 BOB 上山。" },
+      { name: "Grindelwald", lat: 46.6242, lng: 8.0414, time: "17:40", label: "入住 · 連住 4 晚", note: "入住後超市補給、早點休息。" }
+    ],
+    hotel: HOTELS.grindelwald
+  },
+  {
+    n: 3, date: "6/18", weekday: "四", kind: "JTP4 Day 1",
+    eyebrow: "Day 3 · 6/18(四) · Männlichen",
+    title: "Männlichen<br>全景步道",
+    subtitle: "JTP4 啟用。主軸走 Männlichen → Kleine Scheidegg 全景路線；Lauterbrunnen 瀑布鎮是走不動或天氣壓低時的備案。",
+    tags: ["JTP4", "健行偏長", "Lauterbrunnen 備案"],
+    footer: '出發前查看 Jungfrau Webcams,以路況與長輩體力決定完整步道或備案。',
+    center: { lat: 46.60, lng: 7.96 }, zoom: 12, fit: true,
+    stops: [
+      { name: "Grindelwald Terminal", lat: 46.624686, lng: 8.019002, time: "08:30", label: "纜車上山", note: "搭 V-Bahn 到 Männlichen。JTP4 covered。" },
+      { name: "Männlichen", lat: 46.613083, lng: 7.940983, time: "09:30", label: "步道起點", note: "可先上 Royal Walk 看 Eiger / Mönch / Jungfrau。" },
+      { name: "Kleine Scheidegg", lat: 46.585015, lng: 7.961225, time: "中午", label: "午餐 · 中繼", note: "全景路線約 4.7km,長輩抓 2.5-3h 含休息。" },
+      { name: "Lauterbrunnen 瀑布鎮", lat: 46.5935, lng: 7.9091, time: "備案", label: "走不動時改走", optional: true, note: "若主線步道負擔太高,改以低海拔瀑布鎮散步與火車 loop。" },
+      { name: "Grindelwald", lat: 46.6242, lng: 8.0414, time: "下午", label: "返村", note: "下山回公寓休息。" }
+    ],
+    hotel: HOTELS.grindelwald
+  },
+  {
+    n: 4, date: "6/19", weekday: "五", kind: "JTP4 Day 2",
+    eyebrow: "Day 4 · 6/19(五) · First",
+    title: "First Cliff Walk<br>+ Bachalpsee",
+    subtitle: "First 纜車與 Bachalpsee 是主軸。長輩腳程抓 3-3.5 小時,雲多時改 Cliff Walk + 餐廳休息也很順。",
+    tags: ["JTP4", "First covered", "Bachalpsee"],
+    footer: 'First 纜車與山上設施以 jungfrau.ch 當日營運為準。',
+    center: { lat: 46.65, lng: 8.06 }, zoom: 12, fit: true,
+    stops: [
+      { name: "Grindelwald Firstbahn", lat: 46.6242, lng: 8.0414, time: "早上", label: "出發 · 纜車", note: "從鎮上 Firstbahn 上山,JTP4 covered。" },
+      { name: "First 山頂站", lat: 46.6592, lng: 8.0535, time: "上午", label: "2168m", note: "先走 Cliff Walk,再視天氣往 Bachalpsee。" },
+      { name: "First Cliff Walk", lat: 46.6584, lng: 8.0530, time: "上午", label: "懸崖步道", note: "簡單一圈,懼高者可略過懸空段。" },
+      { name: "Bachalpsee", lat: 46.6669, lng: 8.0285, time: "中午", label: "高山湖", note: "來回約 6km,長輩抓 3-3.5h,沿途慢走休息。" },
+      { name: "Grindelwald", lat: 46.6242, lng: 8.0414, time: "下午", label: "返村", note: "下纜車回公寓休息。" }
+    ],
+    hotel: HOTELS.grindelwald
+  },
+  {
+    n: 5, date: "6/20", weekday: "六", kind: "JTP4 Day 3",
+    eyebrow: "Day 5 · 6/20(六) · Jungfraujoch",
+    title: "Jungfraujoch 優先<br>Harder Kulm 備援",
+    subtitle: "天氣好時優先上 Jungfraujoch。Harder Kulm 放在低海拔備援,或上少女峰後傍晚體力好再加。",
+    tags: ["JTP4", "天氣決策日", "JFJ connecting ticket"],
+    footer: 'Jungfraujoch 2026/5/1-10/31 座位預約為 mandatory；JTP connecting ticket 以官方購票頁為準。',
+    center: { lat: 46.56, lng: 7.95 }, zoom: 10, fit: true,
+    stops: [
+      { name: "Grindelwald Terminal", lat: 46.624686, lng: 8.019002, time: "早上", label: "出發", note: "走 Eiger Express / Jungfraubahn 上山,依購票時段安排。" },
+      { name: "Eigergletscher", lat: 46.5747, lng: 7.9747, time: "上午", label: "轉乘", note: "轉 Jungfraubahn 往 Jungfraujoch。" },
+      { name: "Jungfraujoch", lat: 46.5476, lng: 7.9854, time: "中午", label: "Top of Europe", note: "高海拔 3454m,慢走、保暖、補水。不適即下山。" },
+      { name: "Harder Kulm", lat: 46.6967, lng: 7.8512, time: "備援/傍晚", label: "低海拔景觀", optional: true, note: "不上 Jungfraujoch 時可當主菜；上 Jungfraujoch 後只當輕量加菜。" },
+      { name: "Grindelwald", lat: 46.6242, lng: 8.0414, time: "傍晚", label: "返村", note: "回公寓休息,整理隔天退房與寄物。" }
+    ],
+    hotel: HOTELS.grindelwald
+  },
+  {
+    n: 6, date: "6/21", weekday: "日", kind: "JTP4 Day 4",
+    eyebrow: "Day 6 · 6/21(日) · Lake Brienz",
+    title: "Brienz・Iseltwald<br>遊船到 Spiez",
+    subtitle: "退房後在 Interlaken Ost 寄大行李,輕裝玩 Brienz / Iseltwald,傍晚取回行李到 Spiez 入住。",
+    tags: ["JTP4", "BLS 船", "PostBus + HFC"],
+    footer: 'BLS 船班出發前重查。大行李優先使用 Interlaken Ost locker。',
+    center: { lat: 46.71, lng: 7.86 }, zoom: 10, fit: true,
+    stops: [
+      { name: "Grindelwald", lat: 46.6242, lng: 8.0414, time: "早上", label: "退房", note: "退房搭 BOB 到 Interlaken Ost,JTP4 covered。" },
+      { name: "Interlaken Ost", lat: 46.6907, lng: 7.8696, time: "上午", label: "寄大行李", note: "大行李放 locker,全天輕裝向東玩湖區。" },
+      { name: "Brienz", lat: 46.7556, lng: 8.0379, time: "中午", label: "湖邊午餐", note: "Interlaken Ost → Brienz 約 20 分,JTP4 covered。" },
+      { name: "Iseltwald", lat: 46.7197, lng: 7.9711, time: "下午", label: "遊船", note: "BLS Brienz → Iseltwald 約 27 分,JTP4 covered。湖岸散步拍照。" },
+      { name: "Spiez", lat: 46.6863, lng: 7.6797, time: "傍晚", label: "取行李 · 入住", note: "PostBus 回 Interlaken Ost 取行李,再搭火車到 Spiez。" }
+    ],
+    hotel: HOTELS.spiez
+  },
+  {
+    n: 7, date: "6/22", weekday: "一", kind: "高山湖",
+    eyebrow: "Day 7 · 6/22(一) · Oeschinensee",
+    title: "Oeschinensee<br>厄希嫩湖",
+    subtitle: "從 Spiez 直達 Kandersteg,纜車與山上接駁到湖邊。這天節奏友善,適合長輩恢復。",
+    tags: ["HFC", "電動接駁", "湖畔午餐"],
+    footer: 'Oeschinensee 纜車時段建議線上預約。',
+    center: { lat: 46.59, lng: 7.71 }, zoom: 11, fit: true,
+    stops: [
+      { name: "Spiez", lat: 46.6863, lng: 7.6797, time: "早上", label: "出發", note: "從 Niesen Loft 步行到車站,搭 BLS 直達 Kandersteg。" },
+      { name: "Kandersteg", lat: 46.4954, lng: 7.6736, time: "上午", label: "接駁", note: "接駁巴士到 Oeschinen 纜車站。" },
+      { name: "Oeschinen 纜車山下站", lat: 46.4863, lng: 7.7066, time: "上午", label: "纜車", note: "HFC/STP/GA 優惠價,以官方購票頁為準。" },
+      { name: "Oeschinensee", lat: 46.4940, lng: 7.7273, time: "中午", label: "湖畔午餐", note: "搭山上電動接駁到湖邊,湖畔散步與午餐。" },
+      { name: "Spiez 港邊", lat: 46.6863, lng: 7.6797, time: "傍晚", label: "回程", note: "回 Spiez 港邊散步、晚餐。" }
+    ],
+    hotel: HOTELS.spiez
+  },
+  {
+    n: 8, date: "6/23", weekday: "二", kind: "Brig 中繼",
+    eyebrow: "Day 8 · 6/23(二) · Aletsch / Brig",
+    title: "Spiez → Brig<br>Aletsch 冰河視野",
+    subtitle: "早上往 Brig 中繼。天氣清楚時上 Riederalp / Moosfluh 看 Aletsch 冰河；傍晚住 Brig 車站周邊暫定位。",
+    tags: ["HFC", "Brig 暫定位", "Aletsch 可選"],
+    footer: 'Brig 住宿暫以車站周邊定位；訂房後補正式名稱、地址與座標。',
+    center: { lat: 46.36, lng: 7.95 }, zoom: 10, fit: true,
+    stops: [
+      { name: "Spiez", lat: 46.6863, lng: 7.6797, time: "早上", label: "退房 · 出發", note: "帶大行李往 Brig,保留天氣彈性。" },
+      { name: "Brig Bahnhof", lat: 46.3190, lng: 7.9880, time: "上午", label: "寄物/放行李", note: "以車站周邊為當晚住宿暫定位。先處理行李再出發看冰河。" },
+      { name: "Riederalp / Moosfluh", lat: 46.4108, lng: 8.0610, time: "中午", label: "Aletsch 視野", note: "天氣清楚時上 Moosfluh 看 Aletsch 冰河。末班前保留回程緩衝。" },
+      { name: "Stockalper Palace", lat: 46.3154, lng: 7.9877, time: "傍晚", label: "Brig 老城", optional: true, note: "雲霧厚時可把重點放在 Brig 老城、Stockalper Palace 與晚餐。" }
+    ],
+    hotel: HOTELS.brig
+  },
+  {
+    n: 9, date: "6/24", weekday: "三", kind: "Zermatt 適應",
+    eyebrow: "Day 9 · 6/24(三) · Zermatt",
+    title: "Brig → Zermatt<br>鎮上適應日",
+    subtitle: "上午進 Zermatt,下午只排鎮上與低強度散步。先在 1600m 鎮上住 3 晚,再上 Gornergrat 過夜。",
+    tags: ["HFC", "海拔適應", "鎮上慢走"],
+    footer: 'Zermatt 禁汽車鎮,站前可搭電動車或步行到住宿。',
+    center: { lat: 46.11, lng: 7.86 }, zoom: 11, fit: true,
+    stops: [
+      { name: "Brig Bahnhof", lat: 46.3190, lng: 7.9880, time: "上午", label: "出發", note: "從 Brig/Visp 搭 MGB 前往 Zermatt。" },
+      { name: "Zermatt Bahnhof", lat: 46.0207, lng: 7.7491, time: "中午", label: "抵達", note: "進鎮後午餐、寄放或拖行李到住宿。" },
+      { name: "Hinterdorf 防鼠木屋區", lat: 46.0204, lng: 7.7480, time: "下午", label: "鎮上散步", note: "Zermatt 舊村區,低強度散步與拍照。" },
+      { ...hotelStop(HOTELS.zermatt, "下午", "🏨 Check-in") }
+    ],
+    hotel: HOTELS.zermatt
+  },
+  {
+    n: 10, date: "6/25", weekday: "四", kind: "高海拔可選",
+    eyebrow: "Day 10 · 6/25(四) · Glacier Paradise",
+    title: "冰川天堂<br>+ Sunnegga / Riffelsee",
+    subtitle: "好天氣可上 Matterhorn Glacier Paradise。下午視體力補 Sunnegga / Blauherd / Stellisee 或改低強度鎮上。",
+    tags: ["HFC", "3883m", "天氣決策"],
+    footer: 'Matterhorn Paradise 票價與營運以官方購票頁和當天 live 狀態為準。',
+    center: { lat: 45.99, lng: 7.75 }, zoom: 12, fit: true,
+    stops: [
+      { name: "Zermatt 鎮", lat: 46.0207, lng: 7.7491, time: "早上", label: "出發", note: "先看 Matterhorn Paradise live 狀態再買票。" },
+      { name: "Matterhorn Glacier Paradise", lat: 45.9398, lng: 7.7286, time: "上午", label: "3883m", note: "全歐最高纜車站。短停、慢走、保暖補水。" },
+      { name: "Sunnegga", lat: 46.0227, lng: 7.7634, time: "下午", label: "低海拔補景", optional: true, note: "可搭地下纜車到 Sunnegga,視體力轉 Blauherd。" },
+      { name: "Blauherd / Stellisee", lat: 46.0301, lng: 7.7724, time: "下午", label: "倒影湖", optional: true, note: "Stellisee 是經典馬特洪峰倒影點,風大時以散步為主。" }
+    ],
+    hotel: HOTELS.zermatt
+  },
+  {
+    n: 11, date: "6/26", weekday: "五", kind: "Zermatt 緩衝",
+    eyebrow: "Day 11 · 6/26(五) · Zermatt 彈性",
+    title: "策馬特彈性日<br>留白恢復",
+    subtitle: "用來補天氣、補山景或休息。這天不搬行李,是全程很重要的恢復日。",
+    tags: ["HFC", "緩衝日", "不搬行李"],
+    footer: '依 D10 天氣結果決定補 Glacier Paradise、Riffelsee、Gornergrat 沿線或鎮上慢活。',
+    center: { lat: 46.01, lng: 7.75 }, zoom: 13, fit: true,
+    stops: [
+      { name: "Zermatt 鎮上", lat: 46.0207, lng: 7.7491, time: "全天", label: "彈性", note: "優先休息、補前一日未完成景點,或鎮上慢逛。" },
+      { name: "Riffelsee", lat: 45.9906, lng: 7.7594, time: "選配", label: "倒影湖", optional: true, note: "天氣好可走 Gornergrat 沿線湖景。" },
+      { name: "Gorner Gorge", lat: 46.0098, lng: 7.7506, time: "選配", label: "冰河峽谷", optional: true, note: "鎮上步行可到,棧道與階梯注意止滑。" }
+    ],
+    hotel: HOTELS.zermatt
+  },
+  {
+    n: 12, date: "6/27", weekday: "六", kind: "Gornergrat",
+    eyebrow: "Day 12 · 6/27(六) · Gornergrat 3100",
+    title: "Gornergrat<br>3100 高山住宿",
+    subtitle: "鎮上住滿 3 晚後再上 3100m 過夜。只帶過夜小包,大行李留 Zermatt。",
+    tags: ["HFC", "高海拔過夜", "小包上山"],
+    footer: 'Gornergrat 來回票可跨日使用；出發前確認飯店晚餐與末班。',
+    center: { lat: 46.00, lng: 7.77 }, zoom: 12, fit: true,
+    stops: [
+      { name: "Heinz Julen Loft", lat: 46.0193, lng: 7.7491, time: "上午", label: "整理小包", note: "大行李留 Zermatt,只帶過夜小包上山。" },
+      { name: "Zermatt GGB", lat: 46.0207, lng: 7.7491, time: "下午", label: "齒軌上山", note: "搭 Gornergrat Bahn 上山。" },
+      { name: "Gornergrat", lat: 45.9836, lng: 7.7837, time: "下午", label: "觀景", note: "到站後慢走,看馬特洪峰與冰河景觀。" },
+      { ...hotelStop(HOTELS.gornergrat, "晚上", "🏨 高山飯店") }
+    ],
+    hotel: HOTELS.gornergrat
+  },
+  {
+    n: 13, date: "6/28", weekday: "日", kind: "GPX",
+    eyebrow: "Day 13 · 6/28(日) · GoldenPass Express",
+    title: "Gornergrat → Spiez<br>→ Montreux",
+    subtitle: "清晨看日出後下山,取大行李往 Spiez,搭 14:38 GoldenPass Express 到 Montreux。這是全程最長移動日。",
+    tags: ["HFC", "GPX 14:38", "Montreux 暫定位"],
+    footer: 'Montreux 住宿暫以車站/湖畔定位；訂房後補正式名稱、地址與座標。',
+    center: { lat: 46.22, lng: 7.30 }, zoom: 8, fit: true,
+    stops: [
+      { name: "Gornergrat 日出", lat: 45.9836, lng: 7.7848, time: "清晨", label: "馬特洪峰日出", note: "飯店外看日出,早餐後下山。" },
+      { name: "Zermatt", lat: 46.0207, lng: 7.7491, time: "上午", label: "取大行李", note: "回鎮上取行李,接 MGB/SBB 往 Spiez。" },
+      { name: "Spiez", lat: 46.6863, lng: 7.6797, time: "14:38", label: "GPX 出發", note: "已選 GoldenPass Express 14:38 → Montreux 17:25,1 等普通座。" },
+      { name: "Montreux Gare", lat: 46.4351, lng: 6.9107, time: "17:25", label: "抵達", note: "抵達後往湖畔住宿暫定位,晚餐與湖邊散步。" }
+    ],
+    hotel: HOTELS.montreux
+  },
+  {
+    n: 14, date: "6/29", weekday: "一", kind: "回 Zürich",
+    eyebrow: "Day 14 · 6/29(一) · Montreux → Zürich",
+    title: "Montreux 湖畔<br>回 Zürich HB",
+    subtitle: "上午留給 Montreux 湖邊短散步,午後回 Zürich HB 附近住宿,降低隔天機場風險。",
+    tags: ["HFC", "湖畔短散步", "Zürich HB"],
+    footer: 'Montreux → Zürich HB 以 HFC 1 等點對點彈性票為主,出發前重查票籃。',
+    center: { lat: 46.9, lng: 7.5 }, zoom: 8, fit: true,
+    stops: [
+      { name: "Montreux 湖畔", lat: 46.4312, lng: 6.9106, time: "上午", label: "湖邊散步", note: "湖邊短散步、咖啡、拍照。" },
+      { name: "Chillon Castle", lat: 46.4142, lng: 6.9275, time: "選配", label: "湖畔選配", optional: true, note: "時間充裕可短看西庸城堡外觀或湖邊步道。" },
+      { name: "Zürich HB", lat: 47.3779, lng: 8.5403, time: "下午", label: "抵達", note: "回 Zürich HB 附近住宿,整理行李與退稅文件。" },
+      { ...hotelStop(HOTELS.zurich, "今晚", "🏨 Zürich HB 附近") }
+    ],
+    hotel: HOTELS.zurich
+  },
+  {
+    n: 15, date: "6/30", weekday: "二", kind: "返航",
+    eyebrow: "Day 15 · 6/30(二) → 7/1(三) · 返航",
+    title: "Zürich → Seoul<br>→ Taipei",
+    subtitle: "早上從 Zürich HB 前往 ZRH。LX122 13:15 起飛到 ICN T1,7/1 轉 BR169 回 TPE T2。",
+    tags: ["LX122", "ICN T1 4h30", "BR169"],
+    footer: '抓 10:15 前到 ZRH 較穩；實際航班狀態以航空公司訂位頁為準。',
+    center: { lat: 42, lng: 70 }, zoom: 3, fit: true,
+    stops: [
+      { name: "Ruby Mimi Zurich", lat: 47.3743, lng: 8.5388, time: "早上", label: "退房", note: "早餐後退房,前往 Zürich HB / ZRH。" },
+      { name: "Zürich Flughafen", lat: 47.4502, lng: 8.5616, time: "10:15", label: "抵達機場", note: "車程約 10-15 分,預留退稅與托運時間。" },
+      { name: "ZRH 起飛", lat: 47.4502, lng: 8.5616, time: "13:15", label: "LX122", note: "瑞士航空 LX122,商務艙 Z,飛往 ICN T1。" },
+      { name: "Seoul ICN T1", lat: 37.4602, lng: 126.4407, time: "7/1 07:30", label: "轉機 4h30", note: "同一航廈 T1 轉 BR169。" },
+      { name: "桃園機場 TPE T2", lat: 25.0797, lng: 121.2342, time: "7/1 13:35", label: "抵達", note: "長榮航空 BR169,商務艙 D,座位 09A/09C/09D。" }
+    ],
+    hotel: null
+  }
+];
+
+function hotelStop(hotel, time, label) {
+  return {
+    name: hotel.displayName || hotel.name,
+    officialName: hotel.name,
+    lat: hotel.lat,
+    lng: hotel.lng,
+    time,
+    label,
+    isHotel: true,
+    note: hotel.address,
+    address: hotel.address,
+    bookingLink: hotel.link || null,
+    mapsQuery: hotel.maps,
+    nights: hotel.nights
+  };
+}
+
+const MODE_STYLE = {
+  flight: { emoji: "✈️", color: "#8b5cf6", label: "飛機", line: "dotted" },
+  train:  { emoji: "🚂", color: "#2563eb", label: "火車", line: "solid" },
+  cog:    { emoji: "🚞", color: "#d97706", label: "齒軌/登山火車", line: "solid" },
+  cable:  { emoji: "🚡", color: "#dc2626", label: "纜車/索道", line: "solid" },
+  boat:   { emoji: "⛵", color: "#0891b2", label: "船", line: "solid" },
+  bus:    { emoji: "🚌", color: "#059669", label: "巴士/接駁", line: "solid" },
+  walk:   { emoji: "🚶", color: "#9ca3af", label: "步行", line: "dashed" }
+};
+const PASS_STYLE = {
+  JTP: { label: "JTP covered", bg: "#dcfce7", fg: "#166534" },
+  HFC: { label: "HFC 半價", bg: "#ffedd5", fg: "#9a3412" },
+  mixed: { label: "JTP+HFC", bg: "#e0e7ff", fg: "#3730a3" },
+  self: { label: "另付", bg: "#f1f5f9", fg: "#475569" }
+};
+const LUG_STYLE = {
+  full: { icon: "🧳", label: "帶大行李" },
+  light: { icon: "🎒", label: "輕裝" },
+  overnight: { icon: "🧳", label: "過夜小包" }
+};
+
+const DAY_LEGS = {
+  1: [null,
+    { mode: "flight", line: "BR75", dur: "4h", pass: null, lug: "full" },
+    { mode: "flight", line: "LX181", dur: "11h45", pass: null, lug: "full" },
+    { mode: "walk", line: "航廈連通道", dur: "~5分", pass: null, lug: "full" }],
+  2: [null,
+    { mode: "train", line: "SBB Zürich→Luzern", dur: "~1h10", pass: "HFC", lug: "full" },
+    { mode: "walk", line: "Luzern 舊城步行", dur: "彈性", pass: null, lug: "light" },
+    { mode: "train", line: "Luzern-Interlaken Express", dur: "~1h50", pass: "HFC", lug: "full" },
+    { mode: "train", line: "BOB Interlaken→Grindelwald", dur: "~32分", pass: "HFC", lug: "full" }],
+  3: [null,
+    { mode: "cable", line: "Männlichen 纜車", dur: "~19分", pass: "JTP", lug: "light" },
+    { mode: "walk", line: "全景步道", dur: "2.5-3h", pass: null, lug: "light" },
+    { mode: "train", line: "WAB / 瀑布鎮 loop", dur: "彈性", pass: "JTP", lug: "light" },
+    { mode: "train", line: "WAB 返 Grindelwald", dur: "~35分", pass: "JTP", lug: "light" }],
+  4: [null,
+    { mode: "cable", line: "Firstbahn", dur: "~25分", pass: "JTP", lug: "light" },
+    { mode: "walk", line: "Cliff Walk", dur: "20-40分", pass: null, lug: "light" },
+    { mode: "walk", line: "Bachalpsee 主徑", dur: "3-3.5h", pass: null, lug: "light" },
+    { mode: "cable", line: "Firstbahn 下山", dur: "~25分", pass: "JTP", lug: "light" }],
+  5: [null,
+    { mode: "train", line: "Eiger Express / Jungfraubahn", dur: "依票面", pass: "JTP", lug: "light" },
+    { mode: "cog", line: "Jungfraubahn", dur: "依票面", pass: "JTP", lug: "light" },
+    { mode: "train", line: "下山 + Harder 備援", dur: "彈性", pass: "mixed", lug: "light" },
+    { mode: "train", line: "BOB 返村", dur: "~32分", pass: "JTP", lug: "light" }],
+  6: [null,
+    { mode: "train", line: "BOB", dur: "~32分", pass: "JTP", lug: "full" },
+    { mode: "train", line: "Zentralbahn", dur: "~20分", pass: "JTP", lug: "light" },
+    { mode: "boat", line: "BLS Lake Brienz", dur: "~27分", pass: "JTP", lug: "light" },
+    { mode: "bus", line: "PostBus 103 + 火車", dur: "~1h", pass: "mixed", lug: "full" }],
+  7: [null,
+    { mode: "train", line: "BLS Spiez→Kandersteg", dur: "~28分", pass: "HFC", lug: "light" },
+    { mode: "bus", line: "接駁巴士", dur: "~10分", pass: "HFC", lug: "light" },
+    { mode: "cable", line: "Oeschinensee 纜車", dur: "~7分", pass: "HFC", lug: "light" },
+    { mode: "train", line: "原路回 Spiez", dur: "~50分", pass: "HFC", lug: "light" }],
+  8: [null,
+    { mode: "train", line: "SBB/BLS Spiez→Brig", dur: "~40-60分", pass: "HFC", lug: "full" },
+    { mode: "train", line: "Aletsch Explorer", dur: "彈性", pass: "HFC", lug: "light" },
+    { mode: "walk", line: "Brig 老城步行", dur: "彈性", pass: null, lug: "light" }],
+  9: [null,
+    { mode: "train", line: "MGB Brig/Visp→Zermatt", dur: "~1h15", pass: "HFC", lug: "full" },
+    { mode: "walk", line: "鎮上步行", dur: "~10分", pass: null, lug: "light" },
+    { mode: "walk", line: "入住動線", dur: "~5分", pass: null, lug: "full" }],
+  10: [null,
+    { mode: "cable", line: "Matterhorn Express", dur: "~40分", pass: "HFC", lug: "light" },
+    { mode: "cable", line: "Sunnegga", dur: "~5分", pass: "HFC", lug: "light" },
+    { mode: "walk", line: "Stellisee 短線", dur: "1.5-2h", pass: null, lug: "light" }],
+  11: [null,
+    { mode: "cog", line: "Gornergrat 沿線補景", dur: "彈性", pass: "HFC", lug: "light" },
+    { mode: "walk", line: "鎮上步行", dur: "彈性", pass: null, lug: "light" }],
+  12: [null,
+    { mode: "walk", line: "小包到車站", dur: "~5分", pass: null, lug: "overnight" },
+    { mode: "cog", line: "Gornergrat Bahn", dur: "~33分", pass: "HFC", lug: "overnight" },
+    { mode: "walk", line: "站旁飯店", dur: "~2分", pass: null, lug: "overnight" }],
+  13: [null,
+    { mode: "cog", line: "Gornergrat 下山", dur: "~33分", pass: "HFC", lug: "overnight" },
+    { mode: "train", line: "MGB/SBB Zermatt→Spiez", dur: "~3h", pass: "HFC", lug: "full" },
+    { mode: "train", line: "GoldenPass Express", dur: "2h47", pass: "HFC", lug: "full" }],
+  14: [null,
+    { mode: "walk", line: "湖畔步道", dur: "彈性", pass: null, lug: "light" },
+    { mode: "train", line: "SBB Montreux→Zürich HB", dur: "~2h40", pass: "HFC", lug: "full" },
+    { mode: "walk", line: "飯店步行", dur: "~5分", pass: null, lug: "full" }],
+  15: [null,
+    { mode: "train", line: "Zürich HB→ZRH", dur: "~10-15分", pass: "HFC", lug: "full" },
+    { mode: "walk", line: "Check-in / 出境", dur: "預留", pass: null, lug: "full" },
+    { mode: "flight", line: "LX122", dur: "11h15", pass: null, lug: "full" },
+    { mode: "flight", line: "BR169", dur: "2h35", pass: null, lug: "full" }]
+};
+
+// 把 leg 掛到原始 stop 物件上,buildEffectiveStops 用 {...s} 會自動帶著走
+DAYS.forEach(day => {
+  const legs = DAY_LEGS[day.n];
+  if (!legs) return;
+  day.stops.forEach((s, i) => { if (legs[i]) s.leg = legs[i]; });
+});
+
+let map;
+let currentDay = 0;
+let currentStops = [];
+let activeMarkers = [];
+let activePolylines = [];
+let infoWindow;
+
+function buildEffectiveStops(day, idx) {
+  const stops = day.stops.map(s => ({ ...s }));
+  const prev = idx > 0 ? DAYS[idx - 1] : null;
+  const startHotel = prev && prev.hotel && prev.hotel.lat != null ? prev.hotel : null;
+  const hasHotelInStops = stops.some(s => s.isHotel);
+  const endHotel = !hasHotelInStops && day.hotel && day.hotel.lat != null ? day.hotel : null;
+  const sameHotel = startHotel && endHotel && startHotel.name === endHotel.name;
+  const startSameAsExistingHotel = startHotel && hasHotelInStops &&
+    stops.some(s => s.isHotel && (s.officialName || s.name) === startHotel.name);
+
+  function enrichWithHotel(stop, hotel) {
+    stop.isHotel = true;
+    if (hotel.displayName) {
+      stop.officialName = hotel.name;
+      stop.name = hotel.displayName;
+    }
+    if (!stop.address) stop.address = hotel.address || "";
+    if (!stop.bookingLink) stop.bookingLink = hotel.link || null;
+    if (!stop.nights) stop.nights = hotel.nights || "";
+    if (!stop.mapsQuery) stop.mapsQuery = hotel.maps || null;
+  }
+
+  if (day.hotel) {
+    stops.forEach(s => { if (s.isHotel) enrichWithHotel(s, day.hotel); });
+  }
+
+  function makeHotelStop(num, hotel, time, label) {
+    const s = {
+      num,
+      name: hotel.displayName || hotel.name,
+      officialName: hotel.name,
+      lat: hotel.lat,
+      lng: hotel.lng,
+      time,
+      label,
+      note: hotel.address || "",
+      isHotel: true
+    };
+    enrichWithHotel(s, hotel);
+    return s;
+  }
+
+  const firstStop = stops[0];
+  const startCollidesWithFirst = startHotel && firstStop && firstStop.lat != null &&
+    Math.abs(firstStop.lat - startHotel.lat) < 0.001 &&
+    Math.abs(firstStop.lng - startHotel.lng) < 0.001;
+  function markStart(s) { s.isStartHotel = true; return s; }
+
+  if (sameHotel) {
+    if (startCollidesWithFirst) {
+      enrichWithHotel(firstStop, startHotel);
+      markStart(firstStop);
+    } else {
+      stops.unshift(markStart(makeHotelStop(0, startHotel, "連住", "🏨 出發 / 回程")));
+    }
+  } else {
+    if (startHotel && !startSameAsExistingHotel) {
+      if (startCollidesWithFirst) {
+        enrichWithHotel(firstStop, startHotel);
+        markStart(firstStop);
+      } else {
+        stops.unshift(markStart(makeHotelStop(0, startHotel, "出發", "🏨 上一晚住宿")));
+      }
+    } else if (startHotel && startSameAsExistingHotel) {
+      const m = stops.find(s => s.isHotel && (s.officialName || s.name) === startHotel.name);
+      if (m) markStart(m);
+    }
+    if (endHotel) {
+      stops.push(makeHotelStop(stops.length + 1, endHotel, "今晚", "🏨 入住"));
+    }
+  }
+
+  let routeIdx = 0;
+  stops.forEach(s => { s.num = s.isStartHotel ? 0 : ++routeIdx; });
+  return stops;
+}
+
+function escapeHTML(v) {
+  return String(v || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function mapHref(s) {
+  const q = encodeURIComponent(s.mapsQuery || s.officialName || s.name);
+  return `https://www.google.com/maps/search/?api=1&query=${q}`;
+}
+
+function legHTML(leg) {
+  if (!leg) return "";
+  const mode = MODE_STYLE[leg.mode] || MODE_STYLE.walk;
+  const pass = leg.pass ? PASS_STYLE[leg.pass] : null;
+  const lug = leg.lug ? LUG_STYLE[leg.lug] : null;
+  return `
+    <div class="leg-connector">
+      <span class="leg-rail" style="background:${mode.color}"></span>
+      <span>${mode.emoji}</span>
+      <span class="leg-text">${escapeHTML(leg.line)} · ${escapeHTML(leg.dur)}</span>
+      ${pass ? `<span class="leg-pass" style="background:${pass.bg};color:${pass.fg}">${pass.label}</span>` : ""}
+      ${lug ? `<span class="leg-lug leg-lug-${leg.lug}">${lug.icon} ${lug.label}</span>` : ""}
+    </div>
+  `;
+}
+
+function stopHTML(s) {
+  const num = s.num === 0 ? "00" : String(s.num).padStart(2, "0");
+  const numClass = s.isHotel ? " hotel" : (s.optional ? " optional" : "");
+  const hotelExtra = s.isHotel ? `
+    <div class="stop-hotel-extra">
+      ${s.nights ? `<div class="stop-nights">${escapeHTML(s.nights)}</div>` : ""}
+      ${s.address ? `<div class="stop-address">${escapeHTML(s.address)}</div>` : ""}
+      <div class="stop-actions">
+        <a href="${mapHref(s)}" target="_blank" rel="noopener">Google Maps</a>
+        ${s.bookingLink ? `<a href="${s.bookingLink}" target="_blank" rel="noopener">住宿連結</a>` : ""}
+      </div>
+    </div>
+  ` : "";
+  return `
+    ${legHTML(s.leg)}
+    <article class="stop" data-stop="${s.num}">
+      <div class="stop-num${numClass}">${num}</div>
+      <div>
+        <div class="stop-time">${escapeHTML(s.time)} · ${escapeHTML(s.label)}</div>
+        <div class="stop-name">${escapeHTML(s.name)}</div>
+        <div class="stop-note">${escapeHTML(s.note)}</div>
+        ${hotelExtra}
+      </div>
+    </article>
+  `;
+}
+
+function clearMap() {
+  activeMarkers.forEach(m => m.setMap(null));
+  activePolylines.forEach(p => p.setMap(null));
+  activeMarkers = [];
+  activePolylines = [];
+}
+
+function markerIcon(s) {
+  const fill = s.isHotel ? "#1F2421" : (s.optional ? "#6B6B5E" : "#B8472D");
+  return {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: s.isStartHotel ? 8 : 10,
+    fillColor: fill,
+    fillOpacity: 1,
+    strokeColor: "#ffffff",
+    strokeWeight: 2
+  };
+}
+
+function popupHTML(s) {
+  return `
+    <div class="popup-title">${escapeHTML(s.name)}</div>
+    <div class="popup-note"><strong>${escapeHTML(s.time)} · ${escapeHTML(s.label)}</strong><br>${escapeHTML(s.note)}</div>
+    <div class="popup-actions"><a href="${mapHref(s)}" target="_blank" rel="noopener">Google Maps</a></div>
+  `;
+}
+
+function drawDay(idx) {
+  currentDay = idx;
+  const day = DAYS[idx];
+  currentStops = buildEffectiveStops(day, idx);
+  document.getElementById("eyebrow").textContent = day.eyebrow;
+  document.getElementById("title").innerHTML = day.title;
+  document.getElementById("subtitle").textContent = day.subtitle;
+  document.getElementById("chips").innerHTML = day.tags.map((t, i) => `<span class="chip ${i === 0 ? "good" : i === 1 ? "blue" : "warn"}">${escapeHTML(t)}</span>`).join("");
+  document.getElementById("stops").innerHTML = currentStops.map(stopHTML).join("");
+  document.getElementById("footer").innerHTML = day.footer || "";
+  document.querySelectorAll(".day-tab").forEach((tab, tabIdx) => tab.classList.toggle("active", tabIdx === idx));
+  document.querySelectorAll(".stop").forEach(el => {
+    el.addEventListener("click", () => focusStop(Number(el.dataset.stop)));
+  });
+  if (map) renderMap(day);
+}
+
+function focusStop(num) {
+  const s = currentStops.find(x => x.num === num);
+  const marker = activeMarkers.find(m => m.__stopNum === num);
+  if (!s || !marker) return;
+  map.panTo({ lat: s.lat, lng: s.lng });
+  map.setZoom(Math.max(map.getZoom(), 13));
+  infoWindow.setContent(popupHTML(s));
+  infoWindow.open(map, marker);
+}
+
+function renderMap(day) {
+  clearMap();
+  const bounds = new google.maps.LatLngBounds();
+  currentStops.filter(s => s.lat != null && s.lng != null).forEach((s) => {
+    const marker = new google.maps.Marker({
+      position: { lat: s.lat, lng: s.lng },
+      map,
+      title: s.name,
+      label: { text: s.num === 0 ? "00" : String(s.num).padStart(2, "0"), color: "#ffffff", fontWeight: "700", fontSize: "11px" },
+      icon: markerIcon(s)
+    });
+    marker.__stopNum = s.num;
+    marker.addListener("click", () => {
+      infoWindow.setContent(popupHTML(s));
+      infoWindow.open(map, marker);
+    });
+    activeMarkers.push(marker);
+    bounds.extend(marker.getPosition());
+  });
+
+  for (let i = 1; i < currentStops.length; i++) {
+    const a = currentStops[i - 1], b = currentStops[i];
+    if (!a || !b || a.lat == null || b.lat == null) continue;
+    const leg = b.leg || {};
+    const mode = MODE_STYLE[leg.mode] || MODE_STYLE.walk;
+    const line = new google.maps.Polyline({
+      path: [{ lat: a.lat, lng: a.lng }, { lat: b.lat, lng: b.lng }],
+      geodesic: true,
+      strokeColor: mode.color,
+      strokeOpacity: .72,
+      strokeWeight: 3,
+      icons: mode.line === "dashed" ? [{
+        icon: { path: "M 0,-1 0,1", strokeOpacity: 1, scale: 3 },
+        offset: "0",
+        repeat: "12px"
+      }] : []
+    });
+    line.setMap(map);
+    activePolylines.push(line);
+  }
+
+  if (day.fit && !bounds.isEmpty()) map.fitBounds(bounds, 60);
+  else map.setCenter(day.center || currentStops[0]);
+  if (!day.fit && day.zoom) map.setZoom(day.zoom);
+}
+
+function renderTabs() {
+  document.getElementById("dayTabs").innerHTML = DAYS.map((d, i) => `
+    <button class="day-tab" type="button" data-day="${i}">
+      <span>D${d.n}</span><span class="day-tab-date">${d.date}</span>
+    </button>
+  `).join("");
+  document.querySelectorAll(".day-tab").forEach(tab => {
+    tab.addEventListener("click", () => drawDay(Number(tab.dataset.day)));
+  });
+}
+
+function renderLegend() {
+  document.getElementById("mapLegend").innerHTML = Object.values(MODE_STYLE).map(m => `
+    <span class="legend-chip"><span class="legend-line" style="background:${m.color}"></span>${m.emoji} ${m.label}</span>
+  `).join("");
+}
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 46.8, lng: 8.1 },
+    zoom: 7,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true
+  });
+  infoWindow = new google.maps.InfoWindow();
+  renderLegend();
+  drawDay(0);
+}
+
+renderTabs();
+drawDay(0);
+
+const script = document.createElement("script");
+script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&loading=async`;
+script.async = true;
+script.defer = true;
+document.head.appendChild(script);
+</script>
+</body>
+</html>

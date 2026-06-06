@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行程時間可行性 × 長輩友善檢查 · 2026/6/16-6/30</title>
+<style>
+  :root{
+    --bg:#f7f5f0; --card:#fff; --ink:#1f2421; --muted:#5b6660; --line:#e3ddd2; --accent:#B8472D;
+    --red:#991b1b; --redbg:#fee2e2; --amber:#92400e; --amberbg:#fef3c7; --green:#166534; --greenbg:#dcfce7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  header.top{background:var(--ink);color:#f5f1e8;border-radius:14px;padding:24px 26px}
+  header.top h1{margin:0 0 6px;font-size:24px}
+  header.top .sub{color:#c9c2b4;font-size:14px}
+  .meta-bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{background:rgba(255,255,255,.12);border-radius:999px;padding:4px 12px;font-size:12.5px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+  h2{font-size:20px;margin:0 0 4px;border-left:5px solid var(--accent);padding-left:12px}
+  h2 .en{color:var(--muted);font-size:13px;font-weight:400}
+  h3{font-size:16px;margin:20px 0 8px}
+  p.lead{color:var(--muted);margin:4px 0 14px;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#efe9dd;font-weight:600}
+  tbody tr:nth-child(even){background:#faf8f3}
+  .lvl{display:inline-block;border-radius:6px;padding:1px 8px;font-size:12px;font-weight:700;white-space:nowrap}
+  .l-red{background:var(--redbg);color:var(--red)}
+  .l-amber{background:var(--amberbg);color:var(--amber)}
+  .l-green{background:var(--greenbg);color:var(--green)}
+  .box{border-radius:12px;padding:14px 18px;margin:14px 0;font-size:14px}
+  .box-red{background:var(--redbg);border:1px solid #fca5a5}
+  .box-amber{background:var(--amberbg);border:1px solid #fcd34d}
+  .box-green{background:var(--greenbg);border:1px solid #86efac}
+  .box h4{margin:0 0 6px;font-size:15px}
+  ul{margin:8px 0;padding-left:20px} li{margin:5px 0}
+  a{color:var(--accent)} .src{font-size:12px;color:var(--muted);word-break:break-all}.src a{color:var(--muted)}
+  .day-h{background:#1f2421;color:#f5f1e8;padding:7px 13px;border-radius:8px;font-size:15px;margin:18px 0 4px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+  .timeline{font-size:13px;color:var(--muted);background:#f3f0e9;border-radius:8px;padding:8px 12px;margin:6px 0;font-family:ui-monospace,Menlo,monospace;white-space:pre-wrap}
+  .foot{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px}
+  strong.hi{color:var(--accent)}
+  details.fold{border:1px solid var(--line);border-radius:10px;margin:14px 0;background:#fcfbf8}
+  details.fold>summary{cursor:pointer;list-style:none;padding:12px 15px;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary::before{content:"▸";color:var(--accent);font-size:13px;transition:transform .15s}
+  details.fold[open]>summary::before{transform:rotate(90deg)}
+  details.fold>summary:hover{background:#f3efe6}
+  details.fold>summary .en{color:var(--muted);font-size:12px;font-weight:400}
+  details.fold>summary .badge{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);background:#efe9dd;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  details.fold .fold-body{padding:2px 15px 14px}
+  @media (max-width:600px){
+    .wrap{padding:16px 12px 56px}
+    body{font-size:14px}
+    header.top{padding:18px 16px}
+    header.top h1{font-size:20px}
+    h2{font-size:18px} h3{font-size:15px}
+    section{padding:16px 14px}
+    .box{padding:12px 14px;font-size:13px}
+    .timeline{font-size:12px;padding:7px 10px}
+    .day-h{font-size:14px;padding:6px 11px}
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:12px}
+    th,td{padding:6px 7px}
+    details.fold>summary{font-size:15px;padding:10px 12px}
+    details.fold .fold-body{padding:2px 12px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>行程時間可行性 × 長輩友善檢查</h1>
+  <div class="sub">2026/6/16-6/30 瑞士段新版 · 5 人成人 · 1 位 65 歲走路偏慢長輩 · 全程拖大行李</div>
+  <div class="meta-bar">
+    <span class="chip">查證日：2026-06-05/06</span>
+    <span class="chip">來源：ticket.html + 官方營運頁 + search.ch/opentransportdata + 航班公開追蹤頁</span>
+    <span class="chip">依據：ticket.html 票券主軸與新版 D1-D15</span>
+  </div>
+</header>
+
+<section>
+  <h2>① 總體紅黃綠燈 <span class="en">新版逐日可行性一覽</span></h2>
+  <p class="lead">日期星期已用系統日曆核對：6/16 二、6/17 三、6/18 四、6/19 五、6/20 六、6/21 日、6/22 一、6/23 二、6/24 三、6/25 四、6/26 五、6/27 六、6/28 日、6/29 一、6/30 二、7/1 三。</p>
+  <table>
+    <thead><tr><th>Day</th><th>日期</th><th>主軸</th><th>時間/體力</th><th>長輩重點</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>6/16 二</td><td>TPE→BKK→ZRH，晚到機場附近</td><td><span class="lvl l-green">轉機條件已確認</span></td><td>BR75 07:50→10:50，BKK 轉機 2h，LX181 12:50→19:35；已確認同張票/同一訂位且行李可直掛 ZRH。</td></tr>
+      <tr><td>D2</td><td>6/17 三</td><td>Zürich Airport→Luzern 短停→Grindelwald</td><td><span class="lvl l-amber">原版保留</span></td><td>保留 index.html 原本琉森短停；約 09:15 到 Luzern、15:06 接 Interlaken Express 進山，出發前以 SBB 重查。</td></tr>
+      <tr><td>D3</td><td>6/18 四</td><td>Männlichen / Kleine Scheidegg / Wengen；Lauterbrunnen 備案</td><td><span class="lvl l-amber">健行偏長</span></td><td>全景路線 4.7km，長輩抓 2.5-3h；若本來的路線走不動，改低壓瀑布鎮備案。</td></tr>
+      <tr><td>D4</td><td>6/19 五</td><td>First / Bachalpsee</td><td><span class="lvl l-amber">健行偏長</span></td><td>Bachalpsee 來回約 6km，長輩抓 3-3.5h；Cliff Walk 懼高可略。</td></tr>
+      <tr><td>D5</td><td>6/20 六</td><td>Jungfraujoch 優先；Harder Kulm 備援/加菜</td><td><span class="lvl l-amber">天氣決策日</span></td><td>JTP4 主軸；天氣好時以 Jungfraujoch 為優先，Harder Kulm 只放低海拔備援或傍晚體力好時加菜。</td></tr>
+      <tr><td>D6</td><td>6/21 日</td><td>Grindelwald→Interlaken 寄行李→Brienz / Iseltwald→Spiez</td><td><span class="lvl l-amber">原版保留</span></td><td>保留 index.html 原本 Lake Brienz / Brienz / Iseltwald；重點是 Interlaken Ost 寄物與 BLS 船班。</td></tr>
+      <tr><td>D7</td><td>6/22 一</td><td>Oeschinensee / Kandersteg</td><td><span class="lvl l-green">友善</span></td><td>Spiez→Kandersteg 約 28 分；纜車＋電動計程車可把步行量降到低。</td></tr>
+      <tr><td>D8</td><td>6/23 二</td><td>Spiez→Brig，Moosfluh / Aletsch</td><td><span class="lvl l-amber">中繼加景點</span></td><td>先放行李再上 Moosfluh；末班與天氣要留緩衝，雲厚時改 Brig 老城/溫泉。</td></tr>
+      <tr><td>D9</td><td>6/24 三</td><td>Brig→Zermatt，鎮上適應</td><td><span class="lvl l-green">海拔適應日</span></td><td>比舊版健康很多：先在 1600m 鎮上睡 3 晚，再上 3100m。</td></tr>
+      <tr><td>D10</td><td>6/25 四</td><td>Glacier Paradise 或 Sunnegga / Riffelsee</td><td><span class="lvl l-amber">極高海拔可選</span></td><td>3883m 短停仍需慢走、保暖、不適即下山。</td></tr>
+      <tr><td>D11</td><td>6/26 五</td><td>Zermatt 彈性山區日</td><td><span class="lvl l-green">緩衝日</span></td><td>保留天氣/體力修正，很適合長輩節奏。</td></tr>
+      <tr><td>D12</td><td>6/27 六</td><td>Gornergrat 3100 過夜</td><td><span class="lvl l-amber">高海拔過夜</span></td><td>已有 3 晚 Zermatt 預適應，風險低於舊版；仍要只帶小包、觀察 AMS。</td></tr>
+      <tr><td>D13</td><td>6/28 日</td><td>Gornergrat→Zermatt→Spiez→Montreux</td><td><span class="lvl l-red">全程最長移動</span></td><td>若要搭 GoldenPass Express 景觀段，需早下山或接受 17:25 抵 Montreux。</td></tr>
+      <tr><td>D14</td><td>6/29 一</td><td>Montreux→Zürich HB</td><td><span class="lvl l-green">可控</span></td><td>上午湖邊短散步後回 Zürich，降低隔天機場風險。</td></tr>
+      <tr><td>D15</td><td>6/30 二</td><td>Zürich HB→ZRH→ICN→TPE +1</td><td><span class="lvl l-green">寬鬆</span></td><td>LX122 13:15→ICN T1 07:30+1，轉機 4h30，BR169 ICN T1 12:00+1→TPE T2 13:35+1；BR169 座位 09A/09C/09D。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>② 最需注意的問題 <span class="en">新版優先級</span></h2>
+
+  <div class="box box-amber">
+    <h4>1. 票券與時間節奏已改成 HFC + JTP4 主軸</h4>
+    <ul>
+      <li>ticket.html 目前依你的決策採 HFC + JTP4（6/18-6/21）為主軸；HFC only 保留為成本參考，JTP5 不選。</li>
+      <li>feasibility 的時間判斷仍以「不硬塞」為原則：基本走法已涵蓋 Männlichen、First、Jungfraujoch 優先日與 Brienz / Iseltwald，不為了把 pass 用滿而加長健行。</li>
+      <li>D6 小段票價已在 ticket.html 補齊；時間上仍要把 Interlaken Ost 寄物、BLS 船班與 PostBus 回程當成主要風險。</li>
+    </ul>
+  </div>
+
+  <div class="box box-amber">
+    <h4>2. D12 3100m 過夜風險已下降，但仍要照高海拔規則</h4>
+    <ul>
+      <li>新版在 Zermatt 鎮上先睡 6/24、6/25、6/26 三晚，再 6/27 上 Gornergrat 3100m，已比舊版「當天直上 3100m 過夜」友善許多。</li>
+      <li>仍建議長輩出發前做高海拔適性評估；高血壓、心血管病史、睡眠呼吸中止或近期重大疾病者，請醫師評估是否備 Diamox。</li>
+      <li>入住當晚不喝酒、不快走、不爬樓梯；頭痛、噁心、步態不穩、休息仍喘時，不硬撐拍照。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>③ 逐日時間可行性明細 <span class="en">營運時間與長輩節奏</span></h2>
+  <details class="fold"><summary>展開 D1-D15 逐日時間軸與長輩節奏細節 <span class="badge">逐日明細</span></summary>
+  <div class="fold-body">
+
+  <div class="day-h"><span>D1 · 6/16(二)· Taipei → Bangkok → Zürich</span><span class="lvl l-green">轉機條件已確認</span></div>
+  <div class="timeline">訂位資料：BR75 TPE 07:50 → BKK 10:50；轉機 2h；LX181 BKK 12:50 → ZRH 19:35 → 入境取行李 → 機場附近住宿</div>
+  <ul>
+    <li>已確認：BR75 + LX181 是同張票/同一訂位，行李可從 TPE 直掛 ZRH；BR75 座位 11A/11D/11G，LX181 商務艙 Z。公開航班頁只能作參考，正式時刻需以航空公司訂位紀錄為準。</li>
+    <li>晚到後不安排市區移動；機場附近住宿是正確方向。</li>
+  </ul>
+
+  <div class="day-h"><span>D2 · 6/17(三)· Zürich Airport → Luzern 短停 → Grindelwald</span><span class="lvl l-amber">原版保留</span></div>
+  <div class="timeline">index.html 原版：Zürich Flughafen 約 09:15 → Luzern 約 10:25；Luzern 15:06 → Grindelwald 17:40（實際班次出發前用 SBB 再選）</div>
+  <ul>
+    <li>依你的要求，保留 index.html 原本「琉森短停・黃金列車東段」主軸：Luzern locker 寄大行李，走卡貝爾橋、舊城區、琉森湖畔，下午搭 Luzern-Interlaken Express 進山。</li>
+    <li>長輩與行李重點：Luzern 寄物櫃空位、15:06 班次前回到車站、Interlaken Ost 轉乘餘裕。若琉森午餐放慢，可順延 16:06 班。</li>
+  </ul>
+
+  <div class="day-h"><span>D3 · 6/18(四)· Männlichen / Kleine Scheidegg / Wengen；Lauterbrunnen 備案</span><span class="lvl l-amber">健行偏長</span></div>
+  <ul>
+    <li>Männlichen 全景路線約 4.7km，寬路、景觀好，但長輩抓 2.5-3h 比較穩。</li>
+    <li>縮短版：Männlichen 纜車觀景 → Kleine Scheidegg 午餐 → WAB 下山，不硬走完全程。</li>
+    <li>Lauterbrunnen 瀑布鎮改為備案：若全景路線走不動、天氣壓低或長輩體力不足，就用較低壓的瀑布鎮 loop 取代，不當成加碼行程。</li>
+    <li>JTP4 主軸下 D3 主要區內交通 covered；HFC 票價只保留為不買 JTP 時的成本參考。</li>
+  </ul>
+
+  <div class="day-h"><span>D4 · 6/19(五)· First / Bachalpsee</span><span class="lvl l-amber">健行偏長</span></div>
+  <ul>
+    <li>JTP4 主軸下 First Cable Car covered；HFC 逐項票 from CHF 38 只作成本參考，冒險活動另計。</li>
+    <li>Bachalpsee 來回約 6km，前段有上坡，長輩抓 3-3.5h。雲多時只走 Cliff Walk + 餐廳休息也可。</li>
+    <li>若 D5 因天氣不上 Jungfraujoch，可用 JTP4 彈性轉去 Schynige Platte / Mürren 等低海拔或中海拔備案；不為了用票硬塞長健行。</li>
+  </ul>
+
+  <div class="day-h"><span>D5 · 6/20(六)· Jungfraujoch 優先 / Harder Kulm 備援</span><span class="lvl l-amber">天氣決策日</span></div>
+  <ul>
+    <li>天氣好時以 Jungfraujoch 為優先；JTP4 主軸使用 connecting ticket from CHF 89（含座位），2026/5/1-10/31 座位預約為 mandatory。</li>
+    <li>HFC only 成本參考為 from CHF 119.60 + 座位 CHF 10；BOP alone / STP 分支約 25% discount。若同時有 HFC，直接用 HFC 50% 分支較低。</li>
+    <li>Harder Kulm 官方 2026/6/20（週六）晚間班：首上 09:10，末上 20:40，末下 21:40。不上 Jungfraujoch 時可作低海拔主菜；上 Jungfraujoch 時只當體力好時的傍晚加菜。</li>
+  </ul>
+
+  <div class="day-h"><span>D6 · 6/21(日)· Grindelwald → Interlaken 寄行李 → Brienz / Iseltwald → Spiez</span><span class="lvl l-amber">原版保留</span></div>
+  <div class="timeline">index.html 原版：Grindelwald → Interlaken Ost 寄行李 → Brienz 湖邊午餐 → Brienz→Iseltwald BLS 船 → PostBus 103 回 Interlaken Ost → Spiez</div>
+  <ul>
+    <li>這天不是只有 Lake Thun；主軸是 <strong>Lake Brienz / Brienz / Iseltwald</strong>，傍晚再去 Spiez 入住。JTP4 主軸下主要區內段與湖船 covered；PostBus 103 仍保守按 Libero reduced CHF 3.00 處理。</li>
+    <li>HFC 偏好 1 等口徑約 CHF 40.50（不含 Interlaken Ost→Spiez 已另列）只作不買 JTP 時的成本參考；實際行程重點仍是寄物、船班與取行李節奏。</li>
+    <li>長輩與行李重點：Interlaken Ost 寄物、BLS Brienz→Iseltwald 船班、PostBus 103 回程、傍晚取行李後再到 Spiez。比「直接進 Spiez」更有內容，但也更受船班與寄物時間影響。</li>
+  </ul>
+
+  <div class="day-h"><span>D7 · 6/22(一)· Oeschinensee / Kandersteg</span><span class="lvl l-green">友善</span></div>
+  <div class="timeline">search.ch 樣本：Spiez 08:12 → Kandersteg 08:40（約 28 分；後續約每小時有車）</div>
+  <ul>
+    <li>Oeschinensee 官方夏季 2026：5/9-9/20 每日 08:30-18:00，6/22 涵蓋。</li>
+    <li>6/15-9/21 旺季來回成人 CHF 40，HFC/STP/GA 為 CHF 22.50；BOP 2026 起不再適用且無折扣。</li>
+    <li>官方建議公共交通票持有人也預約上山時段；山上電動計程車夏季約 10:45 起，每半小時往返湖邊，適合長輩。</li>
+  </ul>
+
+  <div class="day-h"><span>D8 · 6/23(二)· Spiez → Brig，Moosfluh / Aletsch</span><span class="lvl l-amber">中繼加景點</span></div>
+  <ul>
+    <li>Brig 可作順路中繼；天氣清楚時去 Riederalp / Moosfluh，看 Aletsch 冰河是合理加點。</li>
+    <li>Aletsch Arena 官方：Riederalp-Moosfluh 2026/6/6-10/25 開放，08:30-16:30；Aletsch Explorer HFC/STP 優惠價 from CHF 27.50，涵蓋 Brig-Mörel-Fiesch-Fürgangen 與相關纜車。</li>
+    <li>票券分支提醒：目前 ticket.html 主軸用 HFC 點對點票。若最後選 BOP，Spiez–Brig 只有 RE1 經 Kandersteg/Goppenstein 的山線可納入 BOP；若為了省時走 Lötschberg Base Tunnel，仍按 HFC 另買票。</li>
+    <li>長輩版：先放行李，再上 Moosfluh；若雲霧厚，改 Stockalper Palace、Brig 老城或 Brigerbad。</li>
+  </ul>
+
+  <div class="day-h"><span>D9 · 6/24(三)· Brig → Zermatt，鎮上適應</span><span class="lvl l-green">適應日</span></div>
+  <ul>
+    <li>search.ch 可查到 Brig/Visp→Zermatt 約 1h15-1h25 的班次；上午進 Zermatt 後不要立即衝高海拔。</li>
+    <li>下午安排防鼠木屋區、鎮上、Sunnegga 輕量觀景即可，這天是後面 3100m 過夜的健康保險。</li>
+  </ul>
+
+  <div class="day-h"><span>D10 · 6/25(四)· Matterhorn Glacier Paradise 或 Sunnegga / Riffelsee</span><span class="lvl l-amber">極高海拔可選</span></div>
+  <ul>
+    <li>Matterhorn Paradise 官方購票頁顯示 Glacier Paradise 2026/5/1-10/31 from CHF 120；HFC 通常按 50% 折扣規劃，出發前以官方購票頁為準。</li>
+    <li>3883m 不適合硬撐：上山在 Trockener Steg 停 10-15 分，到頂先坐下喝水，避免快走與爬樓梯。</li>
+    <li>Rothorn 段官方夏季時刻表顯示 Blauherd-Rothorn 6/27 才開；6/25-6/26 可到 Blauherd，五湖短線以 Stellisee / Blauherd 周邊為主。</li>
+  </ul>
+
+  <div class="day-h"><span>D11 · 6/26(五)· Zermatt 彈性山區日</span><span class="lvl l-green">緩衝日</span></div>
+  <ul>
+    <li>用來補 D10 沒看到的山、改走 Riffelsee、Gornergrat 沿線或鎮上休息。這天不搬行李，是全程很重要的恢復日。</li>
+  </ul>
+
+  <div class="day-h"><span>D12 · 6/27(六)· Gornergrat 3100 過夜</span><span class="lvl l-amber">高海拔過夜</span></div>
+  <ul>
+    <li>Gornergrat 官方：Swiss Half Fare Card / Swiss Travel Pass 可享 50% 折扣；Zermatt-Gornergrat 來回 2026 夏季常用規劃值為全價 CHF 132、半價 CHF 66。</li>
+    <li>只帶過夜小包上山，大行李留 Zermatt。若有不適，越早處理越好，不等到末班才決定。</li>
+  </ul>
+
+  <div class="day-h"><span>D13 · 6/28(日)· Gornergrat → Zermatt → Spiez → Montreux</span><span class="lvl l-red">最長移動日</span></div>
+  <div class="timeline">GoldenPass Express 已選官方 2026 班次：Spiez 14:38 → Montreux 17:25（1 等普通座）</div>
+  <ul>
+    <li>如果要搭 11:38 Spiez→Montreux，Gornergrat 需很早下山並快速在 Zermatt 取行李；對長輩和大行李較緊。</li>
+    <li>已採較穩的 14:38 Spiez→Montreux，抵達 17:25，犧牲 Montreux 下午時間換低壓轉乘。</li>
+    <li>BOP 分支只可把 Brig–Spiez 的 RE1 山線納入 pass；若當天為銜接 GoldenPass 選最快 Base Tunnel 路線，ticket.html 目前按 HFC 1 等點對點彈性口徑處理。</li>
+    <li>GoldenPass Express 官方寫公開時刻可能變動，出發前要用 SBB/MOB 重查；座位等級已按 1 等普通座規劃，座位預約官方語氣為 strongly recommended。</li>
+  </ul>
+
+  <div class="day-h"><span>D14 · 6/29(一)· Montreux → Zürich HB</span><span class="lvl l-green">可控</span></div>
+  <ul>
+    <li>上午可湖邊短散步，之後回 Zürich HB。避免拖到傍晚，保留隔天機場前的整理與退稅準備。</li>
+  </ul>
+
+  <div class="day-h"><span>D15 · 6/30(二)· Zürich HB → ZRH → ICN → TPE +1</span><span class="lvl l-green">寬鬆</span></div>
+  <ul>
+    <li>訂位資料：LX122 ZRH 13:15→ICN T1 07:30+1，商務艙 Z；ICN T1 停 4h30；BR169 ICN T1 12:00+1→TPE T2 13:35+1，商務艙 D，座位 09A/09C/09D。SWISS 公開航線頁列 LX122 約 13:20→07:30，與訂位資料有 5 分鐘差，實際以訂位頁為準。</li>
+    <li>Zürich HB 到 ZRH 機場鐵路約 10-15 分一班、車程約 10-15 分。若航班 13:15 起飛，抓 10:15 前到機場較穩。</li>
+  </ul>
+  </div></details>
+</section>
+
+<section>
+  <h2>④ 查證來源 <span class="en">2026-06-05/06</span></h2>
+  <details class="fold"><summary>展開查證來源連結（官方頁／PDF）<span class="badge">查證</span></summary>
+  <div class="fold-body">
+  <ul class="src">
+    <li>票券與採用走法基準：<a href="ticket.html">ticket.html</a>（目前採 HFC + JTP4 6/18-6/21 為主軸；HFC only 保留成本參考；D6 小段票價已補齊）</li>
+    <li>Jungfrau Travel Pass 價格、範圍、Jungfraujoch connecting ticket：<a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/" target="_blank" rel="noopener">jungfrau.ch</a>、<a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/connecting-ticket-to-jungfrau-travel-pass/" target="_blank" rel="noopener">connecting ticket</a></li>
+    <li>BLS Lake Cruise / Brienzersee 船班：<a href="https://www.bls-schiff.ch/en/lake-cruise/timetable" target="_blank" rel="noopener">BLS official timetable</a>、<a href="https://www.bls-schiff.ch/sites/default/files/2025-12/timetable_bls_schifffahrt_2026.pdf" target="_blank" rel="noopener">2026 PDF</a></li>
+    <li>Harder Kulm 2026 營運：<a href="https://www.jungfrau.ch/en-gb/harder-kulm/" target="_blank" rel="noopener">jungfrau.ch Harder Kulm</a></li>
+    <li>Oeschinensee 2026 時刻/票價/BOP 規則：<a href="https://www.oeschinensee.ch/en/tarife-fahrplan/" target="_blank" rel="noopener">oeschinensee.ch</a></li>
+    <li>Berner Oberland Pass 2026 價格/範圍與 GoldenPass 預約規則：<a href="https://www.berneseoberlandpass.ch/prices-tickets/" target="_blank" rel="noopener">prices</a>、<a href="https://www.berneseoberlandpass.ch/faq/" target="_blank" rel="noopener">FAQ</a></li>
+    <li>GoldenPass Express 2026 時刻：<a href="https://www.gpx.swiss/en/pages/timetable" target="_blank" rel="noopener">gpx.swiss</a>、<a href="https://widgets.oev-info.ch/publikation/jahresfpl/471.pdf" target="_blank" rel="noopener">2026 PDF</a></li>
+    <li>Aletsch Arena Moosfluh 營運與 Aletsch Explorer：<a href="https://www.aletscharena.ch/en/planning-booking/travel-mobility/timetable-season-times" target="_blank" rel="noopener">operating hours</a>、<a href="https://www.aletscharena.ch/en/planning-booking/offers-experiences/circular-hike-tickets-and-partial-return-trips" target="_blank" rel="noopener">Aletsch Explorer</a></li>
+    <li>Zermatt / Matterhorn Paradise / Gornergrat：<a href="https://www.matterhornparadise.ch/en/book/tickets" target="_blank" rel="noopener">Matterhorn Paradise tickets</a>、<a href="https://www.matterhornparadise.ch/ZBAG/17-PDF/flyer/flyer-sommer/2026/fahrplan-sommer-2026.pdf" target="_blank" rel="noopener">2026 summer timetable</a>、<a href="https://www.gornergrat.ch/en/pages/prices-gornergrat-bahn" target="_blank" rel="noopener">Gornergrat prices</a></li>
+    <li>航班：使用者提供之訂位資料；SWISS 官方航線頁交叉確認 <a href="https://www.swiss.com/lhg/th/en/o-d/cy-cy/bangkok-zurich" target="_blank" rel="noopener">LX181 BKK-ZRH</a> 與 <a href="https://www.swiss.com/lhg/ch/en/o-d/cy-cy/zurich-seoul" target="_blank" rel="noopener">LX122 ZRH-ICN</a> 公開時刻。</li>
+    <li>鐵路樣本班次：search.ch timetable（資料源 opentransportdata / realtime information），出發前仍以 <a href="https://www.sbb.ch/en" target="_blank" rel="noopener">SBB</a> 即時查詢為準。</li>
+  </ul>
+  </div></details>
+</section>
+
+<div class="foot">所有票價、航班與時刻均為 2026-06-05/06 查證結果；動態資訊以官方購票頁、SBB/MOB 即時時刻與航空公司訂位紀錄為準。</div>
+</div>
+</body>
+</html>

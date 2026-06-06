@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>待確認清單 · 2026/6/16-6/30 新版</title>
+<style>
+  :root{
+    --bg:#f7f5f0; --card:#fff; --ink:#1f2421; --muted:#5b6660; --line:#e3ddd2;
+    --accent:#B8472D; --red:#991b1b; --redbg:#fee2e2; --amber:#92400e; --amberbg:#fef3c7;
+    --green:#166534; --greenbg:#dcfce7; --blue:#3730a3; --bluebg:#e0e7ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  header.top{background:var(--ink);color:#f5f1e8;border-radius:14px;padding:24px 26px}
+  header.top h1{margin:0 0 6px;font-size:24px}
+  header.top .sub{color:#c9c2b4;font-size:14px}
+  .meta-bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{background:rgba(255,255,255,.12);border-radius:999px;padding:4px 12px;font-size:12.5px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+  h2{font-size:20px;margin:0 0 4px;border-left:5px solid var(--accent);padding-left:12px}
+  h2 .en{color:var(--muted);font-size:13px;font-weight:400}
+  p.lead{color:var(--muted);margin:4px 0 14px;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.3px;margin:10px 0}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#efe9dd;font-weight:600}
+  tbody tr:nth-child(even){background:#faf8f3}
+  .tag{display:inline-block;border-radius:6px;padding:1px 7px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .t-ask{background:var(--redbg);color:var(--red)}
+  .t-chk{background:var(--amberbg);color:var(--amber)}
+  .t-ok{background:var(--greenbg);color:var(--green)}
+  .t-src{background:var(--bluebg);color:var(--blue)}
+  .notice{border-radius:12px;padding:14px 18px;margin:16px 0;font-size:13.5px;background:var(--amberbg);color:var(--amber);border:1px solid #fcd34d}
+  ul{margin:8px 0;padding-left:20px} li{margin:5px 0}
+  a{color:var(--accent)} .src{font-size:12px;color:var(--muted);word-break:break-all}.src a{color:var(--muted)}
+  .foot{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px}
+  details.fold{border:1px solid var(--line);border-radius:10px;margin:14px 0;background:#fcfbf8}
+  details.fold>summary{cursor:pointer;list-style:none;padding:12px 15px;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary::before{content:"▸";color:var(--accent);font-size:13px;transition:transform .15s}
+  details.fold[open]>summary::before{transform:rotate(90deg)}
+  details.fold>summary:hover{background:#f3efe6}
+  details.fold>summary .en{color:var(--muted);font-size:12px;font-weight:400}
+  details.fold>summary .badge{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);background:#efe9dd;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  details.fold .fold-body{padding:2px 15px 14px}
+  @media (max-width:600px){
+    .wrap{padding:16px 12px 56px}
+    body{font-size:14px}
+    header.top{padding:18px 16px}
+    header.top h1{font-size:20px}
+    h2{font-size:18px}
+    section{padding:16px 14px}
+    .notice{padding:12px 14px;font-size:13px}
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:12px}
+    th,td{padding:6px 7px}
+    details.fold>summary{font-size:15px;padding:10px 12px}
+    details.fold .fold-body{padding:2px 12px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>待確認清單</h1>
+  <div class="sub">2026/6/16-6/30 新版 · 只放「不能猜、需要你提供或出發前重查」的項目</div>
+  <div class="meta-bar">
+    <span class="chip">查證日：2026-06-06</span>
+    <span class="chip">依據：新版查證＋使用者訂位資料；draft 僅供行程骨架</span>
+    <span class="chip">原則：逐條確認，不批次猜答案</span>
+    <span class="chip">影響檔：feasibility.html · ticket.html · 後續 index/trip</span>
+  </div>
+</header>
+
+<div class="notice">
+  <strong>怎麼用：</strong>本頁不是一般備忘錄，而是合併前的阻塞清單。標 <span class="tag t-ask">要問你</span> 的項目需要你回覆；標 <span class="tag t-chk">出發前重查</span> 的項目則是票價/時刻/座位庫存會變，現在只能放官方查證方向。
+</div>
+
+<section>
+  <h2>① 需要逐條問你的項目 <span class="en">user-dependent</span></h2>
+  <p class="lead">這些無法靠連網替你決定；我會一次問一題，答案會影響後續合併到 index.html / trip.html。</p>
+  <table>
+    <thead><tr><th>順序</th><th>問題</th><th>為什麼重要</th><th>目前檔案處理</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="tag t-ok">已確認</span> 去程為 BR75 + LX181，同張票/同一訂位，且行李可從 TPE 直掛 ZRH。</td>
+        <td>訂位資料：BR75 TPE T2 07:50→BKK 10:50，商務艙 D，座位 11A/11D/11G；BKK 停 2h；LX181 BKK 12:50→ZRH 19:35，商務艙 Z。SWISS 官網可交叉確認 LX181 公開航線時刻。</td>
+        <td>feasibility/ticket/index/trip 已改為「BR75 + LX181，同張票＋行李直掛已確認」。</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="tag t-ok">已確認</span> 回程為 LX122 + BR169，ZRH→ICN→TPE。</td>
+        <td>訂位資料：LX122 ZRH 13:15→ICN T1 07:30+1，商務艙 Z；ICN T1 停 4h30；BR169 ICN T1 12:00+1→TPE T2 13:35+1，商務艙 D，座位 09A/09C/09D。SWISS 公開航線頁列 LX122 約 13:20→07:30，實際以訂位頁為準。</td>
+        <td>feasibility/ticket/index/trip 已更新；D15 機場規劃抓 10:15 前到 ZRH。</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="tag t-ok">已修正</span> 6/21 不是只問 Lake Thun；依 index.html 原版保留 Brienz / Lake Brienz / Iseltwald，再到 Spiez。</td>
+        <td>目前採 HFC + JTP 4 日（6/18-6/21）為主軸：可涵蓋 Männlichen、First、Jungfrau/Harder 彈性日與 Brienz / Iseltwald 遊船。HFC only 是較便宜成本參考；JTP4 的價值是少買 D3-D6 區內票與天氣/體力彈性。JTP 5 日多 CHF 30/人；6/17 已用 SBB 購票頁查到 Luzern→Grindelwald HFC 2 等 Point-to-point CHF 22.90，若買 JTP5 只需買 Luzern→Brienz CHF 15.00，因此實際只省 CHF 7.90/人，低於 30，不買 5 日。BOP 因 1 等版與 Montreux / GPX 範圍保留備案，但 Brig 只能把經 Kandersteg/Goppenstein 的 RE1 山線納入 BOP，不能把 Lötschberg Base Tunnel 當 BOP 節省額。</td>
+        <td>feasibility/ticket 已改為「保留 index.html 原版 6/21」；ticket 第③節已改為 HFC + JTP4 主軸，BOP/STP/Peak Pass 依翻盤門檻保留備案；主要 SBB 段已補官方查價獨立表。</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="tag t-ok">已確認</span> 6/20 天氣好時以 Jungfraujoch 為優先；Harder Kulm 作備援或體力好時加菜。</td>
+        <td>JTP4 主軸可用 connecting ticket from CHF 89/人（含座位）；HFC only 成本參考為 from CHF 119.60 + 座位 CHF 10。不上 Jungfraujoch 時都不把上山票列入固定成本。</td>
+        <td>ticket.html 已改成 JTP4 主軸並保留 HFC/BOP/STP 成本參考；feasibility.html 已改成天氣好優先 Jungfraujoch。</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="tag t-ok">已確認</span> 6/28 GoldenPass Express 採 Spiez 14:38 → Montreux 17:25，座位等級為 1 等普通座。</td>
+        <td>官方 GPX 2026 PDF 已核到 14:38 / 17:25；MOB 支援頁列 1/2 等 seat reservation CHF 20。Prestige supplement 不列入基準。</td>
+        <td>ticket 已改成 14:38 方案；BOP 10 日若啟用到 6/28，可把 GPX 基礎票納入比較。</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><span class="tag t-ask">要問你</span> 6/23 Brig 與 6/28 Montreux 住宿尚未定；其餘住宿照舊或延長。</td>
+        <td>後續 trip.html 地圖需要今晚住宿座標，隔天「出發點 00」也靠這些資料；Brig / Montreux 不能用城市名猜飯店。</td>
+        <td>Brig、Montreux 放待確認；其餘住宿先沿用 index.html / trip.html 既有資料。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>② index.html 備份覆蓋檢查 <span class="en">read-only backup</span></h2>
+  <details class="fold"><summary>展開原版主軸保留核對表 <span class="badge">agent 核對</span></summary>
+  <div class="fold-body">
+  <p class="lead">依你的要求，index.html 不修改，作為原版備份；新版後續合併時，以這張表確認瑞士段原版主軸都有被保留。</p>
+  <table>
+    <thead><tr><th>index.html 原版項目</th><th>新版保留位置</th><th>狀態</th></tr></thead>
+    <tbody>
+      <tr><td>琉森短停、卡貝爾橋、琉森湖畔、Luzern-Interlaken Express</td><td>D2 · 6/17 Zürich Airport → Luzern → Grindelwald</td><td><span class="tag t-ok">已納入 feasibility/ticket 檢查</span></td></tr>
+      <tr><td>Männlichen → Kleine Scheidegg 全景步道，Eiger Walk 選配</td><td>D3 · 6/18</td><td><span class="tag t-ok">已保留</span></td></tr>
+      <tr><td>First Cliff Walk + Bachalpsee</td><td>D4 · 6/19</td><td><span class="tag t-ok">已保留</span></td></tr>
+      <tr><td>Jungfraujoch / Harder Kulm 彈性日</td><td>D5 · 6/20</td><td><span class="tag t-ok">Jungfraujoch 已設為選配分支並納入成本計算</span></td></tr>
+      <tr><td>Interlaken Ost 寄行李、Brienz、Lake Brienz 船、Iseltwald、PostBus 103、Spiez</td><td>D6 · 6/21</td><td><span class="tag t-ok">已改回原版主軸</span></td></tr>
+      <tr><td>Oeschinensee / Kandersteg</td><td>D7 · 6/22</td><td><span class="tag t-ok">已保留</span></td></tr>
+      <tr><td>Aletsch / Moosfluh / Brig</td><td>D8 · 6/23</td><td><span class="tag t-ok">已保留</span></td></tr>
+      <tr><td>Zermatt、Glacier Paradise、Sunnegga / Riffelsee、Gornergrat</td><td>D9-D12 · 6/24-6/27</td><td><span class="tag t-ok">已保留，且高海拔節奏比舊版更緩</span></td></tr>
+      <tr><td>GoldenPass 精華段、Montreux 收尾</td><td>D13-D14 · 6/28-6/29</td><td><span class="tag t-ok">GPX 已選 6/28 14:38，1 等普通座</span></td></tr>
+    </tbody>
+  </table>
+  </div></details>
+</section>
+
+<section>
+  <h2>③ 已連網但仍需出發前重查 <span class="en">dynamic</span></h2>
+  <table>
+    <thead><tr><th>項目</th><th>目前查證結果</th><th>出發前怎麼查</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag t-chk">出發前重查</span> SBB 點對點票 / Saver / Supersaver</td>
+        <td>ticket.html 已新增「SBB 官方查價獨立表」：D2、D6-D9、D13-D15 主要段已列 HFC 2 等最低/彈性與 1 等估值；Saver Day Pass 官方為 HFC 2 等 from CHF 29、1 等 from CHF 49。點對點與 Supersaver 依日期/班次/庫存變動。</td>
+        <td>出發前仍到 <a href="https://www.sbb.ch/en" target="_blank" rel="noopener">sbb.ch</a> 重查 D13、D14、D15 與任何要買 Supersaver 的班次；綁班票只在時間固定時買。</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-chk">出發前重查</span> GoldenPass Express 座位與票價</td>
+        <td>官方 2026 PDF 已核：Spiez 14:38 → Montreux 17:25。MOB 支援頁列 1/2 等 seat reservation CHF 20；使用者已選 1 等普通座，Prestige 不列入基準。</td>
+        <td>出發前到 <a href="https://www.gpx.swiss/en/pages/timetable" target="_blank" rel="noopener">GPX</a> / MOB / SBB 查 14:38 1 等座位庫存與實價。</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-ok">已選主軸</span> HFC + JTP 4 日；BOP 作備案</td>
+        <td>固定成本底稿：HFC + JTP 4 日（不上 Jungfraujoch）固定小計 CHF 568/人；全程估算約 CHF 849-868/人。HFC only 仍較便宜，約 CHF 801-823/人；也就是 JTP4 便利費約 +46-49/人。若 D5 上 Jungfraujoch，JTP4 全程估算 from CHF 938-958/人，和 HFC only 上山口徑差距約 +28/人。HFC + BOP 10 日 1 等（6/19-6/28，涵蓋 GPX）固定小計 CHF 726/人，暫高 CHF 158/人；JTP4+BOP8 固定小計 CHF 871/人，比 JTP4 基準高 CHF 303/人。</td>
+        <td>HFC + JTP4（6/18-6/21）已是目前採用主軸；BOP 是替代備案，不是疊加購買。BOP 10 日只有在靠 D8 RE1 山線、湖船、1 等偏好等額外 covered value，扣掉 D3 Männlichen 漏掉成本後淨省超過 CHF 158/人，才改選 BOP。</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-ask">要問你</span> 6/23 Brig / 6/28 Montreux 住宿</td>
+        <td>使用者確認其餘住宿照舊或延長；Brig 與 Montreux 尚未定。這兩晚會影響 D8、D13、D14 的行李動線、抵達時間與 trip.html 地圖座標。</td>
+        <td>決定後補正式名稱、地址、訂房狀態、Google Maps 座標/連結；未定前不寫入 trip.html 的住宿標記。</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-chk">出發前重查</span> Zermatt 纜車每日營運</td>
+        <td>Matterhorn Paradise 2026 夏季 PDF 已確認 6/25-6/26 可規劃 Glacier Paradise / Sunnegga-Blauherd；Rothorn 6/27 起才進夏季主段。</td>
+        <td>出發前與當天早上看 <a href="https://www.matterhornparadise.ch/en/book/tickets" target="_blank" rel="noopener">Matterhorn Paradise</a> live / ticket 頁，雲厚就不要硬買。</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-chk">出發前重查</span> Oeschinensee 天氣與時段</td>
+        <td>官方 2026/6/15-9/21 來回成人 CHF 40、HFC/STP/GA CHF 22.50；散客為建議預約時段，不寫成強制。</td>
+        <td>出發前在 <a href="https://www.oeschinensee.ch/en/tarife-fahrplan/" target="_blank" rel="noopener">Oeschinensee 官方票店</a>買/調整上山時段。</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-chk">出發前重查</span> 航班時刻與行李規則</td>
+        <td>公開航班頁可作參考，但不是最終官方訂位紀錄。</td>
+        <td>以航空公司訂位管理頁或電子機票為準，尤其是 BR75/LX181 與 LX122/BR169。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>④ 來源有差異但不阻塞合併 <span class="en">source discrepancy</span></h2>
+  <details class="fold"><summary>展開來源差異與處理方式 <span class="badge">校讎</span></summary>
+  <div class="fold-body">
+  <table>
+    <thead><tr><th>項目</th><th>差異</th><th>處理方式</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Swiss Travel Pass 15 日 1 等</td>
+        <td>SBB 購買頁 2026 列 CHF 787；Switzerland Tourism 英文頁同區塊列 CHF 778。SBB 購買頁同時寫價格有效至 2026/12/31。</td>
+        <td>ticket.html 採 SBB 購買頁 CHF 787，並標官方購買頁為準。STP 已列入 ticket.html 第③節試算；此差異只影響 STP 固定成本欄位。</td>
+      </tr>
+      <tr>
+        <td>Gornergrat 價格頁動態載入</td>
+        <td>價格主頁部分內容由 JS 載入；搜尋索引與官方 FAQ 可讀到夏季 Zermatt-Gornergrat 來回 CHF 132、HFC/STP 50%。</td>
+        <td>ticket.html 寫「2026 夏季常用規劃值 CHF 132/66，以官方購票頁為準」。</td>
+      </tr>
+      <tr>
+        <td>BR75 / LX181 / LX122 / BR169 航班資訊</td>
+        <td>使用者訂位資料已確認四段；SWISS 官方公開航線頁可交叉確認 LX181 與 LX122，但 LX122 公開頁列約 13:20、訂位資料列 13:15。</td>
+        <td>以訂位資料與航空公司訂位頁為準；出發前再重查航班狀態。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div></details>
+</section>
+
+<section>
+  <h2>⑤ 查證來源 <span class="en">2026-06-05</span></h2>
+  <details class="fold"><summary>展開查證來源連結（官方頁／PDF）<span class="badge">查證</span></summary>
+  <div class="fold-body">
+  <ul class="src">
+    <li>SBB Half Fare / Saver / STP：<a href="https://www.sbb.ch/en/tickets-offers/tickets/guests-abroad/swiss-halffare-card.html" target="_blank" rel="noopener">Swiss Half Fare Card</a>、<a href="https://www.sbb.ch/en/tickets-offers/tickets/day-passes/saver-day-pass" target="_blank" rel="noopener">Saver Day Pass</a>、<a href="https://www.sbb.ch/en/offers/buy-swiss-travel-pass?duration=15" target="_blank" rel="noopener">Swiss Travel Pass buy page</a></li>
+    <li>Jungfrau：<a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/" target="_blank" rel="noopener">Jungfrau Travel Pass</a>、<a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/connecting-ticket-to-jungfrau-travel-pass/" target="_blank" rel="noopener">Jungfraujoch connecting ticket</a></li>
+    <li>Berner Oberland Pass / Oeschinensee：<a href="https://www.berneseoberlandpass.ch/prices-tickets/" target="_blank" rel="noopener">BOP prices</a>、<a href="https://www.berneseoberlandpass.ch/public-transport/mob-goldenpass/" target="_blank" rel="noopener">BOP GoldenPass validity</a>、<a href="https://www.berneseoberlandpass.ch/faq/" target="_blank" rel="noopener">BOP FAQ</a>、<a href="https://www.oeschinensee.ch/en/tarife-fahrplan/" target="_blank" rel="noopener">Oeschinensee tariffs &amp; FAQ</a></li>
+    <li>BLS Lake Cruise：<a href="https://www.bls-schiff.ch/en/lake-cruise/timetable" target="_blank" rel="noopener">official timetable</a>、<a href="https://www.bls-schiff.ch/sites/default/files/2025-12/timetable_bls_schifffahrt_2026.pdf" target="_blank" rel="noopener">2026 timetable PDF</a></li>
+    <li>Aletsch / Zermatt / Gornergrat：<a href="https://www.aletscharena.ch/en/planning-booking/offers-experiences/aletsch-explorer" target="_blank" rel="noopener">Aletsch Explorer</a>、<a href="https://www.matterhornparadise.ch/en/book/tickets" target="_blank" rel="noopener">Matterhorn Paradise tickets</a>、<a href="https://www.matterhornparadise.ch/ZBAG/17-PDF/flyer/flyer-sommer/2026/fahrplan-sommer-2026.pdf" target="_blank" rel="noopener">2026 summer timetable PDF</a>、<a href="https://www.gornergrat.ch/en/pages/faq-tickets" target="_blank" rel="noopener">Gornergrat FAQ</a></li>
+    <li>GoldenPass：<a href="https://www.gpx.swiss/en/pages/timetable" target="_blank" rel="noopener">GPX timetable</a>、<a href="https://widgets.oev-info.ch/publikation/jahresfpl/471.pdf" target="_blank" rel="noopener">2026 PDF</a>、<a href="https://support.mob.ch/hc/fr-ch/articles/10898091978525-Tarifs-GoldenPass-Express" target="_blank" rel="noopener">MOB fare support</a></li>
+    <li>航班：使用者提供之訂位資料；SWISS 官方航線頁交叉確認 <a href="https://www.swiss.com/lhg/th/en/o-d/cy-cy/bangkok-zurich" target="_blank" rel="noopener">LX181 BKK-ZRH</a> 與 <a href="https://www.swiss.com/lhg/ch/en/o-d/cy-cy/zurich-seoul" target="_blank" rel="noopener">LX122 ZRH-ICN</a> 公開時刻。</li>
+  </ul>
+  </div></details>
+</section>
+
+<div class="foot">所有票價、航班與時刻均為 2026-06-05/06 查證結果；未決項目逐條確認後再合併到旅伴頁。</div>
+</div>
+</body>
+</html>

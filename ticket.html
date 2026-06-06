@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瑞士車票完整驗證記錄 · 2026/6/16-6/30 新版</title>
+<style>
+  :root{
+    --bg:#f7f5f0; --card:#fff; --ink:#1f2421; --muted:#5b6660; --line:#e3ddd2;
+    --accent:#B8472D; --green:#166534; --greenbg:#dcfce7; --blue:#3730a3; --bluebg:#e0e7ff;
+    --amber:#92400e; --amberbg:#fef3c7; --red:#991b1b; --redbg:#fee2e2; --grey:#475569; --greybg:#f1f5f9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
+  header.top{background:var(--ink);color:#f5f1e8;border-radius:14px;padding:24px 26px}
+  header.top h1{margin:0 0 6px;font-size:24px}
+  header.top .sub{color:#c9c2b4;font-size:14px}
+  .meta-bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{background:rgba(255,255,255,.12);border-radius:999px;padding:4px 12px;font-size:12.5px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+  h2{font-size:20px;margin:0 0 4px;border-left:5px solid var(--accent);padding-left:12px}
+  h2 .en{color:var(--muted);font-size:13px;font-weight:400}
+  h3{font-size:16px;margin:20px 0 8px}
+  p.lead{color:var(--muted);margin:4px 0 14px;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.3px;margin:10px 0}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#efe9dd;font-weight:600}
+  tbody tr:nth-child(even){background:#faf8f3}
+  td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .tag{display:inline-block;border-radius:6px;padding:1px 7px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .t-ok{background:var(--greenbg);color:var(--green)}
+  .t-hfc{background:var(--amberbg);color:var(--amber)}
+  .t-jtp{background:var(--greenbg);color:var(--green)}
+  .t-bop{background:var(--bluebg);color:var(--blue)}
+  .t-self{background:var(--greybg);color:var(--grey)}
+  .t-chk{background:var(--amberbg);color:var(--amber)}
+  .t-no{background:var(--redbg);color:var(--red)}
+  .t-opt{background:#fae8ff;color:#86198f}
+  .notice{border-radius:12px;padding:14px 18px;margin:16px 0;font-size:13.5px;background:var(--amberbg);color:var(--amber);border:1px solid #fcd34d}
+  .notice.green{background:var(--greenbg);color:var(--green);border-color:#86efac}
+  .day-h{background:#1f2421;color:#f5f1e8;padding:7px 13px;border-radius:8px;font-size:15px;margin:18px 0 6px}
+  ul{margin:8px 0;padding-left:20px} li{margin:5px 0}
+  a{color:var(--accent)} .src{font-size:12px;color:var(--muted);word-break:break-all}.src a{color:var(--muted)}
+  .foot{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px}
+  details.fold{border:1px solid var(--line);border-radius:10px;margin:14px 0;background:#fcfbf8}
+  details.fold>summary{cursor:pointer;list-style:none;padding:12px 15px;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary::before{content:"▸";color:var(--accent);font-size:13px;transition:transform .15s}
+  details.fold[open]>summary::before{transform:rotate(90deg)}
+  details.fold>summary:hover{background:#f3efe6}
+  details.fold>summary .en{color:var(--muted);font-size:12px;font-weight:400}
+  details.fold>summary .badge{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);background:#efe9dd;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  details.fold .fold-body{padding:2px 15px 14px}
+  details.fold .fold-body>h3:first-child{margin-top:6px}
+  @media (max-width:600px){
+    .wrap{padding:16px 12px 56px}
+    body{font-size:14px}
+    header.top{padding:18px 16px}
+    header.top h1{font-size:20px}
+    h2{font-size:18px} h3{font-size:15px}
+    section{padding:16px 14px}
+    .notice{padding:12px 14px;font-size:13px}
+    .day-h{font-size:14px;padding:6px 11px}
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:12px}
+    th,td{padding:6px 7px}
+    details.fold>summary{font-size:15px;padding:10px 12px}
+    details.fold .fold-body{padding:2px 12px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>瑞士車票完整驗證記錄</h1>
+  <div class="sub">2026/6/16-6/30 新版 · 5 位成人 · 瑞士段偏好 1 等 · HFC + JTP4 主軸，HFC only 作成本參考</div>
+  <div class="meta-bar">
+    <span class="chip">查證日：2026-06-05/06</span>
+    <span class="chip">依據：新版票券查證＋使用者訂位資料；draft 僅供行程骨架</span>
+    <span class="chip">原則：官方頁優先；動態票價以購票頁為準</span>
+    <span class="chip">未決項目：集中到 uncertain.html</span>
+  </div>
+</header>
+
+<div class="notice">
+  <strong>本頁定位：</strong>這是新版行程的票券計算工作區，不是最終購票單。主要官方價已補到可判斷：目前依使用者決策採 <strong>Swiss Half Fare Card + Jungfrau Travel Pass 4 日（6/18-6/21）</strong> 為主軸；HFC only 保留為較便宜的成本參考，JTP5 / BOP / STP 只在路線大改或 1 等 covered value 足夠時作翻盤檢查。凡 SBB Saver、座位庫存、班次、航班、住宿銜接會受實際日期與庫存影響者，仍標 <span class="tag t-chk">待查/待你確認</span>；不把草稿或搜尋摘要當定論。
+</div>
+
+<section>
+  <h2>① 日期與票券天數 <span class="en">date frame</span></h2>
+  <p class="lead">日期星期已用系統日曆核對。瑞士境內主要用票日為 6/17-6/30，其中山區交通集中在 6/17-6/28。</p>
+  <table>
+    <thead><tr><th>Day</th><th>日期</th><th>星期</th><th>主軸</th><th>計算提醒</th></tr></thead>
+    <tbody>
+      <tr><td>D1</td><td>6/16</td><td>二</td><td>BR75 TPE→BKK，LX181 BKK→ZRH</td><td>同張票＋行李直掛已確認；無瑞士鐵路票。</td></tr>
+      <tr><td>D2</td><td>6/17</td><td>三</td><td>Zürich Airport→Luzern 短停→Grindelwald</td><td>進山長途需列入 HFC / STP / Saver / 點對點比較。</td></tr>
+      <tr><td>D3</td><td>6/18</td><td>四</td><td>Männlichen / Kleine Scheidegg / Wengen</td><td>少女峰區山鐵與纜車需比較 JTP / BOP / HFC / STP。</td></tr>
+      <tr><td>D4</td><td>6/19</td><td>五</td><td>First / Bachalpsee</td><td>First 纜車與區內交通需比較 JTP / BOP / HFC / STP。</td></tr>
+      <tr><td>D5</td><td>6/20</td><td>六</td><td>Jungfraujoch 優先；Harder Kulm 備援/加菜</td><td>天氣好時以 Jungfraujoch 為優先；JTP4 connecting ticket 另列。</td></tr>
+      <tr><td>D6</td><td>6/21</td><td>日</td><td>Grindelwald→Interlaken 寄行李→Brienz / Iseltwald→Spiez</td><td>湖船、PostBus 與 Interlaken→Spiez 火車需分段比較。</td></tr>
+      <tr><td>D7</td><td>6/22</td><td>一</td><td>Oeschinensee / Kandersteg</td><td>Spiez↔Kandersteg 火車與 Oeschinensee 纜車需分別比較。</td></tr>
+      <tr><td>D8</td><td>6/23</td><td>二</td><td>Spiez→Brig，Moosfluh / Aletsch</td><td>Spiez→Brig 路線會影響 BOP / HFC / Saver 計算；Aletsch Explorer 可選。</td></tr>
+      <tr><td>D9</td><td>6/24</td><td>三</td><td>Brig→Zermatt，鎮上適應</td><td>Brig / Visp→Zermatt 需查 SBB / MGB 實價。</td></tr>
+      <tr><td>D10</td><td>6/25</td><td>四</td><td>Glacier Paradise 或 Sunnegga / Riffelsee</td><td>策馬特山岳票需比較 HFC / STP / Peak Pass / 逐項票。</td></tr>
+      <tr><td>D11</td><td>6/26</td><td>五</td><td>Zermatt 彈性山區日</td><td>天氣備援；避免過早鎖定不可退纜車票。</td></tr>
+      <tr><td>D12</td><td>6/27</td><td>六</td><td>Gornergrat 3100 過夜</td><td>Gornergrat 來回票可跨日使用。</td></tr>
+      <tr><td>D13</td><td>6/28</td><td>日</td><td>Gornergrat→Zermatt→Spiez→Montreux</td><td>Zermatt→Spiez 與 GPX 需比較 HFC / BOP / STP / Saver，座位預約另列。</td></tr>
+      <tr><td>D14</td><td>6/29</td><td>一</td><td>Montreux→Zürich HB</td><td>長途回 Zürich 需比較 HFC / STP / Saver / 點對點。</td></tr>
+      <tr><td>D15</td><td>6/30</td><td>二</td><td>Zürich HB→ZRH→ICN→TPE +1</td><td>Zürich 市區到機場短程需列入最後總表；LX122 + BR169 已確認。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>② Pass 總整理 <span class="en">2026 official prices</span></h2>
+  <table>
+    <thead><tr><th>Pass / 票種</th><th>2026 官方價</th><th>等級</th><th>計算狀態</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Swiss Half Fare Card</strong></td>
+        <td class="num">CHF 150 / 1 個月</td>
+        <td>1 等、2 等票皆可買半價/優惠價</td>
+        <td><span class="tag t-ok">基底 pass</span> SBB 官方寫 CHF 150、效期一個月，火車/巴士/船/多數山岳交通可半價或優惠價；JTP4 reduced 價格與後段山岳票仍都以 HFC 作基底。</td>
+      </tr>
+      <tr>
+        <td><strong>Jungfrau Travel Pass</strong></td>
+        <td class="num">4 日 reduced CHF 180<br>5 日 reduced CHF 210<br>成人全價 4 日 235 / 5 日 270</td>
+        <td>僅 2 等</td>
+        <td><span class="tag t-jtp">目前主軸</span> JTP 4 日規劃 6/18-6/21，涵蓋 Männlichen、First、Jungfrau/Harder 彈性日與 Brienz/Iseltwald 遊船。HFC 逐項成本低於 JTP4 的 180，採 JTP4 是為了 D3-D6 自由度與少買票；逐項金額與「JTP5 不選」的理由詳見 ③ 計算工作區。</td>
+      </tr>
+      <tr>
+        <td><strong>Jungfraujoch connecting ticket</strong></td>
+        <td class="num">2026/5/1-10/31 from CHF 89</td>
+        <td>配合有效 JTP</td>
+        <td><span class="tag t-opt">可選</span> Jungfrau 官方寫 2026/5/1-10/31 座位預約 mandatory，from CHF 89 含 paid seat reservation；若 D5 不上 Jungfraujoch 則不買。</td>
+      </tr>
+      <tr>
+        <td><strong>Berner Oberland Pass</strong></td>
+        <td class="num">HFC reduced：2 等 8日 287 / 10日 316<br>1 等 8日 345 / 10日 380</td>
+        <td>有 1 等版</td>
+        <td><span class="tag t-self">備案待完整扣抵</span> 範圍廣、有 1 等版，官方/BLS 寫可涵蓋 Bern、Luzern、Montreux、Brig 間多數交通、湖船與 25+ 山岳交通；但 Brig 方向只涵蓋經 Kandersteg/Goppenstein 的 RE1 山線，Spiez–Visp/Brig 的 Lötschberg Base Tunnel 不適用。Oeschinensee 2026 起不接受 BOP 也無折扣。</td>
+      </tr>
+      <tr>
+        <td><strong>Swiss Travel Pass</strong></td>
+        <td class="num">SBB 2026 連續 15 日：2 等 CHF 499 / 1 等 CHF 787<br>Flex 15 日：2 等 519 / 1 等 819</td>
+        <td>有 1 等版</td>
+        <td><span class="tag t-self">備案待完整扣抵</span> 15 日連續版與 Flex 15 日已列價格；公共交通 covered value 需扣掉 HFC 已查 SBB 主線後再比較。Gornergrat / Matterhorn Paradise 等多數山岳多為 50% 折扣，Jungfraujoch 為 25% 分支。</td>
+      </tr>
+      <tr>
+        <td><strong>Saver Day Pass / 半價卡日票</strong></td>
+        <td class="num">Saver HFC：2 等 from CHF 29 / 1 等 from CHF 49<br>Half-Fare Day Pass：2 等 78 / 1 等 128</td>
+        <td>有 1 等版</td>
+        <td><span class="tag t-chk">動態比價</span> D13/D14 若班次固定，可與 Saver、Supersaver、點對點半價、固定半價卡日票比較；正式金額以 SBB 購票頁為準。</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="lead">本表只保留官方價格、等級與限制；採用順序以第③節的成本門檻與翻盤檢查為準。</p>
+</section>
+
+<section>
+  <h2>③ Pass 計算工作區 <span class="en">calculation workspace</span></h2>
+  <div class="notice">
+    <strong>決策狀態：</strong>目前主軸改為 <strong>HFC + JTP4（6/18-6/21）</strong>。SBB 主線、GPX、BLS 船票、D6 區內小段與多數山岳票已補到可判斷：基本走法下，HFC only 仍是較便宜參考；JTP4 代表每人約 +46~49 的少女峰區便利費（若 D5 上 Jungfraujoch，差距約 +28）。BOP / STP 需完整扣抵公共交通 covered value 後再排名。剩下 Saver 動態價、1 等票籃重查與座位庫存需購票頁最後確認，但不把未知數補成假數字。
+  </div>
+
+  <details class="fold"><summary>Pass 組合試算（規則·小計·翻盤門檻·JTP/Peak）<span class="badge">底稿·推導</span></summary>
+  <div class="fold-body">
+  <h3>計算規則與變數 <span class="en">rules before totals</span></h3>
+  <table>
+    <thead><tr><th>項目</th><th>採用規則</th><th>寫入總價的方式</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>人數</td><td>5 位成人</td><td>5 人成本 = 每人成本 × 5</td><td>本節所有金額預設 CHF / 人。</td></tr>
+      <tr><td>固定小計</td><td>只加總 pass 固定價與官方已確認票價</td><td>pass 固定成本 + Oeschinensee + Aletsch + Zermatt 山岳 + GPX 官方票價</td><td>主要 SBB 段已另列表；尚未併入本固定小計與最終排序。</td></tr>
+      <tr><td>SBB 動態票</td><td>D2、D6-D9、D13-D15 已補 2026-06-05/06 查價；Supersaver / Saver 仍屬庫存浮動</td><td>獨立表分開列：HFC 2 等最低、HFC 2 等 Point-to-point、HFC 1 等最低/估值；D6 小段另列 1 等/2 等</td><td>STP 可把多數公共交通基礎票歸 0；座位預約另計。</td></tr>
+      <tr><td>Pass 判斷</td><td>已決定採 HFC + JTP4；HFC only 留作成本參考；BOP/STP 與日票分支仍需完整扣抵後再排名</td><td>先算固定成本差與 covered value 門檻；D6 小額段已補價，出發前只需重看官方購票頁票籃</td><td>避免把「最便宜」和「實際選擇」混在一起。</td></tr>
+      <tr><td>Jungfraujoch</td><td>天氣好才加總</td><td>JTP：from CHF 89（含 5/1-10/31 座位預約）；HFC / HFC+BOP：from CHF 119.60 + 座位 10；STP / BOP alone：約 179.40 + 座位 10</td><td>不寫入固定成本，另列選配情境；6/20 位於座位預約必需期間。</td></tr>
+      <tr><td>GoldenPass Express</td><td>6/28 Spiez 14:38 → Montreux 17:25，1 等普通座</td><td>已查無 pass：84 + 20；HFC：42 + 20；BOP/STP 覆蓋基礎票時：20</td><td>MOB 官方支援頁列 Spiez→Montreux 1 等單程 CHF 84，Half-Fare 有效；座位預約 1/2 等 CHF 20。出發前仍重查 14:38 座位庫存。</td></tr>
+      <tr><td>BOP 到 Brig</td><td>只把 RE1 經 Kandersteg/Goppenstein 山線視為 BOP covered</td><td>Base Tunnel 一律另列 SBB/HFC/Saver 變數</td><td>這是 BOP 試算的關鍵限制。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>可加總票價與仍需重查項 <span class="en">add-ons and live checks</span></h3>
+  <table>
+    <thead><tr><th>票項</th><th>全價/無 pass</th><th>HFC / STP / GA</th><th>BOP / JTP 情境</th><th>寫入方式</th></tr></thead>
+    <tbody>
+      <tr><td>Oeschinensee 纜車來回</td><td class="num">40</td><td class="num">22.50</td><td>BOP 本身不適用；HFC+BOP 仍可用 HFC 優惠</td><td>固定加總</td></tr>
+      <tr><td>Aletsch Explorer / Moosfluh</td><td class="num">55</td><td class="num">27.50</td><td>BOP 不當作 Aletsch 覆蓋；HFC+BOP 仍用 HFC 優惠</td><td>固定加總；若天氣取消則扣除</td></tr>
+      <tr><td>Matterhorn Glacier Paradise</td><td class="num">120</td><td class="num">60</td><td>Peak Pass 覆蓋；BOP/JTP 不靠這段</td><td>D10 選 Glacier Paradise 時加總</td></tr>
+      <tr><td>Gornergrat 來回</td><td class="num">132</td><td class="num">66</td><td>Peak Pass 覆蓋；BOP/JTP 不靠這段</td><td>D12 上山、D13 下山跨日來回票</td></tr>
+      <tr><td>GoldenPass Express Spiez→Montreux</td><td class="num">84 + 20 = <strong>104</strong></td><td class="num">42 + 20 = <strong>62</strong></td><td>BOP 啟用日涵蓋 6/28 或 STP：20</td><td><span class="tag t-ok">MOB 官方已查</span> 1 等單程 CHF 84；Half-Fare 有效，HFC 以 50% 推得 CHF 42；座位預約 CHF 20。</td></tr>
+      <tr><td>Jungfraujoch connecting ticket</td><td class="num">基礎票約 <strong>239.20</strong><br>座位預約 CHF 10</td><td class="num">HFC / HFC+BOP：from <strong>119.60</strong> + 10<br>STP：約 <strong>179.40</strong> + 10</td><td>JTP：from <strong>89</strong>（含座位）<br>BOP alone：約 <strong>179.40</strong> + 10</td><td>只在天氣好上山情境加總。BOP 本身到 Jungfraujoch 為 25%；若同時持 HFC，直接用 HFC 50% 分支較低。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>固定成本小計（含 GPX 官方票價；非最終排序） <span class="en">fixed subtotal with GPX fare</span></h3>
+  <p class="lead">這張表是 pass 組合的成本底稿，不是實際總價。主要 SBB 主線已另列獨立表但尚未併入；GPX Spiez→Montreux 1 等基礎票已由 MOB 支援頁確認為 CHF 84，HFC 半價 CHF 42，普通座位預約 CHF 20。</p>
+  <table>
+    <thead><tr><th>組合</th><th>計算式/人</th><th>固定小計/人</th><th>5 人固定小計</th><th>尚未計入 / 待查</th></tr></thead>
+    <tbody>
+      <tr><td>無 pass</td><td>40 + 55 + 120 + 132 + (84 + 20)</td><td class="num"><strong>451</strong></td><td class="num"><strong>2,255</strong></td><td>所有 SBB / 山區區內交通全價；Jungfraujoch / Harder Kulm 未計</td></tr>
+      <tr><td>HFC only（成本參考）</td><td>150 + 22.5 + 27.5 + 60 + 66 + (42 + 20)</td><td class="num"><strong>388</strong></td><td class="num"><strong>1,940</strong></td><td>SBB 半價段、少女峰區各段、Jungfraujoch / Harder Kulm 未計</td></tr>
+      <tr><td>HFC + JTP 4 日（目前主軸，6/18-6/21，不上 Jungfraujoch）</td><td>150 + 180 + 22.5 + 27.5 + 60 + 66 + 62</td><td class="num"><strong>568</strong></td><td class="num"><strong>2,840</strong></td><td>D2、D7-D9、D13 Zermatt→Spiez、D14-D15 SBB 半價段已另列獨立表，尚未併入本固定小計。</td></tr>
+      <tr><td>HFC + JTP 4 日（目前主軸，D5 上 Jungfraujoch）</td><td>568 + 89</td><td class="num">from <strong>657</strong></td><td class="num">from <strong>3,285</strong></td><td>同上；Jungfraujoch 實際以官方購票頁為準</td></tr>
+      <tr><td>HFC + JTP 5 日（6/17-6/21，不上 Jungfraujoch）</td><td>150 + 210 + 22.5 + 27.5 + 60 + 66 + 62</td><td class="num"><strong>598</strong></td><td class="num"><strong>2,990</strong></td><td>6/17 多覆蓋 Brienz→Grindelwald，但用實際整段購票比較只省 7.90/人；相對 JTP4 淨多 22.10/人。</td></tr>
+      <tr><td>HFC + BOP 8 日 1 等（前段啟用，未涵蓋 GPX）</td><td>150 + 345 + 22.5 + 27.5 + 60 + 66 + 62</td><td class="num"><strong>733</strong></td><td class="num"><strong>3,665</strong></td><td>若啟用 6/18-6/25，GPX 仍按 HFC 62；BOP 實際覆蓋段待逐段填入</td></tr>
+      <tr><td>HFC + BOP 8 日 1 等（後段啟用，涵蓋 GPX）</td><td>150 + 345 + 22.5 + 27.5 + 60 + 66 + 20</td><td class="num"><strong>691</strong></td><td class="num"><strong>3,455</strong></td><td>若啟用 6/21-6/28，D3-D5 少女峰區多數段需另算</td></tr>
+      <tr><td>HFC + BOP 10 日 1 等（6/18-6/27，未涵蓋 GPX）</td><td>150 + 380 + 22.5 + 27.5 + 60 + 66 + 62</td><td class="num"><strong>768</strong></td><td class="num"><strong>3,840</strong></td><td>涵蓋前中段較完整，但 6/28 GPX 不在 pass 內</td></tr>
+      <tr><td>HFC + BOP 10 日 1 等（6/19-6/28，涵蓋 GPX）</td><td>150 + 380 + 22.5 + 27.5 + 60 + 66 + 20</td><td class="num"><strong>726</strong></td><td class="num"><strong>3,630</strong></td><td>D3 Männlichen 日不在 BOP 內；D8/D13 Base Tunnel 仍另買</td></tr>
+      <tr><td>HFC + JTP 4 日 + BOP 8 日 1 等（BOP 涵蓋 GPX）</td><td>150 + 180 + 345 + 22.5 + 27.5 + 60 + 66 + 20</td><td class="num"><strong>871</strong></td><td class="num"><strong>4,355</strong></td><td>JTP 與 BOP 在少女峰區/湖船有重疊；此為疊加備案，只有密集多搭與後段 1 等 covered value 足夠時才重算。</td></tr>
+      <tr><td>HFC + JTP 4 日 + BOP 10 日 1 等（BOP 涵蓋 GPX）</td><td>150 + 180 + 380 + 22.5 + 27.5 + 60 + 66 + 20</td><td class="num"><strong>906</strong></td><td class="num"><strong>4,530</strong></td><td>疊加成本高且重疊多；除非後段 1 等交通與 RE1 山線價值很高，否則不選。</td></tr>
+      <tr><td>STP 15 日 1 等</td><td>787 + 22.5 + 27.5 + 60 + 66 + 20</td><td class="num"><strong>983</strong></td><td class="num"><strong>4,915</strong></td><td>公共交通基礎票多數 covered；山岳折扣與未覆蓋段仍需逐項確認</td></tr>
+      <tr><td>STP Flex 15 日 1 等</td><td>819 + 22.5 + 27.5 + 60 + 66 + 20</td><td class="num"><strong>1,015</strong></td><td class="num"><strong>5,075</strong></td><td>需證明 Flex 的日期彈性值回 32/人差額</td></tr>
+      <tr><td>STP 15 日 2 等（參考，不符 1 等偏好）</td><td>499 + 22.5 + 27.5 + 60 + 66 + 20</td><td class="num"><strong>695</strong></td><td class="num"><strong>3,475</strong></td><td>作價格下限參考；等級不符合瑞士段偏好 1 等</td></tr>
+    </tbody>
+  </table>
+
+  <h3>翻盤門檻 <span class="en">break-even checks</span></h3>
+  <table>
+    <thead><tr><th>比較</th><th>目前已知差額/人</th><th>需要補上的實價條件</th><th>暫時解讀</th></tr></thead>
+    <tbody>
+      <tr><td>HFC only vs 無 pass</td><td class="num">388 - 451 = <strong>-63</strong></td><td>已知項目 HFC 已省 63/人；SBB 半價段會再增加 HFC 優勢。</td><td><span class="tag t-ok">HFC 很可能進入所有低價組合</span></td></tr>
+      <tr><td>JTP 4 日 vs HFC only</td><td class="num">568 - 388 = <strong>+180</strong></td><td>6/18-6/21 由 JTP covered 的 HFC 原本應付成本若 &gt; 180/人，JTP 4 日才是純成本勝出。</td><td>已查項約 120-123（2 等）或 135-138（偏好 1 等），低於 180；所以 JTP4 是便利與彈性選擇，不是最低價選擇。</td></tr>
+      <tr><td>JTP 5 日 vs JTP 4 日</td><td class="num">30 - (22.90 - 15.00) = <strong>+22.10</strong></td><td>JTP 5 日多付 30/人；6/17 實際可少買的是 Luzern→Grindelwald 22.90 改成 Luzern→Brienz 15.00，淨省 7.90/人。Brienz→Grindelwald 單段 10.20 是 covered value，不是整段實際差額。</td><td><span class="tag t-no">5 日不翻盤</span> 採 JTP 主軸也只用 4 日；基本走法不買 5 日。</td></tr>
+      <tr><td>HFC + BOP 10 日 6/19-6/28 vs HFC only</td><td class="num">726 - 388 = <strong>+338</strong></td><td>固定小計已把 GPX 基礎票 CHF 42 的 saving 算進去；BOP 還需靠 D4-D6、D8 RE1 山線、湖船與 1 等公共交通 covered value 補回 338/人。</td><td>BOP 10 日不能只靠 GPX 判勝；未完成逐段扣抵前維持備案。</td></tr>
+      <tr><td>JTP 4 日 + BOP 8/10 日 vs JTP 4 日</td><td class="num">BOP8：871 - 568 = <strong>+303</strong><br>BOP10：906 - 568 = <strong>+338</strong></td><td>兩張區域 pass 疊加後，BOP 需在 JTP 已涵蓋之外再省超過 303-338/人。GPX 基礎票已確認可省 42/人，剩下要靠 D7-D8、D13-D14 與 1 等偏好補足。</td><td>重疊太多；目前不建議 JTP+BOP 同買。</td></tr>
+      <tr><td>STP 15 日 1 等 vs HFC only</td><td class="num">983 - 388 = <strong>+595</strong></td><td>STP 需在 D2、D7-D9、D13-D15 公共交通、GPX 基礎票與少量山岳折扣上，替代 HFC 逐項票省超過 595/人。</td><td>因本行程山岳多、HFC 已給多數山線 50%，STP 需要很高公共交通總額才翻盤。</td></tr>
+      <tr><td>BOP 8/10 後段啟用 vs 前段啟用</td><td class="num">GPX covered 可省 <strong>42</strong>/人</td><td>後段啟用若漏掉少女峰區 covered value，漏掉成本必須 &lt; 42/人 才單靠 GPX 划算；42 已由 MOB 票價表與 Half-Fare 有效規則確認。</td><td>後段 BOP 要成立，不能只靠 GPX，還要靠 D8 或湖船/1 等價值。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>JTP 4 日 vs 5 日 <span class="en">activation-day decision</span></h3>
+  <table>
+    <thead><tr><th>方案</th><th>固定成本/人</th><th>多付成本</th><th>多覆蓋的日子</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>JTP 4 日：6/18-6/21</td><td class="num">CHF 180</td><td class="num">目前主軸</td><td>D3-D6：Männlichen、First、Jungfrau/Harder 彈性日、Brienz / Iseltwald 船</td><td><span class="tag t-jtp">採用</span> 四個核心少女峰區日剛好吃滿；用來買 D3-D6 的自由度與少買票。</td></tr>
+      <tr><td>JTP 5 日：6/17-6/21</td><td class="num">CHF 210</td><td class="num">+30/人<br>+150/5人</td><td>D2 可多覆蓋 Brienz→Interlaken Ost→Grindelwald；Zürich→Luzern→Brienz 不靠 JTP。SBB 2026/6/17 購票頁：Luzern→Grindelwald HFC 2 等 Point-to-point CHF 22.90；若用 JTP5，只需買 Luzern→Brienz CHF 15.00，因此實際省 7.90/人。</td><td><span class="tag t-no">不選</span> 省 7.90/人，低於多付 30/人；5 人淨多 110.50。</td></tr>
+      <tr><td>JTP 5 日：6/18-6/22</td><td class="num">CHF 210</td><td class="num">+30/人<br>+150/5人</td><td>D7 是 Oeschinensee / Kandersteg；Spiez↔Kandersteg 與 Oeschinensee 纜車不靠 JTP。</td><td><span class="tag t-no">不選</span> 多出的第 5 天幾乎沒有 JTP 價值。</td></tr>
+      <tr><td>何時才改 5 日</td><td class="num">CHF 210</td><td class="num">門檻：第 5 天需省 &gt; CHF 30/人</td><td>例如把 6/17 或 6/22 改成另一個完整少女峰區山線/湖船日。</td><td><span class="tag t-chk">條件式備案</span> 行程不改時維持 4 日。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Peak Pass vs 策馬特逐項票 <span class="en">Zermatt mountain pass</span></h3>
+  <table>
+    <thead><tr><th>情境</th><th>逐項 HFC 計算/人</th><th>Peak Pass reduced 2026/人</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td>只做 Glacier Paradise + Gornergrat</td><td class="num">60 + 66 = <strong>126</strong></td><td class="num">3 日 CHF 220.50</td><td>Peak Pass 多 94.50/人；不划算。</td></tr>
+      <tr><td>Glacier Paradise + Blauherd + Gornergrat</td><td class="num">60 + 17.50 + 66 = <strong>143.50</strong></td><td class="num">3 日 CHF 220.50</td><td>Peak Pass 多 77/人；仍不划算。</td></tr>
+      <tr><td>1 日內大幅加碼多條 Zermatt 山線</td><td class="num">需逐項加總</td><td class="num">1 日 CHF 175.50<br>2 日 CHF 195<br>3 日 CHF 220.50</td><td>只有當同日逐項 HFC 票價超過 Peak Pass reduced 才重算。</td></tr>
+    </tbody>
+  </table>
+  </div></details>
+
+  <details class="fold"><summary>SBB 逐段查價底稿 <span class="en">fare audit & per-leg shop prices</span><span class="badge">查價底稿</span></summary>
+  <div class="fold-body">
+  <h3>SBB 查價欄位 <span class="en">fare audit slots</span></h3>
+  <table>
+    <thead><tr><th>票價類型</th><th>穩定性</th><th>用途</th><th>查價規則</th></tr></thead>
+    <tbody>
+      <tr><td>Point-to-Point 一般票</td><td><span class="tag t-self">相對穩定</span></td><td>保底價；HFC/STP/BOP/JTP 翻盤門檻都要拿它當底</td><td>SBB 官方購票頁查 1 等/2 等 full 與 Half Fare；可當日任選符合路線的班次，但仍以購票頁顯示為準。</td></tr>
+      <tr><td>Supersaver / Saver</td><td><span class="tag t-chk">庫存浮動</span></td><td>長途固定班次的可能最低價；會影響 STP / BOP 是否翻盤</td><td>只在時間確定、可接受綁班時採用；需記錄查證日、班次、等級、是否 HFC。</td></tr>
+      <tr><td>Saver Day Pass / Half-Fare Day Pass</td><td><span class="tag t-chk">Saver 浮動；半價卡日票固定</span></td><td>D13/D14 這類長途日的上限/下限比較</td><td>若 1 天內多段長途合併後超過日票價，改列日票分支；座位預約另計。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>SBB / 官方票價查價獨立表 <span class="en">2026-06-05/06 ticket shop and fare tables</span></h3>
+  <p class="lead">本表列 SBB ticket shop 與官方票價表交叉得到的公共交通基礎票，每人 CHF。HFC 2 等「最低」若同頁顯示 Supersaver，代表綁班浮動價；「彈性」用同頁 Point-to-point 加價換算。HFC 1 等彈性為同頁 1 等 additive、票價表或已查票籃交叉推算，最終仍以購票頁選定 1 等後票籃為準。</p>
+  <table>
+    <thead><tr><th>代號</th><th>路段 / 查詢時間</th><th>HFC 2 等最低 / 彈性</th><th>HFC 1 等最低 / 彈性估</th><th>計算過程與結果</th><th>票種判讀</th></tr></thead>
+    <tbody>
+      <tr><td>D2-1</td><td>Zürich Flughafen→Luzern · 6/17 09:15</td><td class="num">11.00 / 15.50</td><td class="num">18.60 / 約 23.10</td><td>2 等 from 11.00；Point-to-point +4.50 → 15.50。</td><td><span class="tag t-chk">Supersaver 可用</span> from 價為綁班；彈性票用 Point-to-point。</td></tr>
+      <tr><td>D2-2</td><td>Luzern→Grindelwald via Interlaken Ost · 6/17 15:06</td><td class="num"><strong>22.90</strong> / 22.90</td><td class="num">39.10 / 39.10</td><td>HFC + JTP4 主軸仍需買這段；JTP4 6/18 才啟用。Supersaver 不可用。</td><td><span class="tag t-ok">Point-to-point 已確認</span></td></tr>
+      <tr><td>D2-2a</td><td>Luzern→Brienz · 6/17 15:06</td><td class="num"><strong>15.00</strong> / 15.00</td><td class="num">25.50 / 25.50</td><td>JTP5 啟用時，只需買到 Brienz；Supersaver 不可用。</td><td><span class="tag t-ok">Point-to-point 已確認</span></td></tr>
+      <tr><td>D2-2b</td><td>Brienz→Grindelwald via Interlaken Ost · 6/17 16:37</td><td class="num"><strong>10.20</strong> / 10.20</td><td class="num">17.50 / 17.50</td><td>單段 covered value 為 10.20；但 JTP5 實際省額應用 22.90 - 15.00 = <strong>7.90</strong>。</td><td><span class="tag t-ok">Point-to-point 已確認</span> Supersaver 不可用。</td></tr>
+      <tr><td>D6-1</td><td>Grindelwald→Interlaken Ost · 6/21 AM</td><td class="num"><strong>5.90</strong> / 5.90</td><td class="num">約 <strong>10.10</strong> / 10.10</td><td>2 等全票 CHF 11.80 → HFC 5.90；1 等用已查 Brienz→Grindelwald 1 等 P2P 17.50 扣 Interlaken Ost→Brienz 1 等 HFC 7.40 推得。</td><td><span class="tag t-chk">2 等官方 PDF / 1 等票籃重查</span></td></tr>
+      <tr><td>D6-2</td><td>Interlaken Ost→Brienz · 6/21 midday</td><td class="num"><strong>4.30</strong> / 4.30</td><td class="num"><strong>7.40</strong> / 7.40</td><td>全票 2 等 8.60 / 1 等 14.80 → HFC 2 等 4.30 / 1 等 7.40；2 等亦可由 Brienz→Grindelwald 10.20 扣 Interlaken Ost→Grindelwald 5.90 交叉驗算。</td><td><span class="tag t-chk">可計算；出發前票籃重查</span></td></tr>
+      <tr><td>D6-bus</td><td>PostBus 103 Iseltwald→Interlaken Ost · 6/21 PM</td><td class="num"><strong>3.00</strong> / 3.00</td><td class="num">不適用</td><td>Libero 750+810 共 2 zones，reduced 單程 CHF 3.00；巴士無 1 等，持 HFC 用 reduced 票。</td><td><span class="tag t-ok">Libero 2026 tariff</span></td></tr>
+      <tr><td>D6-last</td><td>Interlaken Ost→Spiez · 6/21 17:00</td><td class="num">5.20 / 5.20</td><td class="num">8.90 / 8.90</td><td>取行李後火車到 Spiez。JTP4 主軸下 D6-last 仍按 HFC/SBB 另買；JTP 只影響少女峰區內 covered 段。</td><td><span class="tag t-chk">SBB from / regional fare</span> 未顯示 Point-to-point 票名。</td></tr>
+      <tr><td>D7-out</td><td>Spiez→Kandersteg · 6/22 09:00</td><td class="num">7.20 / 9.70</td><td class="num">11.40 / 約 13.90</td><td>單程：2 等 from 7.20；Point-to-point +2.50 → 9.70。來回乘 2：2 等最低 14.40 / 彈性 19.40。</td><td><span class="tag t-chk">Supersaver 可用</span> Oeschinensee 纜車另計。</td></tr>
+      <tr><td>D8-fast</td><td>Spiez→Brig · 6/23 09:00</td><td class="num">15.60 / 20.00</td><td class="num">23.60 / 約 28.00</td><td>2 等 from 15.60；Point-to-point +4.40 → 20.00。實際最快路線可能走 Lötschberg Base Tunnel。</td><td><span class="tag t-chk">Supersaver 可用</span> Base Tunnel 不當 BOP covered。</td></tr>
+      <tr><td>D8-mountain</td><td>Spiez→Kandersteg→Brig · 6/23 09:00</td><td class="num">17.00 / 21.60</td><td class="num">25.60 / 約 30.20</td><td>山線拆查：Spiez→Kandersteg 8.60 / 9.70；Kandersteg→Brig 8.40 / 11.90。2 等小計最低 17.00 / 彈性 21.60。</td><td><span class="tag t-chk">BOP 比較用</span> 此列只作 RE1 山線價值估算。</td></tr>
+      <tr><td>D9</td><td>Brig→Zermatt · 6/24 09:00</td><td class="num"><strong>20.00</strong> / 20.00</td><td class="num">34.00 / 34.00</td><td>進 Zermatt 固定段；Supersaver 不可用。</td><td><span class="tag t-ok">Point-to-point 已確認</span></td></tr>
+      <tr><td>D13</td><td>Zermatt→Spiez via Visp · 6/28 10:00</td><td class="num">34.00 / 39.00</td><td class="num">53.60 / 約 58.60</td><td>2 等 from 34.00；Point-to-point +5.00 → 39.00。銜接 Spiez 14:38 GPX 時使用。</td><td><span class="tag t-chk">Supersaver / Saver 可用</span> 綁班才採最低價。</td></tr>
+      <tr><td>D14</td><td>Montreux→Zürich HB via Lausanne · 6/29 10:00</td><td class="num"><strong>42.00</strong> / 42.00</td><td class="num">71.50 / 71.50</td><td>Saver Day Pass 2 等同頁為 +7.00 → 49.00；但 1 等日票需另查或用官方 from 價比較。</td><td><span class="tag t-ok">Point-to-point 已確認</span> Supersaver 不可用。</td></tr>
+      <tr><td>D15</td><td>Zürich HB→Zürich Flughafen · 6/30 10:00</td><td class="num">3.60 / 3.60</td><td class="num">5.90 / 5.90</td><td>Zürich 市區到機場短程；Supersaver 不可用。</td><td><span class="tag t-chk">SBB from / regional fare</span> 未顯示 Point-to-point 票名。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>SBB 查價小計 <span class="en">not final pass ranking</span></h3>
+  <table>
+    <thead><tr><th>小計口徑</th><th>2 等 / 人</th><th>1 等 / 人</th><th>計算過程</th><th>使用限制</th></tr></thead>
+    <tbody>
+      <tr><td>SBB 最低價小計</td><td class="num"><strong>168.70</strong></td><td class="num">約 <strong>278.00</strong></td><td>D2-1 + D2-2 + D6-last + D7 來回 + D8-fast + D9 + D13 + D14 + D15。</td><td><span class="tag t-chk">含 Supersaver</span> 需接受綁班且出發前仍有庫存。</td></tr>
+      <tr><td>SBB 較彈性小計</td><td class="num"><strong>187.60</strong></td><td class="num">約 <strong>296.90</strong></td><td>同上，但有 Point-to-point 加價者改用彈性價；D8 用 fast/base 口徑。</td><td><span class="tag t-self">比較保底</span> 1 等彈性為 additive 推算，購買前仍需選 1 等重看票籃。</td></tr>
+      <tr><td>D6 區內補價（不含 D6-last）</td><td class="num"><strong>25.20</strong></td><td class="num">約 <strong>40.50</strong></td><td>Grindelwald→Interlaken Ost + Interlaken Ost→Brienz + Brienz→Iseltwald 船 + PostBus 103。2 等：5.90+4.30+12+3；偏好 1 等：10.10+7.40+20+3。</td><td><span class="tag t-self">列入 D3-D6 少女峰區逐項成本</span> 不重複加進 SBB 主線小計。</td></tr>
+      <tr><td>JTP5 對 D2 的實際節省</td><td class="num">22.90 - 15.00 = <strong>7.90</strong></td><td class="num">不作等價比較</td><td>JTP 是 2 等；比較 JTP4 分支未啟用時買 Luzern→Grindelwald，和 JTP5 啟用時只買 Luzern→Brienz。</td><td><span class="tag t-no">5 日不翻盤</span> JTP5 多 30/人，實際淨多 22.10/人。</td></tr>
+    </tbody>
+  </table>
+  </div></details>
+
+  <h3>全程估算總額（HFC + JTP4 主軸；含 SBB 公共交通） <span class="en">indicative trip total</span></h3>
+  <p class="lead">把「固定成本小計」與「SBB 查價小計」相加，給旅伴一個每人實際概算。瑞士段以偏好 1 等計：固定小計已含 1 等 GPX 官方票價，SBB 用 1 等小計 278.00（最低，含 Supersaver）～296.90（彈性）。山岳纜車無分艙等；少女峰區 D3-D6 已把 D6 小段補進逐項成本，但 1 等票籃仍以出發前官方購票頁為準。</p>
+  <table>
+    <thead><tr><th>組合（瑞士段 1 等）</th><th>固定小計/人</th><th>＋SBB 1 等/人</th><th>少女峰區 D3-D6</th><th>全程估算/人</th><th>5 人估算</th></tr></thead>
+    <tbody>
+      <tr><td>HFC only（成本參考，含少女峰區逐項票）</td><td class="num">388</td><td class="num">278.00 ~ 296.90</td><td><span class="tag t-ok">約 135-138（偏好 1 等口徑）</span></td><td class="num"><strong>≈ 801 ~ 823</strong></td><td class="num"><strong>≈ 4,005 ~ 4,115</strong></td></tr>
+      <tr><td><strong>HFC + JTP 4 日（目前主軸，不上 Jungfraujoch）</strong></td><td class="num">568</td><td class="num">278.00 ~ 296.90</td><td>JTP 已含主要區內段；PostBus 保守另加 3</td><td class="num"><strong>849 ~ 868</strong></td><td class="num"><strong>4,245 ~ 4,340</strong></td></tr>
+      <tr><td><strong>HFC + JTP 4 日（目前主軸，D5 上 Jungfraujoch）</strong></td><td class="num">657</td><td class="num">278.00 ~ 296.90</td><td>JTP 已含主要區內段；Jungfraujoch +89；PostBus +3</td><td class="num">from <strong>938 ~ 958</strong></td><td class="num">from 4,690 ~ 4,790</td></tr>
+    </tbody>
+  </table>
+  <div class="notice">
+    <strong>關鍵解讀：</strong>HFC only 的全程估算要把少女峰區 D3-D6 逐項票加回；JTP4 主軸則是多付 CHF 180 換 6/18-6/21 的 covered value 與少買票。兩案都加同一份 SBB 1 等小計，所以純成本上，JTP4 是否勝出只看少女峰區 D3-D6 的 HFC 逐項交通成本是否 &gt; 180/人；目前未超過，因此這筆是你已接受的便利費。BOP / STP 組合的全程估算需先把各 pass covered 的 SBB 段扣掉，未完成前不列入本表，請看「固定成本小計」與「翻盤門檻」。
+  </div>
+
+  <details class="fold"><summary>自由度交叉驗證 ＋ 少女峰 D3-D6 逐項深算 <span class="en">freedom premium & itemized</span><span class="badge">深算</span></summary>
+  <div class="fold-body">
+  <h3>交叉驗證：自由度 vs 逐項購票（不採 Saver） <span class="en">freedom premium</span></h3>
+  <p class="lead">本表刻意不沿用任何「主軸」結論，只回答兩件事：多買 pass 可少處理幾次票？每人與 5 人大約多花多少？此處完全不採 Saver / Supersaver / Saver Day Pass，只用 HFC 1 等彈性點對點票、官方山岳票與已查 pass 價。注意：HFC 逐項票不是「每班火車都要買」，而是「每段/每天/每個山岳票項要買」；Point-to-point 票本身仍是當日彈性。</p>
+  <table>
+    <thead><tr><th>驗證方向</th><th>不採 Saver 的成本口徑/人</th><th>約需處理票項（5 人可同筆買）</th><th>少買票換來的代價</th><th>初步解讀</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>HFC 逐項彈性票</strong><br>不上 Jungfraujoch</td>
+        <td class="num">388 + 296.90 + 135~138<br>= <strong>約 819~822</strong></td>
+        <td>約 <strong>18~21</strong> 個購票/查票動作：HFC、公共交通逐段、D3-D6 山線/湖船、D7-D13 山岳票、GPX 基礎票與座位。</td>
+        <td>最低成本，但票項最多；每段都要確認日期、等級、路線或天氣。</td>
+        <td><span class="tag t-ok">成本參考</span> 自由度靠「點對點當日彈性」，不是靠 pass；行政負擔最高。</td>
+      </tr>
+      <tr>
+        <td><strong>HFC + JTP4</strong><br>6/18-6/21，不上 Jungfraujoch</td>
+        <td class="num">568 + 296.90 + 3<br>= <strong>約 868</strong><br><span class="en">PostBus 103 保守另買</span></td>
+        <td>約 <strong>14~17</strong> 個動作：少處理 D3 Männlichen/WAB、D4 First、D5 Harder、D6 湖船/部分區內交通；其他長途與策馬特仍逐項。</td>
+        <td>相對 HFC 逐項約 <strong>+46~49/人</strong>（5 人約 +230~245），大約少 4~6 個票項。</td>
+        <td><span class="tag t-jtp">目前主軸</span> 這筆錢主要買 D3-D6 少女峰區不用逐段想；但 JTP 是 2 等，且長途日沒有幫助。</td>
+      </tr>
+      <tr>
+        <td><strong>HFC + JTP4</strong><br>D5 上 Jungfraujoch</td>
+        <td class="num">657 + 296.90 + 3<br>= <strong>約 958</strong><br><span class="en">HFC 逐項約 930</span></td>
+        <td>購票動作與上列相近；JTP connecting ticket from 89 已含座位，HFC 分支需買 Jungfraujoch ticket + seat。</td>
+        <td>相對 HFC 逐項上 Jungfraujoch 約 <strong>+28/人</strong>，少數票項變簡單。</td>
+        <td><span class="tag t-jtp">目前主軸</span> 上 Jungfraujoch 會縮小差距；相對 HFC 逐項約 +28/人，屬可接受的自由度成本。</td>
+      </tr>
+      <tr>
+        <td><strong>HFC + BOP 8/10 日 1 等</strong><br>依啟用日測自由度</td>
+        <td class="num">粗估 <strong>約 985~1,040</strong><br>取決於 D8/D13 是否走 RE1 山線、是否涵蓋 GPX、是否漏掉 D3。</td>
+        <td>約 <strong>12~17</strong> 個動作：區域內公共交通、湖船、部分山線少買；但 Oeschinensee、Aletsch、Zermatt 山線、Jungfraujoch/Harder 折扣票與非 covered 長途仍需處理。</td>
+        <td>相對 HFC 逐項約 <strong>+165~220/人</strong>（5 人約 +825~1,100），大約少 6~8 個票項。</td>
+        <td><span class="tag t-self">自由度很貴</span> 優點是有 1 等版與區域公共交通自由；若仍常走 Base Tunnel 或天氣取消山線，成本很難回收。</td>
+      </tr>
+      <tr>
+        <td><strong>STP 15 日 1 等</strong></td>
+        <td class="num">983 + D3/D4/D5 山岳折扣票約 94<br>= <strong>約 1,077</strong><br><span class="en">不上 Jungfraujoch 口徑</span></td>
+        <td>約 <strong>8~10</strong> 個動作：公共交通幾乎不用逐段買；仍需處理山岳票、Jungfraujoch 座位/折扣票、GPX 座位。</td>
+        <td>相對 HFC 逐項約 <strong>+245~260/人</strong>（5 人約 +1,225~1,300），大約少 10~12 個票項。</td>
+        <td><span class="tag t-self">最大自由，成本最高</span> 若把「少買票」當主要價值，每少一個團體購票動作約要多付 100+ CHF；除非非常重視全程公共交通無腦搭，不然偏貴。</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="notice">
+    <strong>這輪驗證的讀法：</strong>若只想減少 4~6 個少女峰區票項，JTP4 的自由度溢價約 46~49/人；若想大幅減少公共交通逐段購票，BOP/STP 的溢價會跳到約 165~260/人。也就是說，「貴一點但自由」目前只有 JTP4 屬於可討論的小額便利費；BOP/STP 是大額便利費，需要 1 等舒適、路線 covered、少買票壓力三者同時有價值才值得繼續挑戰。
+  </div>
+
+  <h3>少女峰區 D3-D6 HFC 逐項試算 <span class="en">now mostly official-sourced</span></h3>
+  <div class="notice green">
+    <strong>查證等級（已加強，2026-06-06）：</strong>D3 已用<strong>官方 PDF（maennlichen.ch 2026 夏季票價表；圖檔以 Read 視覺判讀）</strong>釘死，並確認 <strong>HFC = 50% 為官方政策</strong>（票價表明列 GA / Halbtax / Swiss Half Fare Card / STP 享 50%，JTP / BOP 免費）。First「From CHF 38」、Jungfraujoch「From CHF 119.60」、Harder「From CHF 19」皆為 <strong>jungfrau.ch 官方頁內嵌價</strong>。BLS Brienz→Iseltwald 船票已由 2026 官方 PDF 確認；BLS FAQ 同列 Swiss Half Fare Card 享 50%。D6 小段已補上 2 等與偏好 1 等口徑；1 等火車票籃仍在出發前用 SBB 官方購票頁重看。
+  </div>
+  <table>
+    <thead><tr><th>日</th><th>段（採用走法）</th><th>全票</th><th>HFC 2 等 / 偏好 1 等</th><th>來源強度</th></tr></thead>
+    <tbody>
+      <tr><td>D3</td><td>Panoramaweg 環線：Grindelwald→Männlichen 上＋健行 Männlichen→Kleine Scheidegg＋Kleine Scheidegg→Grindelwald WAB 下（官方套票）</td><td class="num">74.60</td><td class="num"><strong>37.30</strong></td><td><span class="tag t-ok">官方 PDF</span> maennlichen.ch 2026 夏季</td></tr>
+      <tr><td>D3 備案</td><td>Lauterbrunnen 瀑布鎮 loop：本來的 Männlichen / Kleine Scheidegg 路線走不動、天氣壓低或體力不足時改走；不作加碼行程</td><td class="num">總額約 89.40<br>相對原 D3 +14.80</td><td class="num">總額約 <strong>44.70</strong><br>相對原 D3 <strong>+7.40</strong></td><td><span class="tag t-ok">官方 PDF</span> Jungfraubahnen 2026 fares：Kleine Scheidegg→Lauterbrunnen Saison 2 全價 46、Lauterbrunnen→Grindelwald via Zweilütschinen 全價 9.40；HFC 50%。JTP4 主軸下這天主要區內交通 covered。</td></tr>
+      <tr><td>D4</td><td>Grindelwald-First 來回</td><td class="num">~76</td><td class="num">38</td><td><span class="tag t-ok">官方頁內嵌</span> First「From CHF 38」</td></tr>
+      <tr><td>D5</td><td>Harder Kulm 來回（此天不上 Jungfraujoch 時）</td><td class="num">~38-44</td><td class="num">from <strong>19</strong></td><td><span class="tag t-ok">官方頁內嵌</span> Harder Kulm「From CHF 19」；完整票籃出發前確認</td></tr>
+      <tr><td>D6</td><td>BOB Grindelwald→Interlaken Ost 單程</td><td class="num">2 等 11.80<br>1 等約 20.20</td><td class="num">2 等 <strong>5.90</strong><br>1 等約 <strong>10.10</strong></td><td><span class="tag t-chk">2 等官方 PDF / 1 等推導</span> 2 等取 Jungfraubahnen 2026 fares；1 等由 SBB 已查 Brienz→Grindelwald 1 等 P2P 與 Interlaken Ost→Brienz 1 等交叉推得，出發前重看票籃</td></tr>
+      <tr><td>D6</td><td>Interlaken Ost→Brienz 單程</td><td class="num">2 等 8.60<br>1 等 14.80</td><td class="num">2 等 <strong>4.30</strong><br>1 等 <strong>7.40</strong></td><td><span class="tag t-chk">可計算；票籃重查</span> 2 等與 D2 已查值可互相扣算；1 等以票價表/購票頁交叉值列入，出發前仍以 SBB 票籃為準</td></tr>
+      <tr><td>D6</td><td>Brienz→Iseltwald 船 單程（D6 採用走法）</td><td class="num">2 等 24<br>1 等 40</td><td class="num">2 等 <strong>12</strong><br>1 等 <strong>20</strong></td><td><span class="tag t-ok">BLS 2026 官方 PDF + FAQ</span> HFC / Swiss HFC 50%；JTP / BOP / STP 定期船 covered（依已購艙等）</td></tr>
+      <tr><td>D6</td><td>PostBus 103 Iseltwald→Interlaken Ost</td><td class="num">reduced 2-zone 3.00</td><td class="num">2 等/巴士 <strong>3.00</strong><br>1 等不適用</td><td><span class="tag t-ok">Libero 2026 tariff</span> Interlaken Ost 750 + Iseltwald 810；巴士無 1 等</td></tr>
+      <tr><td colspan="2"><strong>HFC only 少女峰區 D3-D6 完整小計/人</strong></td><td class="num">—</td><td class="num">2 等口徑 <strong>~120 ~ 123</strong><br>偏好 1 等口徑 <strong>~135 ~ 138</strong></td><td>偏好 1 等口徑用 D6 火車/船 1 等、巴士 reduced。</td></tr>
+    </tbody>
+  </table>
+  <p class="lead" style="margin-top:16px"><strong>情境成本對照（少女峰 D3-D6 段，每人 CHF）</strong>　主 SBB / Zermatt / GPX 兩案相同，差別只在少女峰這段。HFC only = 逐項半價票；HFC+JTP4 = 多付 JTP 180 換 4 天不限次。</p>
+  <table>
+    <thead><tr><th>情境</th><th>HFC only（逐項）</th><th>HFC+JTP4</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td><strong>不上 Jungfraujoch</strong>，每天一趟主纜車</td><td class="num">2 等 ~120~123<br>偏好 1 等 ~135~138</td><td class="num">180</td><td><span class="tag t-ok">HFC only 仍省約 40+</span></td></tr>
+      <tr><td><strong>D3 改 Lauterbrunnen 瀑布鎮備案</strong></td><td class="num">2 等 ~127~130<br>偏好 1 等 ~142~145</td><td class="num">180</td><td><span class="tag t-ok">成本參考</span> 這是走不動時的替代方案，不拿來當 JTP4 翻盤理由；JTP4 主軸下不需逐段另買主要區內票。</td></tr>
+      <tr><td><strong>D5 上 Jungfraujoch</strong>（HFC 來回 from 119.60 + 座位 10；JTP connecting from 89 含座位）</td><td class="num">偏好 1 等約 245<br><span class="en">含 PostBus 3</span></td><td class="num">269 + PostBus 3<br>= 約 272</td><td><span class="tag t-ok">HFC only 仍省約 25~30</span></td></tr>
+      <tr><td><strong>亂搭 / 密集</strong>：再加 ~2-3 趟（Schynige Platte HFC 34、重搭 First 38…）</td><td class="num">破 180 ↑</td><td class="num">180</td><td><span class="tag t-jtp">JTP4 反超</span></td></tr>
+    </tbody>
+  </table>
+  <div class="notice green">
+    <strong>結論（金額多數已官方鎖定）：</strong>翻盤點是<strong>「會不會密集多搭」，不是「上不上 Jungfraujoch」</strong>。① 不上 JFJ：HFC only 在偏好 1 等口徑下仍省約 40+/人。② 上 JFJ：HFC 上山來回 from 119.60 + 座位 10；JTP connecting from 89 且含座位，差距縮小到約 +25~30/人（全程約 930 vs 958 的不採 Saver 彈性口徑）。③ Lauterbrunnen 是走不動時的備案，不是為了把 JTP 用滿的加點。<strong>所以成本最低是 HFC only；目前實際選擇是 HFC + JTP4，買 D3-D6 的自由度與少買票。</strong>
+  </div>
+  </div></details>
+
+  <details class="fold"><summary>退改彈性與剩餘變數 <span class="en">refundability & remaining checks</span><span class="badge">策略·待查</span></summary>
+  <div class="fold-body">
+  <h3>退改與綁班彈性 <span class="en">refundability &amp; train-binding</span></h3>
+  <p class="lead">本行程刻意保留天氣與長輩節奏彈性，原則是「不為省小錢先買不可退的綁班票」。下表彙整各票種的綁班/退改性質，作為「何時才買」的依據。</p>
+  <table>
+    <thead><tr><th>票種 / 票項</th><th>綁指定班次?</th><th>退改性質</th><th>對本行程的策略</th></tr></thead>
+    <tbody>
+      <tr><td>Swiss Half Fare Card</td><td>否</td><td>效期一個月，期間任意使用</td><td><span class="tag t-ok">可先買</span> 全程基底，採用後覆蓋 6/17-6/30。</td></tr>
+      <tr><td>Point-to-Point 點對點票</td><td>否</td><td>當日有效，可任選符合路線班次</td><td><span class="tag t-ok">彈性首選</span> 山區銜接、長輩走得慢時不怕誤班。</td></tr>
+      <tr><td>Supersaver / Saver</td><td><strong>是</strong></td><td>綁指定班次，原則不可退改</td><td><span class="tag t-no">時間 100% 確定才買</span> 天氣或長輩節奏不確定的日子別碰。</td></tr>
+      <tr><td>Saver Day Pass</td><td>綁日期</td><td>提早買較便宜、有限額，改期受限</td><td>D13/D14 班次定了再買；否則用點對點 / 半價卡日票。</td></tr>
+      <tr><td>Half-Fare Day Pass（半價卡日票）</td><td>否</td><td>固定價，當日彈性</td><td>臨時湊成多段長途日時的上限保底。</td></tr>
+      <tr><td>JTP / BOP / STP 區域 pass</td><td>否</td><td>啟用日數內自由搭乘</td><td><span class="tag t-ok">進山前再啟用</span> 不綁班，只需決定啟用日。</td></tr>
+      <tr><td>山岳纜車（Glacier Paradise / Sunnegga-Blauherd / Oeschinensee / Aletsch）</td><td>多為當日或限期</td><td>天氣不可抗力依各官網規定</td><td><span class="tag t-chk">看天氣前 1-2 天或當天買</span> 不為早買犧牲彈性。</td></tr>
+      <tr><td>Gornergrat 來回票</td><td>否</td><td>10 天有效，可跨日上下山</td><td><span class="tag t-ok">彈性佳</span> 6/27 上山、6/28 下山同一張。</td></tr>
+      <tr><td>Jungfraujoch connecting ticket</td><td>綁座位時段</td><td>5/1-10/31 座位預約 mandatory</td><td>天氣好才買並確認時段；不先鎖。</td></tr>
+      <tr><td>GoldenPass Express 座位預約 CHF 20</td><td><strong>是</strong>（綁班次/時段）</td><td>預約費綁 6/28 14:38 該班</td><td>座位 1/2 等屬 strongly recommended；出發前查 14:38 庫存再訂。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>剩餘變數與已完成判斷 <span class="en">remaining variables and locked decisions</span></h3>
+  <p class="lead">已查的 SBB 逐段價見上方「SBB 官方查價獨立表」。本表把已足以定方向的判斷和仍需購票頁補價的項目分開，避免把已確認事項重複列成待查。</p>
+  <table>
+    <thead><tr><th>變數</th><th>路段/內容</th><th>要查的比較</th><th>影響哪個 pass 結果</th></tr></thead>
+    <tbody>
+      <tr><td>JUNGFRAU-D3-D6</td><td>Männlichen、First、Harder、WAB、BOB、Brienz / Iseltwald 船、PostBus 103 的 HFC 逐項成本</td><td><span class="tag t-ok">已補到可計算</span> D3 Panoramaweg 74.60 / HFC 37.30、First「From 38」、Harder「From 19」、JFJ「From 119.60」皆官方頁；BLS 船 Brienz→Iseltwald 單程 HFC 2 等 12 / 1 等 20 已由官方 PDF + FAQ 確認。D6 小段已列 2 等與偏好 1 等口徑，出發前只需重看 SBB/Libero 票籃。</td><td>結論見「自由度交叉驗證 ＋ 少女峰 D3-D6 逐項深算」。</td></tr>
+      <tr><td>JUNGFRAUJOCH</td><td>6/20 天氣好優先上 Jungfraujoch</td><td><span class="tag t-ok">已查</span> HFC / HFC+BOP：119.60＋座位 10；JTP connecting：from 89（含座位）；STP / BOP alone：25% discount → 約 179.40＋座位 10</td><td>採 JTP4 主軸時，用 connecting ticket；BOP 若與 HFC 同買，使用 HFC 50% 分支即可，不採 BOP alone 25%。</td></tr>
+      <tr><td>D6 小段票籃重查</td><td>Grindelwald→Interlaken Ost、Interlaken Ost→Brienz、PostBus 103</td><td>目前已列入：BOB HFC 2 等 5.90 / 1 等約 10.10；Interlaken Ost→Brienz HFC 2 等 4.30 / 1 等 7.40；PostBus reduced 3.00。實買仍以 SBB/Libero ticket finder 為準。</td><td>JTP4 主軸下主要區內段 covered；PostBus 仍保守按 CHF 3。</td></tr>
+      <tr><td>D13 / D14 彈性票重查</td><td>Zermatt→Spiez、Montreux→Zürich 1 等點對點票籃</td><td>本輪自由度驗證不採 Saver / Supersaver；出發前只需重看 HFC 1 等 Point-to-point、路線與等級是否仍相同</td><td>HFC / STP / BOP 彈性總價保底</td></tr>
+    </tbody>
+  </table>
+  </div></details>
+</section>
+
+<section>
+  <h2>④ 逐段交通明細 <span class="en">draft mapping</span></h2>
+  <p class="lead">價格以每人計。SBB 點對點票、Saver、座位預約、班次均需以出發前官方頁重查；本表先保留各段可能用到的票種與官方覆蓋資訊，正式計算時會拆成不同 pass 組合，不以單一方案作基準。</p>
+
+  <div class="day-h">D1 · 6/16（二）· TPE → BKK → ZRH</div>
+  <table><thead><tr><th>路段</th><th>票券</th><th>狀態</th><th>備註</th></tr></thead><tbody>
+    <tr><td>BR75 + LX181</td><td>機票</td><td><span class="tag t-ok">同張票＋行李直掛已確認</span></td><td>訂位資料：BR75 TPE T2 07:50→BKK 10:50，商務艙 D，座位 11A/11D/11G；BKK 停 2h；LX181 BKK 12:50→ZRH 19:35，商務艙 Z。公開航班頁不能取代航空公司訂位，實際時刻仍以訂位紀錄為準。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D2 · 6/17（三）· Zürich Flughafen → Luzern 短停 → Grindelwald</div>
+  <table><thead><tr><th>路段</th><th>Pass / 票</th><th>票價狀態</th><th>備註</th></tr></thead><tbody>
+    <tr><td>Zürich Flughafen → Luzern</td><td><span class="tag t-hfc">HFC 半價 / Saver 比價</span></td><td class="num">2 等 from 11.00 / P2P 15.50<br>1 等 from 18.60 / P2P 約 23.10</td><td>保留 index.html 原版：09:15 左右直達 Luzern、約 10:25 抵達。SBB 購票頁顯示 from 價為 Supersaver；若要彈性，Point-to-point 加價後為 CHF 15.50（2 等）。</td></tr>
+    <tr><td>Luzern → Interlaken Ost → Grindelwald</td><td><span class="tag t-hfc">HFC 半價 / JTP5 分支</span></td><td class="num">2 等 P2P 22.90<br>1 等 P2P 39.10</td><td>保留 index.html 原版：15:06 Luzern→Interlaken Express，17:40 到 Grindelwald。若買 JTP5，只需另買 Luzern→Brienz：2 等 CHF 15.00 / 1 等 CHF 25.50（實際省額見 ③）。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D3-D5 · 6/18-6/20 · 少女峰區三天</div>
+  <table><thead><tr><th>日</th><th>路段/景點</th><th>Pass / 票</th><th>2026 查證</th></tr></thead><tbody>
+    <tr><td>D3</td><td>Männlichen、WAB、Kleine Scheidegg、Wengen</td><td><span class="tag t-jtp">JTP4 主軸 covered</span> / <span class="tag t-hfc">HFC 成本參考</span></td><td>JTP 官方範圍含 Grindelwald-Männlichen、WAB、BOB 等；HFC 參考價 Panoramaweg CHF 37.30。Lauterbrunnen 是走不動時備案，不是加碼。</td></tr>
+    <tr><td>D4</td><td>Grindelwald-First / Bachalpsee</td><td><span class="tag t-jtp">JTP4 主軸 covered</span> / <span class="tag t-hfc">HFC 成本參考</span></td><td>JTP 官方範圍含 First Cable Car；HFC 參考價 First from CHF 38。冒險活動另計。</td></tr>
+    <tr><td>D5 優先</td><td>Jungfraujoch</td><td><span class="tag t-jtp">JTP4 + connecting ticket</span></td><td>天氣好時優先；JTP4 主軸用 connecting ticket from CHF 89（含座位）。HFC 成本參考為 from CHF 119.60 + 座位 10；STP / BOP alone 為 25% discount，約 179.40 + 座位 10。</td></tr>
+    <tr><td>D5 備援/加菜</td><td>Harder Kulm</td><td><span class="tag t-jtp">JTP4 covered</span></td><td>JTP 官方範圍含 Harder funicular；BOP 官方頁寫 Harder Kulm 為 half fare。D5 若上 Jungfraujoch，Harder Kulm 只作體力好時傍晚加點。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D6 · 6/21（日）· Grindelwald → Interlaken 寄行李 → Brienz / Iseltwald → Spiez</div>
+  <table><thead><tr><th>路段</th><th>Pass / 票</th><th>狀態</th><th>備註</th></tr></thead><tbody>
+    <tr><td>Grindelwald → Interlaken Ost</td><td><span class="tag t-jtp">JTP4 主軸 covered</span> / <span class="tag t-hfc">HFC 成本參考</span></td><td class="num">HFC 2 等 5.90<br>1 等約 10.10</td><td>保留 index.html 原版行李策略：大行李寄 Interlaken Ost locker，全天輕裝向東玩 Brienz / Iseltwald。1 等為票籃推導值，出發前用 SBB 重看。</td></tr>
+    <tr><td>Interlaken Ost → Brienz</td><td><span class="tag t-jtp">JTP4 主軸 covered</span> / <span class="tag t-hfc">HFC 成本參考</span></td><td class="num">HFC 2 等 4.30<br>1 等 7.40</td><td>Zentralbahn 約 20 分；Brienz 湖邊散步與午餐。HFC 價只作不買 JTP 時的成本參考。</td></tr>
+    <tr><td>Brienz → Iseltwald</td><td><span class="tag t-jtp">JTP4 主軸 covered</span> / <span class="tag t-hfc">HFC 成本參考</span></td><td>HFC 2 等 12 / 1 等 20；區域 pass 分支依已購艙等 covered</td><td>BLS Lake Brienz 船，2026 官方 PDF：單程全價 2 等 CHF 24 / 1 等 CHF 40；Swiss HFC 50%。船班仍需出發前重查。</td></tr>
+    <tr><td>Iseltwald → Interlaken Ost → Spiez</td><td><span class="tag t-hfc">HFC 半價</span></td><td class="num">PostBus 103：CHF 3.00（巴士無 1 等）<br>Interlaken Ost→Spiez HFC 2 等 5.20 / 1 等 8.90</td><td>PostBus 103 回 Interlaken Ost 取行李，再搭火車到 Spiez。Libero 2026 tariff 確認 Interlaken Ost 為 750、Iseltwald 為 810；實際車票仍以 SBB/Libero ticket finder 為準。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D7 · 6/22（一）· Oeschinensee / Kandersteg</div>
+  <table><thead><tr><th>路段</th><th>Pass / 票</th><th>2026 價格</th><th>備註</th></tr></thead><tbody>
+    <tr><td>Spiez ↔ Kandersteg</td><td><span class="tag t-hfc">HFC 半價 / Saver 比價</span></td><td class="num">單程 2 等 from 7.20 / P2P 9.70<br>單程 1 等 from 11.40 / P2P 約 13.90<br>來回 2 等 14.40 / 19.40</td><td>SBB 購票頁顯示 from 價為 Supersaver；若要彈性，Point-to-point 單程 CHF 9.70（2 等）或約 CHF 13.90（1 等）。</td></tr>
+    <tr><td>Oeschinensee 纜車來回</td><td><span class="tag t-hfc">HFC/STP/GA 優惠</span></td><td class="num">成人 CHF 40<br>HFC / STP / GA CHF 22.50</td><td>Oeschinensee 官方 2026/6/15-9/21 價格。官方建議線上買含上山時段；5 人散客不寫成強制。</td></tr>
+    <tr><td>BOP 對 Oeschinensee</td><td><span class="tag t-no">不適用</span></td><td>無折扣</td><td>Oeschinensee 官方 FAQ：自 2026 年 1 月起不接受 BOP，也沒有纜車折扣。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D8 · 6/23（二）· Spiez → Brig / Aletsch</div>
+  <table><thead><tr><th>路段</th><th>Pass / 票</th><th>2026 價格</th><th>備註</th></tr></thead><tbody>
+    <tr><td>Spiez → Brig</td><td><span class="tag t-hfc">HFC 半價 / Saver 比價</span></td><td class="num">fast/base：2 等 from 15.60 / P2P 20.00<br>fast/base：1 等 from 23.60 / P2P 約 28.00<br>RE1 山線：2 等 17.00 / 21.60；1 等 25.60 / 約 30.20</td><td>若當天固定早班，可比 Supersaver；若天氣決定是否上 Moosfluh，保留半價點對點較彈性。BOP 分支只有搭 RE1 經 Kandersteg/Goppenstein 的山線才 covered；走 Lötschberg Base Tunnel 往 Visp/Brig 需另買票。</td></tr>
+    <tr><td>Aletsch Explorer / Moosfluh</td><td><span class="tag t-opt">可選</span></td><td class="num">成人全票 CHF 55<br>HFC/STP CHF 27.50</td><td>Aletsch Arena 官方票價：成人全票 CHF 55，持 Half Fare Card / STP 為 CHF 27.50；含 Brig-Mörel-Fiesch-Fürgangen 與相關纜車範圍。不能在 Brig 購買，建議先網購或到 Aletsch Arena 銷售點處理，實際依官方購票頁為準。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D9-D12 · 6/24-6/27 · Brig / Zermatt / Gornergrat</div>
+  <table><thead><tr><th>日</th><th>路段/景點</th><th>Pass / 票</th><th>2026 查證</th></tr></thead><tbody>
+    <tr><td>D9</td><td>Brig / Visp → Zermatt</td><td><span class="tag t-hfc">HFC 半價</span></td><td>SBB 6/24 09:00 Brig→Zermatt：2 等 HFC Point-to-point CHF 20.00；1 等 CHF 34.00；Supersaver 不可用。</td></tr>
+    <tr><td>D10 可選</td><td>Matterhorn Glacier Paradise</td><td><span class="tag t-hfc">HFC/STP 50%</span></td><td>Matterhorn Paradise 官方購票頁：Matterhorn Glacier Paradise 2026/5/1-10/31 from CHF 120；官方 2026 單程/來回票 PDF 寫 GA / Half Fare Card / Swiss Travel Pass 對多數個別票有 50% off。</td></tr>
+    <tr><td>D10/D11 可選</td><td>Sunnegga / Blauherd</td><td><span class="tag t-hfc">HFC 50%</span></td><td>官方頁顯示 Sunnegga from CHF 19、Blauherd from CHF 35，實際目的地/日期購票頁為準。2026 夏季時刻表顯示 Blauherd-Rothorn 自 6/27 起進入夏季主段，6/25-6/26 不把 Rothorn 作必走。</td></tr>
+    <tr><td>D12-D13</td><td>Zermatt ↔ Gornergrat</td><td><span class="tag t-hfc">HFC 50%</span></td><td>Gornergrat 官方/FAQ：夏季 Zermatt-Gornergrat return CHF 132，HFC/STP 50% → CHF 66；作為 6/27 上山、6/28 下山的跨日來回票規劃值。</td></tr>
+    <tr><td>Peak Pass</td><td>策馬特通票</td><td><span class="tag t-self">待計算</span></td><td>Matterhorn Paradise 官方 Peak Pass 2026：HFC / GA / Swiss Travel Pass reduced 為成人價 75%（例如 3 日 CHF 220.50）。需依 D10/D11 實際搭乘段落，和逐項票重新比較。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D13 · 6/28（日）· Gornergrat → Zermatt → Spiez → Montreux</div>
+  <table><thead><tr><th>路段</th><th>Pass / 票</th><th>狀態</th><th>備註</th></tr></thead><tbody>
+    <tr><td>Gornergrat → Zermatt</td><td>含於 Gornergrat 來回票</td><td>已規劃</td><td>下山後取行李再往 Spiez。</td></tr>
+    <tr><td>Zermatt → Spiez</td><td><span class="tag t-hfc">HFC 半價 / Saver 比價</span></td><td class="num">HFC 2 等 from 34.00 / P2P 39.00<br>1 等 from 53.60 / 彈性估 58.60</td><td>已選 Spiez 14:38 → Montreux 17:25；Zermatt→Spiez 6/28 10:00 via Visp 已查。BOP 分支不涵蓋 Zermatt→Brig；Brig→Spiez 也只有 RE1 山線 covered，若為銜接選最快 Base Tunnel 路線仍按 HFC/Saver 比價。</td></tr>
+    <tr><td>Spiez → Montreux（GoldenPass Express）</td><td><span class="tag t-hfc">HFC 半價基礎票</span> + <span class="tag t-opt">1 等普通座位預約</span></td><td class="num">1 等單程 CHF 84、HFC CHF 42<br>座位預約：1/2 等 CHF 20</td><td><span class="tag t-ok">MOB 官方已查</span> Spiez→Montreux 1 等單程 CHF 84；Half-Fare 有效，HFC 以 50% 推得 CHF 42。Prestige CHF 49 supplement 不列入基準；出發前只需重查 14:38 座位庫存。</td></tr>
+  </tbody></table>
+
+  <div class="day-h">D14-D15 · 6/29-6/30 · Montreux → Zürich HB → ZRH Airport</div>
+  <table><thead><tr><th>路段</th><th>Pass / 票</th><th>狀態</th><th>備註</th></tr></thead><tbody>
+    <tr><td>Montreux → Zürich HB</td><td><span class="tag t-hfc">HFC 半價 / Saver Day Pass 比價</span></td><td class="num">HFC 2 等 P2P 42.00<br>1 等 71.50</td><td>6/29 10:00 via Lausanne 已查；Supersaver 不可用。同頁 2 等 Saver Day Pass 為 +7.00 → CHF 49，但 1 等日票需另查或用官方 from 價比較。</td></tr>
+    <tr><td>Zürich HB → Zürich Flughafen</td><td><span class="tag t-hfc">HFC 半價</span></td><td class="num">HFC 2 等 3.60<br>1 等 5.90</td><td>車程約 10-15 分；6/30 10:00 SBB 購票頁顯示 Supersaver 不可用。</td></tr>
+    <tr><td>ZRH → ICN → TPE +1</td><td>機票</td><td><span class="tag t-ok">回程已確認</span></td><td>訂位資料：LX122 ZRH 13:15→ICN T1 07:30+1，商務艙 Z；ICN T1 停 4h30；BR169 ICN T1 12:00+1→TPE T2 13:35+1，商務艙 D，座位 09A/09C/09D。SWISS 公開航線頁列 LX122 約 13:20→07:30，實際以訂位頁為準。</td></tr>
+  </tbody></table>
+</section>
+
+<section>
+  <h2>⑤ 購票時程 <span class="en">when to buy</span></h2>
+  <table>
+    <thead><tr><th>時間</th><th>項目</th><th>建議</th></tr></thead>
+    <tbody>
+      <tr><td>Pass 計算完成後</td><td>HFC / JTP / BOP / STP</td><td>目前主軸是 HFC + JTP4；購買前確認 HFC 覆蓋瑞士用票日 6/17-6/30，JTP4 啟用 6/18-6/21。BOP / STP 只在路線大改或 covered value 明顯翻盤時改列購買。</td></tr>
+      <tr><td>少女峰區前</td><td>JTP4 或逐段票</td><td>採 JTP4 6/18-6/21 作主軸；D3 Lauterbrunnen 是走不動時備案，不作加碼理由。GPX 座位成本以 1 等普通座為基準。</td></tr>
+      <tr><td>看天氣前 1-2 天或當天</td><td>Jungfraujoch / Glacier Paradise / Sunnegga-Blauherd</td><td>山岳票受天氣影響大，不為了早買犧牲彈性；D5 天氣好優先 Jungfraujoch，用 JTP connecting ticket 並確認座位時段。</td></tr>
+      <tr><td>出發前重查</td><td>GoldenPass Express 6/28 14:38 座位</td><td>座位等級已選 1 等普通座；查 14:38 的 1 等座位庫存。1/2 等座位預約官方語氣是 strongly recommended。</td></tr>
+      <tr><td>出發前重查</td><td>D13 / D14 SBB 長途</td><td>本輪不採 Saver / Supersaver；重查 HFC 1 等 Point-to-point、路線與轉乘時間即可。若之後想另開省錢分支，再回頭看綁班票。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>⑥ 待確認才可定案 <span class="en">do not guess</span></h2>
+  <ul>
+    <li><strong>D6 6/21 小額交通：</strong>BOB、Interlaken Ost→Brienz、PostBus 103 與 BLS 船已列 2 等 / 1 等或不適用價；出發前重查 SBB/Libero 票籃與船班時刻。</li>
+    <li><strong>D5 6/20 Jungfraujoch：</strong>JTP4 主軸用 connecting ticket；HFC / HFC+BOP、STP / BOP alone 三種票價分支已列入成本參考。實買仍依天氣、官方購票頁與座位時段。</li>
+    <li><strong>D13 6/28 GoldenPass Express：</strong>Spiez 14:38 → Montreux 17:25、1 等普通座票價已查；出發前仍需查座位庫存與購票頁顯示。</li>
+    <li><strong>D13 / D14 SBB 長途：</strong>本輪不採 Saver / Supersaver；出發前只重查 HFC 1 等點對點、路線與轉乘時間，確保彈性票籃仍一致。</li>
+    <li><strong>D10 / D11 策馬特山線：</strong>Peak Pass 已初算不利，但若實際加碼多條山線，需用購票頁逐項票 vs Peak Pass reduced 重新比較。</li>
+    <li><strong>非票券變數：</strong>航班已由訂位資料確認；住宿未定項目留在 uncertain.html，通常不影響 HFC + JTP4 主軸。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>⑦ 查證來源 <span class="en">2026-06-05/06</span></h2>
+  <details class="fold"><summary>展開查證來源連結（官方頁／PDF）<span class="badge">查證</span></summary>
+  <div class="fold-body">
+  <ul class="src">
+    <li>Swiss Half Fare Card：<a href="https://www.sbb.ch/en/tickets-offers/tickets/guests-abroad/swiss-halffare-card.html" target="_blank" rel="noopener">SBB Swiss Half Fare Card</a></li>
+    <li>SBB Point-to-point / timetable 查價：<a href="https://www.sbb.ch/en/offers/point-to-point-ticket" target="_blank" rel="noopener">SBB Point-to-Point Ticket</a>、<a href="https://www.sbb.ch/en/buying/pages/fahrplan/fahrplan.xhtml" target="_blank" rel="noopener">SBB timetable / ticket shop</a>。2026-06-05/06 以 Playwright 讀 SBB 官方購票流程並用票價表交叉；D2-1、D2-2、D2-2a、D2-2b、D6-1、D6-2、D6-last、D7、D8-fast、D8-mountain split、D9、D13、D14、D15 已逐段列入獨立表。標 Supersaver / from 者為綁班浮動價；Point-to-point 為較彈性的同頁加價或購票頁票名。</li>
+    <li>Saver Day Pass / Half-Fare Day Pass：<a href="https://www.sbb.ch/en/tickets-offers/tickets/day-passes/saver-day-pass" target="_blank" rel="noopener">SBB Saver Day Pass</a>、<a href="https://www.sbb.ch/en/offers/day-passes" target="_blank" rel="noopener">SBB day passes overview</a></li>
+    <li>Swiss Travel Pass：<a href="https://www.sbb.ch/en/offers/buy-swiss-travel-pass?duration=15" target="_blank" rel="noopener">SBB buy Swiss Travel Pass</a>、<a href="https://www.myswitzerland.com/en-us/planning/transport-accommodation/tickets-public-transport/swiss-travel-pass/" target="_blank" rel="noopener">Switzerland Tourism</a>、<a href="https://community.sbb.ch/d/12883-swiss-travel-pass" target="_blank" rel="noopener">SBB Community STP/Jungfraujoch</a>（STP 到 Grindelwald/Lauterbrunnen covered，往 Jungfraujoch 25%）</li>
+    <li>Jungfrau Travel Pass / Jungfraujoch connecting ticket：<a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/" target="_blank" rel="noopener">jungfrau.ch JTP</a>、<a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/connecting-ticket-to-jungfrau-travel-pass/" target="_blank" rel="noopener">connecting ticket</a></li>
+    <li>Jungfraujoch seat reservation：<a href="https://www.jungfrau.ch/en-gb/arriving/" target="_blank" rel="noopener">jungfrau.ch Arriving</a>、<a href="https://www.jungfrau.ch/en-gb/faq/" target="_blank" rel="noopener">FAQ</a>（官方頁列 01.05-31.10.2026 seat reservation mandatory，CHF 10）</li>
+    <li>Jungfraubahnen 2026 個別票價：<a href="https://cdn.jungfrau.ch/Prospekte_und_Broschueren/Jungfraubahnen_Fahrpreise_Preisliste.pdf" target="_blank" rel="noopener">Fahrpreise / Prices / Prix 14.12.2025-12.12.2026 PDF</a>（Saison 2：Kleine Scheidegg→Lauterbrunnen 全價 CHF 46、Lauterbrunnen→Grindelwald via Zweilütschinen 全價 CHF 9.40、Interlaken Ost→Grindelwald 2 等全價 CHF 11.80；HFC 50%）</li>
+    <li>少女峰區逐項 HFC 票價（2026-06-06 加強，圖檔 PDF 以 Read 視覺判讀）：<a href="https://www.maennlichen.ch/files/content/informieren/ggm/preise_sommer_2026.pdf" target="_blank" rel="noopener">Männlichen 自 Grindelwald 2026 夏季票價 PDF</a>（官方；Grindelwald–Männlichen 單程 34 / 來回 68、Panoramaweg 環線 74.60、HFC/STP 50%、JTP/BOP 免費）、<a href="https://www.maennlichen.ch/files/content/informieren/lwm/preise_sommer_2026.pdf" target="_blank" rel="noopener">Wengen–Männlichen 票價 PDF</a>（31/62、HFC 50%）；jungfrau.ch 官方頁內嵌價：<a href="https://www.jungfrau.ch/en-gb/grindelwald-first/" target="_blank" rel="noopener">First From CHF 38</a>、<a href="https://www.jungfrau.ch/en-gb/harder-kulm/" target="_blank" rel="noopener">Harder Kulm From CHF 19</a>、<a href="https://www.jungfrau.ch/en-gb/jungfraujoch-top-of-europe/" target="_blank" rel="noopener">Jungfraujoch From CHF 119.60</a>（與全票 239.20×50% 相符；實買仍以官方購票頁為準）；BLS Lake Cruise：<a href="https://www.bls-schiff.ch/sites/default/files/2025-11/fares_lake-cruises_2026.pdf" target="_blank" rel="noopener">2026 fares PDF</a>（Brienz→Iseltwald 單程 2 等 24 / 1 等 40）與 <a href="https://www.bls-schiff.ch/en/contact-help/frequently-asked-questions" target="_blank" rel="noopener">BLS FAQ</a>（Swiss Half Fare Card 50%）</li>
+    <li>PostBus / Libero 103：<a href="https://www.sbb.ch/en/travelcards-and-tickets/fare-networks/libero" target="_blank" rel="noopener">SBB Libero fare network</a>、<a href="https://www.mylibero.ch/sites/default/files/2025-12/Libero-Prospekt-2026.pdf" target="_blank" rel="noopener">Libero 2026 prospectus</a>（2-zone reduced 單程 CHF 3.00）、<a href="https://www.mylibero.ch/sites/default/files/2025-12/Tarif-651.10-DE-2025-12.pdf" target="_blank" rel="noopener">Tarif 651.10</a>（Interlaken Ost 750、Iseltwald 810）</li>
+    <li>Berner Oberland Pass：<a href="https://www.berneseoberlandpass.ch/prices-tickets/" target="_blank" rel="noopener">prices &amp; tickets</a>、<a href="https://www.berneseoberlandpass.ch/public-transport/mob-goldenpass/" target="_blank" rel="noopener">GoldenPass validity</a>、<a href="https://www.berneseoberlandpass.ch/public-transport/grindelwald-maennlichen/" target="_blank" rel="noopener">Männlichen</a>、<a href="https://www.berneseoberlandpass.ch/public-transport/grindelwald-first/" target="_blank" rel="noopener">First</a>、<a href="https://www.berneseoberlandpass.ch/public-transport/interlaken-harder-kulm/" target="_blank" rel="noopener">Harder Kulm</a>、<a href="https://www.berneseoberlandpass.ch/public-transport/jungfraubahnen-jungfraujoch/" target="_blank" rel="noopener">Jungfraujoch special price</a>、<a href="https://www.berneseoberlandpass.ch/faq/" target="_blank" rel="noopener">FAQ / seat reservations</a></li>
+    <li>BLS Lake Cruise / Brienzersee 船班：<a href="https://www.bls-schiff.ch/en/lake-cruise/timetable" target="_blank" rel="noopener">official timetable</a>、<a href="https://www.bls-schiff.ch/sites/default/files/2025-12/timetable_bls_schifffahrt_2026.pdf" target="_blank" rel="noopener">2026 timetable PDF</a></li>
+    <li>Oeschinensee 2026 票價/FAQ：<a href="https://www.oeschinensee.ch/en/tarife-fahrplan/" target="_blank" rel="noopener">oeschinensee.ch</a></li>
+    <li>Aletsch Explorer / Aletsch 營運：<a href="https://www.aletscharena.ch/en/planning-booking/offers-experiences/aletsch-explorer" target="_blank" rel="noopener">Aletsch Explorer</a>、<a href="https://www.aletscharena.ch/en/planning-booking/travel-mobility/timetable-season-times" target="_blank" rel="noopener">season times</a></li>
+    <li>Matterhorn Paradise / Zermatt 夏季時刻與 Peak Pass：<a href="https://www.matterhornparadise.ch/en/book/tickets" target="_blank" rel="noopener">tickets</a>、<a href="https://www.matterhornparadise.ch/ZBAG/13-trade/01-downloads/03-prospekte-broschueren/singleandreturntickets_2026.pdf" target="_blank" rel="noopener">2026 single &amp; return tickets PDF</a>、<a href="https://www.matterhornparadise.ch/de/informationen/tickets-tarife/wander-tickets" target="_blank" rel="noopener">Peak Pass prices</a>、<a href="https://www.matterhornparadise.ch/ZBAG/17-PDF/flyer/flyer-sommer/2026/fahrplan-sommer-2026.pdf" target="_blank" rel="noopener">2026 summer timetable PDF</a></li>
+    <li>Gornergrat：<a href="https://www.gornergrat.ch/en/pages/prices-gornergrat-bahn" target="_blank" rel="noopener">prices</a>、<a href="https://www.gornergrat.ch/en/pages/faq-tickets" target="_blank" rel="noopener">FAQ tickets</a></li>
+    <li>GoldenPass Express：<a href="https://www.gpx.swiss/en/pages/timetable" target="_blank" rel="noopener">official timetable</a>、<a href="https://widgets.oev-info.ch/publikation/jahresfpl/471.pdf" target="_blank" rel="noopener">2026 PDF</a>、<a href="https://support.mob.ch/hc/fr-ch/sections/10841743525149-Tarifs" target="_blank" rel="noopener">MOB fare support</a>（Spiez→Montreux 1 等 CHF 84、Half-Fare 有效）、<a href="https://support.mob.ch/hc/en-ch/articles/11671993080349-How-much-does-it-cost-to-reserve-a-seat" target="_blank" rel="noopener">MOB seat reservation</a>（GoldenPass Express CHF 20）</li>
+    <li>航班：使用者提供之訂位資料；SWISS 官方航線頁交叉確認 <a href="https://www.swiss.com/lhg/th/en/o-d/cy-cy/bangkok-zurich" target="_blank" rel="noopener">LX181 BKK-ZRH</a> 與 <a href="https://www.swiss.com/lhg/ch/en/o-d/cy-cy/zurich-seoul" target="_blank" rel="noopener">LX122 ZRH-ICN</a> 公開時刻。</li>
+    <li>鐵路樣本班次：<a href="https://search.ch/timetable/" target="_blank" rel="noopener">search.ch timetable</a>；出發前仍以 <a href="https://www.sbb.ch/en" target="_blank" rel="noopener">SBB</a> 即時查詢為準。</li>
+  </ul>
+  </div></details>
+</section>
+
+<div class="foot">所有票價、航班與時刻均為 2026-06-05/06 查證結果；動態資訊以官方購票頁、SBB/MOB 即時時刻與航空公司訂位紀錄為準。</div>
+</div>
+</body>
+</html>

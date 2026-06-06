@@ -2,8 +2,8 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2026 瑞士住宿與航班</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 瑞士 15 日行程</title>
 <style>
   :root {
     --bg: #f6f3ec;
@@ -11,377 +11,1536 @@
     --ink: #202426;
     --muted: #66706b;
     --line: #ded8cb;
-    --accent: #2f6f73;
-    --accent-soft: #e8f1ef;
+    --accent: #b8472d;
+    --accent-soft: #f4e4dc;
+    --green: #166534;
+    --green-bg: #dcfce7;
+    --blue: #1d4ed8;
+    --blue-bg: #dbeafe;
+    --amber: #92400e;
+    --amber-bg: #fef3c7;
   }
-
   * { box-sizing: border-box; }
-
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
-    line-height: 1.55;
+    line-height: 1.58;
   }
-
-  .wrap {
-    width: min(920px, calc(100% - 32px));
-    margin: 0 auto;
-    padding: 28px 0 56px;
+  a { color: var(--accent); }
+  .nav-icon,
+  .status-icon,
+  .tag-icon,
+  .summary-icon {
+    display: inline-block;
+    line-height: 1;
   }
-
-  header {
-    display: grid;
-    gap: 8px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .eyebrow {
-    margin: 0;
-    color: var(--accent);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-  }
-
-  h1 {
-    margin: 0;
-    font-size: clamp(30px, 6vw, 48px);
-    line-height: 1.08;
-    letter-spacing: 0;
-  }
-
-  .summary {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin: 18px 0;
-  }
-
-  .metric {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px 16px;
-  }
-
-  .metric span {
-    display: block;
-    color: var(--muted);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-  }
-
-  .metric strong {
-    display: block;
-    margin-top: 4px;
-    font-size: 18px;
-  }
-
-  .flight-board {
-    display: grid;
-    gap: 10px;
-    margin: 18px 0;
-  }
-
-  .flight {
-    display: grid;
-    grid-template-columns: 64px 92px 86px minmax(240px, 1fr) minmax(150px, 0.75fr);
-    gap: 12px;
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    min-height: 76px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px 16px;
-  }
-
-  .flight-direction {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 30px;
-    padding: 5px 8px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 900;
-  }
-
-  .flight-date {
-    border-right: 1px solid var(--line);
-    padding-right: 12px;
-  }
-
-  .flight-date strong,
-  .flight-code {
-    display: block;
-    font-size: 21px;
-    line-height: 1.05;
-  }
-
-  .flight-date span {
-    display: block;
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  .flight-code {
-    font-weight: 900;
-  }
-
-  .flight-time {
-    font-weight: 800;
-    font-size: 19px;
-  }
-
-  .flight-note {
-    color: var(--muted);
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .list {
-    display: grid;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  .stay {
-    display: grid;
-    grid-template-columns: 96px 1fr;
     gap: 16px;
-    align-items: center;
-    min-height: 74px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px 16px;
+    padding: 10px 18px;
+    background: rgba(246, 243, 236, 0.94);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
   }
-
-  .date {
-    border-right: 1px solid var(--line);
-    padding-right: 12px;
-  }
-
-  .date strong {
-    display: block;
-    font-size: 21px;
-    line-height: 1.05;
-  }
-
-  .date span {
-    display: block;
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  .place {
+  .toplinks {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    align-items: baseline;
   }
-
-  .place strong {
-    font-size: 21px;
-    line-height: 1.2;
+  .toplinks a,
+  .toplinks button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
   }
-
-  .place span {
+  .toplinks a:hover,
+  .toplinks button:hover { color: var(--accent); border-color: var(--accent); }
+  .toplinks button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .hero {
+    min-height: 72vh;
+    display: grid;
+    align-items: end;
+    background:
+      linear-gradient(180deg, rgba(16, 24, 20, .22), rgba(16, 24, 20, .78)),
+      url("https://www.gornergrat-kulm.ch/wp-content/uploads/2022/03/hotel-exterior-winter-daytime-2.jpg") center / cover;
+    color: #fff;
+  }
+  .hero-inner {
+    width: min(1120px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 72px 0 42px;
+  }
+  .eyebrow {
+    margin: 0 0 12px;
+    color: #f5cdbf;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 0;
+    max-width: 760px;
+    font-size: clamp(42px, 8vw, 92px);
+    line-height: .96;
+    letter-spacing: 0;
+  }
+  .hero-sub {
+    max-width: 760px;
+    margin: 18px 0 0;
+    font-size: clamp(17px, 2.2vw, 23px);
+    color: rgba(255,255,255,.88);
+  }
+  .hero-flight {
+    width: min(760px, 100%);
+    margin-top: 24px;
+    padding-left: 16px;
+    border-left: 3px solid rgba(245, 205, 191, .9);
+    color: #fff;
+  }
+  .wrap {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 72px;
+  }
+  section {
+    margin: 22px 0;
+    scroll-margin-top: 104px;
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(24px, 4vw, 36px);
+    line-height: 1.15;
+  }
+  .section-note {
+    margin: 0;
     color: var(--muted);
     font-size: 14px;
   }
-
-  .highlight {
-    background: var(--accent-soft);
-    border-color: #b9d1cd;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
   }
-
-  footer {
-    margin-top: 22px;
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+  }
+  .card p {
+    margin: 0;
     color: var(--muted);
+    font-size: 14px;
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 24px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .status.good { background: var(--green-bg); color: var(--green); }
+  .status.blue { background: var(--blue-bg); color: var(--blue); }
+  .status.warn { background: var(--amber-bg); color: var(--amber); }
+  .fold {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: clip;
+  }
+  .fold summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 17px 18px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .fold summary::-webkit-details-marker { display: none; }
+  .fold summary h2 {
+    margin-top: 3px;
+  }
+  .fold-summary-copy {
+    min-width: 0;
+  }
+  .fold-toggle {
+    flex: 0 0 auto;
+    min-width: 48px;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
     font-size: 13px;
+    font-weight: 950;
     text-align: center;
   }
-
-  @media (max-width: 680px) {
-    .summary {
-      grid-template-columns: 1fr;
+  .fold-body {
+    padding: 0 18px 18px;
+  }
+  .fold[open] {
+    box-shadow: 0 14px 34px rgba(40, 32, 24, .08);
+  }
+  .fold[open] .fold-toggle::before { content: "收合"; }
+  .fold:not([open]) .fold-toggle::before { content: "展開"; }
+  .flight-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .flight {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .flight-date {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .flight-code {
+    margin-top: 5px;
+    font-size: 25px;
+    font-weight: 950;
+  }
+  .flight-route {
+    margin-top: 5px;
+    font-weight: 900;
+  }
+  .flight-note {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .flight-status-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 12px;
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .hero-flight .flight-status-panel {
+    margin-bottom: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .68);
+  }
+  .flight-status-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  .flight-status-icon {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: var(--blue-bg);
+    color: var(--blue);
+    font-size: 21px;
+  }
+  .hero-flight .flight-status-icon {
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .32);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .24);
+  }
+  .flight-count-label {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 900;
+  }
+  .hero-flight .flight-count-label {
+    color: #f5cdbf;
+    letter-spacing: .08em;
+  }
+  .flight-count-main {
+    margin-top: 3px;
+    font-size: 22px;
+    font-weight: 950;
+  }
+  .hero-flight .flight-count-main {
+    color: #fff;
+    font-size: clamp(25px, 4vw, 34px);
+    line-height: 1.05;
+  }
+  .flight-count-sub {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .hero-flight .flight-count-sub {
+    color: rgba(255, 255, 255, .9);
+    font-weight: 800;
+  }
+  .flight-links,
+  .flight-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hero-flight .flight-links {
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .flight-links a,
+  .flight-links button,
+  .flight-actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 30px;
+    padding: 5px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 900;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .hero-flight .flight-links a,
+  .hero-flight .flight-links button {
+    min-height: 38px;
+    color: #fff;
+    background: rgba(0, 0, 0, .16);
+    border-color: rgba(255, 255, 255, .5);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .18);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, .62);
+  }
+  .flight-links a::before,
+  .flight-actions a::before {
+    content: "📡";
+    line-height: 1;
+  }
+  .flight-card-count {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--blue);
+  }
+  .flight-actions {
+    margin-top: 10px;
+  }
+  .drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(22, 18, 14, .38);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .18s ease, visibility 0s linear .18s;
+  }
+  .drawer-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity .18s ease;
+  }
+  .drawer-card {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(520px, calc(100% - 24px));
+    height: 100%;
+    overflow-y: auto;
+    background: var(--bg);
+    border-left: 1px solid var(--line);
+    box-shadow: -18px 0 42px rgba(30, 24, 20, .18);
+    transform: translateX(100%);
+    transition: transform .22s ease;
+    padding: 18px;
+  }
+  .drawer-backdrop.is-open .drawer-card {
+    transform: translateX(0);
+  }
+  .drawer-head {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 14px;
+    margin: -18px -18px 14px;
+    padding: 18px;
+    background: rgba(246, 243, 236, .96);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+  .drawer-head h2 {
+    font-size: 28px;
+  }
+  .drawer-close {
+    flex: 0 0 auto;
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 950;
+    cursor: pointer;
+  }
+  .drawer-card .grid,
+  .drawer-card .flight-grid {
+    grid-template-columns: 1fr;
+  }
+  body.drawer-open {
+    overflow: hidden;
+  }
+  .quick-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 53px;
+    z-index: 12;
+    background: var(--bg);
+  }
+  .quick-nav a {
+    min-width: 84px;
+    padding: 7px 9px;
+    border-radius: 5px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 900;
+  }
+  .quick-nav b {
+    display: block;
+    line-height: 1.15;
+  }
+  .quick-nav span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .quick-nav small {
+    display: block;
+    margin-top: 1px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+  .day-card {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 104px;
+  }
+  .day-num {
+    position: sticky;
+    top: 118px;
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-size: 25px;
+    font-weight: 950;
+  }
+  .day-main {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .day-media {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+    background: #ddd7c9;
+  }
+  .day-content {
+    padding: 18px 20px 20px;
+  }
+  .day-date {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 950;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .day-title {
+    margin: 5px 0 6px;
+    font-size: clamp(22px, 3.3vw, 34px);
+    line-height: 1.18;
+  }
+  .day-summary {
+    margin: 0 0 12px;
+    color: var(--muted);
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 24px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 900;
+  }
+  .timeline {
+    display: grid;
+    gap: 8px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 84px 28px 1fr;
+    gap: 10px;
+    align-items: start;
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+  }
+  .time {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 900;
+  }
+  .step-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: #f0ebe2;
+    font-size: 15px;
+    line-height: 1;
+  }
+  .hotel {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 7px;
+    background: #f8f6f1;
+    border: 1px solid var(--line);
+  }
+  .hotel-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
+  }
+  .hotel-icon {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+  }
+  .hotel strong { display: block; }
+  .hotel small {
+    display: block;
+    color: var(--muted);
+  }
+  .hotel small + small { margin-top: 2px; }
+  .hotel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .hotel a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 40px;
+    padding: 8px 11px;
+    border-radius: 7px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--accent);
+    font-weight: 900;
+    text-decoration: none;
+  }
+  .notice {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 7px;
+    background: var(--amber-bg);
+    color: var(--amber);
+    border: 1px solid #fcd34d;
+    font-size: 14px;
+  }
+  footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    text-align: center;
+    font-size: 13px;
+  }
+  @media (max-width: 880px) {
+    .grid, .flight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .section-head { display: block; }
+    .quick-nav { top: 52px; }
+    .day-card { grid-template-columns: 1fr; }
+    .day-num { position: static; width: auto; height: auto; border-radius: 7px; justify-content: start; padding: 9px 12px; }
+    .timeline li { grid-template-columns: 72px 1fr; }
+  }
+  @media (max-width: 560px) {
+    .topbar {
+      position: static;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      overflow: hidden;
     }
-
-    .stay {
-      grid-template-columns: 76px 1fr;
-      gap: 12px;
-      padding: 13px;
+    .toplinks {
+      flex: 1 1 auto;
+      min-width: 0;
+      margin-top: 0;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-
-    .flight {
-      grid-template-columns: 76px 1fr;
-      gap: 12px;
-      padding: 13px;
+    .toplinks::-webkit-scrollbar { display: none; }
+    .toplinks a,
+    .toplinks button {
+      flex: 0 0 auto;
+      min-height: 40px;
+      padding: 6px 10px;
+      font-size: 12px;
+      white-space: nowrap;
     }
-
-    .flight-direction {
-      grid-column: 1;
-      grid-row: 1 / span 3;
-      align-self: start;
+    .grid, .flight-grid { grid-template-columns: 1fr; }
+    .flight-status-panel { display: block; }
+    .flight-status-main { align-items: flex-start; }
+    .flight-links { margin-top: 10px; }
+    .flight-links a,
+    .flight-actions a { min-height: 42px; padding: 8px 11px; }
+    .drawer-card { width: 100%; padding: 16px; }
+    .drawer-head { margin: -16px -16px 14px; padding: 16px; }
+    .drawer-close { width: 44px; height: 44px; }
+    .quick-nav {
+      top: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin-inline: -16px;
+      padding-inline: 16px;
+      scrollbar-width: thin;
     }
-
-    .flight-date {
-      grid-column: 2;
-      border-right: 0;
-      padding-right: 0;
+    .quick-nav a { flex: 0 0 88px; }
+    section,
+    .day-card { scroll-margin-top: 140px; }
+    .hero { min-height: 62vh; }
+    .hero-inner {
+      width: min(1120px, calc(100% - 28px));
+      padding: 42px 0 28px;
     }
-
-    .flight-code,
-    .flight-time,
-    .flight-note {
-      grid-column: 2;
+    .eyebrow {
+      margin-bottom: 10px;
+      font-size: 11px;
+      letter-spacing: .12em;
     }
-
-    .place strong {
-      font-size: 18px;
+    h1 { font-size: clamp(38px, 12vw, 48px); }
+    .hero-sub {
+      margin-top: 12px;
+      font-size: 16px;
+      line-height: 1.56;
     }
-
-    .flight-date strong,
-    .flight-code,
-    .flight-time {
-      font-size: 18px;
+    .hero-flight { margin-top: 18px; }
+    .day-media { height: 160px; }
+    .day-content { padding: 16px; }
+    .day-title { font-size: 22px; }
+    .timeline li {
+      grid-template-columns: 62px 26px 1fr;
+      gap: 8px;
+    }
+    .time { font-size: 12px; }
+    .step-icon {
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+    }
+    .hotel-actions a {
+      flex: 1 1 130px;
+      min-height: 44px;
     }
   }
 </style>
 </head>
 <body>
+<header class="topbar">
+  <nav class="toplinks" aria-label="行程導覽">
+    <button id="langToggle" type="button" aria-label="切換全中文"><span class="nav-icon" aria-hidden="true">🌐</span><span>全中文</span></button>
+    <a href="trip.html"><span class="nav-icon" aria-hidden="true">🗺️</span><span>地圖視圖 ↗</span></a>
+    <button type="button" data-open-drawer="prepDrawer"><span class="nav-icon" aria-hidden="true">📋</span><span>出發前清單</span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Taipei / Bangkok / Zürich / Swiss Alps / Seoul</p>
+    <h1>2026 瑞士 15 日行程</h1>
+    <p class="hero-sub">2026/6/16 從台北出發,6/30 由 Zürich 返程,7/1 抵台。一路從湖區、少女峰區、策馬特走到 Montreux 與 Zürich。</p>
+    <div class="hero-flight" id="flights">
+      <div class="flight-status-panel" aria-live="polite">
+        <div class="flight-status-main">
+          <span class="flight-status-icon" aria-hidden="true">✈️</span>
+          <div>
+            <div class="flight-count-label">下一段航班倒數</div>
+            <div class="flight-count-main" id="nextFlightCountdown">計算中</div>
+            <div class="flight-count-sub" id="nextFlightMeta">以各地出發時間換算</div>
+          </div>
+        </div>
+        <div class="flight-links" aria-label="航班操作">
+          <a id="nextFlightStatusLink" href="https://www.flightradar24.com/data/flights/br75" target="_blank" rel="noopener">BR75 第三方追蹤</a>
+          <button type="button" data-open-drawer="flightDrawer"><span aria-hidden="true">✈️</span><span>完整航班資訊</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <main class="wrap">
-  <header>
-    <p class="eyebrow">住宿簡版</p>
-    <h1>2026 瑞士住宿與航班</h1>
-  </header>
+  <nav class="quick-nav" id="quickNav" aria-label="快速跳日程"></nav>
 
-  <section class="flight-board" aria-label="航班時間">
-    <article class="flight">
-      <div class="flight-direction">去程</div>
-      <div class="flight-date"><strong>6/16</strong><span>週二</span></div>
-      <div class="flight-code">BR75</div>
-      <div class="flight-time">TPE 07:50 → BKK 10:50</div>
-      <div class="flight-note">長榮航空 · Boeing 777-300ER</div>
-    </article>
-
-    <article class="flight">
-      <div class="flight-direction">去程</div>
-      <div class="flight-date"><strong>6/16</strong><span>週二</span></div>
-      <div class="flight-code">LX181</div>
-      <div class="flight-time">BKK 12:50 → ZRH 19:35</div>
-      <div class="flight-note">瑞士航空 · Boeing 777-300ER</div>
-    </article>
-
-    <article class="flight">
-      <div class="flight-direction">回程</div>
-      <div class="flight-date"><strong>6/30</strong><span>週二</span></div>
-      <div class="flight-code">LX122</div>
-      <div class="flight-time">ZRH 13:15 → ICN 07:30<sup>+1</sup></div>
-      <div class="flight-note">瑞士航空 · Airbus A350-900</div>
-    </article>
-
-    <article class="flight">
-      <div class="flight-direction">回程</div>
-      <div class="flight-date"><strong>7/1</strong><span>週三</span></div>
-      <div class="flight-code">BR169</div>
-      <div class="flight-time">ICN 12:00 → TPE 13:35</div>
-      <div class="flight-note">長榮航空 · Airbus A330-300</div>
-    </article>
-  </section>
-
-  <section class="summary" aria-label="住宿摘要">
-    <div class="metric">
-      <span>住宿日期</span>
-      <strong>2026/6/16-6/29</strong>
+  <section id="days">
+    <div class="section-head">
+      <div>
+        <h2>每日行程</h2>
+        <p class="section-note">Brig 與 Montreux 住宿暫以城市核心點標示。</p>
+      </div>
     </div>
-    <div class="metric">
-      <span>晚數</span>
-      <strong>14 晚</strong>
-    </div>
+    <div id="dayList"></div>
   </section>
 
-  <section class="list" aria-label="每日住宿地點">
-    <article class="stay">
-      <div class="date"><strong>6/16</strong><span>週二</span></div>
-      <div class="place"><strong>Zürich Airport 附近</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/17</strong><span>週三</span></div>
-      <div class="place"><strong>Grindelwald</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/18</strong><span>週四</span></div>
-      <div class="place"><strong>Grindelwald</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/19</strong><span>週五</span></div>
-      <div class="place"><strong>Grindelwald</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/20</strong><span>週六</span></div>
-      <div class="place"><strong>Grindelwald</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/21</strong><span>週日</span></div>
-      <div class="place"><strong>Spiez</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/22</strong><span>週一</span></div>
-      <div class="place"><strong>Spiez</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/23</strong><span>週二</span></div>
-      <div class="place"><strong>Brig</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/24</strong><span>週三</span></div>
-      <div class="place"><strong>Zermatt 鎮上</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/25</strong><span>週四</span></div>
-      <div class="place"><strong>Zermatt 鎮上</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/26</strong><span>週五</span></div>
-      <div class="place"><strong>Zermatt 鎮上</strong></div>
-    </article>
-
-    <article class="stay highlight">
-      <div class="date"><strong>6/27</strong><span>週六</span></div>
-      <div class="place"><strong>Gornergrat 3100</strong><span>山上住宿</span></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/28</strong><span>週日</span></div>
-      <div class="place"><strong>Montreux</strong></div>
-    </article>
-
-    <article class="stay">
-      <div class="date"><strong>6/29</strong><span>週一</span></div>
-      <div class="place"><strong>Zürich HB</strong><span>蘇黎世火車站附近</span></div>
-    </article>
-  </section>
-
-  <footer>版本日期：2026-06-05</footer>
+  <footer>
+    <p>更新基準: 2026-06-07 · 動態票價、航班與班次出發前再以官方頁重查。</p>
+  </footer>
 </main>
+
+<div class="drawer-backdrop" id="flightDrawer" aria-hidden="true">
+  <aside class="drawer-card" role="dialog" aria-modal="true" aria-labelledby="flightDrawerTitle">
+    <div class="drawer-head">
+      <div>
+        <span class="status blue"><span class="status-icon" aria-hidden="true">✈️</span><span>完整航班資訊</span></span>
+        <h2 id="flightDrawerTitle">航班</h2>
+        <p class="section-note">使用第三方航班直接頁追蹤即時狀態。</p>
+      </div>
+      <button class="drawer-close" type="button" data-close-drawer aria-label="關閉">×</button>
+    </div>
+    <div class="flight-grid">
+      <article class="flight" data-flight-code="BR75" data-flight-title="BR75 TPE→BKK" data-departure="2026-06-16T07:50:00+08:00" data-status-url="https://www.flightradar24.com/data/flights/br75">
+        <div class="flight-date">6/16 二 · 去程 1</div>
+        <div class="flight-code">BR75</div>
+        <div class="flight-route">TPE T2 07:50 → BKK 10:50</div>
+        <div class="flight-note">商務艙 D · 11A/11D/11G</div>
+        <div class="flight-card-count" data-flight-countdown>倒數計算中</div>
+        <div class="flight-actions"><a href="https://www.flightradar24.com/data/flights/br75" target="_blank" rel="noopener" data-status-link>BR75 第三方追蹤</a></div>
+      </article>
+      <article class="flight" data-flight-code="LX181" data-flight-title="LX181 BKK→ZRH" data-departure="2026-06-16T12:50:00+07:00" data-status-url="https://www.flightradar24.com/data/flights/lx181">
+        <div class="flight-date">6/16 二 · 去程 2</div>
+        <div class="flight-code">LX181</div>
+        <div class="flight-route">BKK 12:50 → ZRH 19:35</div>
+        <div class="flight-note">商務艙 Z · BKK 轉機 2h</div>
+        <div class="flight-card-count" data-flight-countdown>倒數計算中</div>
+        <div class="flight-actions"><a href="https://www.flightradar24.com/data/flights/lx181" target="_blank" rel="noopener" data-status-link>LX181 第三方追蹤</a></div>
+      </article>
+      <article class="flight" data-flight-code="LX122" data-flight-title="LX122 ZRH→ICN" data-departure="2026-06-30T13:15:00+02:00" data-status-url="https://www.flightradar24.com/data/flights/lx122">
+        <div class="flight-date">6/30 二 · 回程 1</div>
+        <div class="flight-code">LX122</div>
+        <div class="flight-route">ZRH 13:15 → ICN T1 07:30+1</div>
+        <div class="flight-note">商務艙 Z</div>
+        <div class="flight-card-count" data-flight-countdown>倒數計算中</div>
+        <div class="flight-actions"><a href="https://www.flightradar24.com/data/flights/lx122" target="_blank" rel="noopener" data-status-link>LX122 第三方追蹤</a></div>
+      </article>
+      <article class="flight" data-flight-code="BR169" data-flight-title="BR169 ICN→TPE" data-departure="2026-07-01T12:00:00+09:00" data-status-url="https://www.flightradar24.com/data/flights/br169">
+        <div class="flight-date">7/1 三 · 回程 2</div>
+        <div class="flight-code">BR169</div>
+        <div class="flight-route">ICN T1 12:00 → TPE T2 13:35</div>
+        <div class="flight-note">商務艙 D · 09A/09C/09D</div>
+        <div class="flight-card-count" data-flight-countdown>倒數計算中</div>
+        <div class="flight-actions"><a href="https://www.flightradar24.com/data/flights/br169" target="_blank" rel="noopener" data-status-link>BR169 第三方追蹤</a></div>
+      </article>
+    </div>
+  </aside>
+</div>
+
+<div class="drawer-backdrop" id="prepDrawer" aria-hidden="true">
+  <aside class="drawer-card" role="dialog" aria-modal="true" aria-labelledby="prepDrawerTitle">
+    <div class="drawer-head">
+      <div>
+        <span class="status good"><span class="status-icon" aria-hidden="true">📋</span><span>出發前清單</span></span>
+        <h2 id="prepDrawerTitle">出發前處理</h2>
+        <p class="section-note">按時間順序處理；票價與時段以官方購票頁為準。</p>
+      </div>
+      <button class="drawer-close" type="button" data-close-drawer aria-label="關閉">×</button>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <span class="status good"><span class="status-icon" aria-hidden="true">🎫</span><span>先買</span></span>
+        <h3>Swiss Half Fare Card</h3>
+        <p>5 張,覆蓋 6/17-6/30 瑞士用票日。<br><a href="https://www.sbb.ch/en/tickets-offers/tickets/guests-abroad/swiss-halffare-card.html" target="_blank" rel="noopener">SBB 官網</a></p>
+      </article>
+      <article class="card">
+        <span class="status good"><span class="status-icon" aria-hidden="true">🚞</span><span>先買</span></span>
+        <h3>Jungfrau Travel Pass 4 日</h3>
+        <p>5 張,6/18-6/21。D3-D6 少女峰區主軸。<br><a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/" target="_blank" rel="noopener">jungfrau.ch</a></p>
+      </article>
+      <article class="card">
+        <span class="status blue"><span class="status-icon" aria-hidden="true">⛅</span><span>看天氣</span></span>
+        <h3>Jungfraujoch</h3>
+        <p>D5 好天氣優先上山。用 JTP connecting ticket 並確認座位時段。<br><a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/connecting-ticket-to-jungfrau-travel-pass/" target="_blank" rel="noopener">Connecting ticket</a></p>
+      </article>
+      <article class="card">
+        <span class="status blue"><span class="status-icon" aria-hidden="true">🚆</span><span>出發前</span></span>
+        <h3>GoldenPass Express</h3>
+        <p>6/28 Spiez 14:38 → Montreux 17:25,1 等普通座。<br><a href="https://www.gpx.swiss/en/pages/timetable" target="_blank" rel="noopener">GPX 時刻</a></p>
+      </article>
+    </div>
+  </aside>
+</div>
+
+<script>
+const hotelLinks = {
+  zrh: {
+    name: "Radisson Blu Zurich Airport",
+    maps: "Radisson Blu Hotel Zurich Airport",
+    link: "https://www.radissonhotels.com/en-us/hotels/radisson-blu-zurich-airport",
+    details: [
+      "入住/退房: 入住 15:00 · 退房 12:00（以確認信為準）",
+      "位置: 蘇黎世機場有蓋走廊連通航廈,晚到免外出移動"
+    ]
+  },
+  grindelwald: {
+    name: "Grindelwald 公寓",
+    maps: "Alpin Chic - Aare Jungfrau AG - Three-Bedroom Apartment",
+    link: "https://www.airbnb.com.tw/rooms/1275129086150054004",
+    details: [
+      "洗衣機: 有",
+      "入住/退房: 入住 16:00-22:00 · 退房 10:00 前"
+    ]
+  },
+  spiez: {
+    name: "Niesen Loft",
+    maps: "Niesen Loft Kirchgasse 20 Spiez",
+    link: "https://niesenloft.holidayfuture.com/listings/353929",
+    details: [
+      "洗衣機: 有",
+      "入住/退房: 入住 15:00 · 退房 10:00"
+    ]
+  },
+  brig: {
+    name: "Brig 車站周邊住宿",
+    maps: "Brig Bahnhof Switzerland",
+    details: [
+      "住宿確認後回填洗衣機與入住/退房時間"
+    ]
+  },
+  zermatt: {
+    name: "Heinz Julen Loft",
+    maps: "Heinz Julen Loft Bachstrasse Zermatt",
+    link: "https://www.airbnb.com.tw/rooms/17381831",
+    details: [
+      "洗衣機: 有",
+      "入住/退房: 入住 16:00-20:00 · 退房 10:00 前"
+    ]
+  },
+  gornergrat: {
+    name: "3100 Kulmhotel Gornergrat",
+    maps: "3100 Kulmhotel Gornergrat",
+    link: "https://gornergrat-kulm.ch/?lang=en",
+    details: [
+      "入住/退房: 入住 15:00 · 退房 11:00（以確認信為準）",
+      "高海拔 3100m: 只帶過夜小包上山"
+    ]
+  },
+  montreux: {
+    name: "Montreux 車站/湖畔住宿",
+    maps: "Montreux Gare Switzerland",
+    details: [
+      "住宿確認後回填洗衣機與入住/退房時間"
+    ]
+  },
+  zurich: {
+    name: "Ruby Mimi Zurich",
+    maps: "Ruby Mimi Hotel Zurich Beatenplatz 4",
+    link: "https://www.ruby-hotels.com/en/destinations/zurich/ruby-mimi",
+    details: [
+      "入住/退房: 入住 15:00 · 退房 12:00（以確認信為準）",
+      "位置: Zürich HB 步行約 2 分,Bahnhofstrasse 旁"
+    ]
+  }
+};
+
+const days = [
+  {
+    n: 1, date: "6/16 二", title: "Taipei → Bangkok → Zürich", image: "https://media.flughafen-zuerich.ch/-/jssmedia/airport/portal/bilder/shopfinder/bilder/dienstleistungen/radisson_lobby.jpg?sc_lang=en&vs=1&sc_site=dxp-portal&rev=06cc18a2a984483191873ab3fa5b5208",
+    summary: "BR75 + LX181 同張票抵達 Zürich。晚到後直接住機場旁。",
+    tags: ["長程飛行", "BKK 轉機 2h", "機場飯店"],
+    items: [
+      ["07:50", "TPE T2 起飛,BR75 商務艙 D,座位 11A/11D/11G"],
+      ["10:50", "抵達 BKK,轉機 2 小時"],
+      ["12:50", "BKK 起飛,LX181 商務艙 Z"],
+      ["19:35", "抵達 Zürich ZRH,入境取行李後前往機場飯店"]
+    ],
+    hotel: ["zrh", "1 晚 · 6/16", "第 1 晚 / 共 1 晚"]
+  },
+  {
+    n: 2, date: "6/17 三", title: "Zürich Airport → Luzern → Grindelwald", image: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI3NTEyOTA4NjE1MDA1NDAwNA%3D%3D/original/8829c889-3009-4688-ba2f-9eb84053c9ca.jpeg?im_w=720&width=720&quality=70&auto=webp",
+    summary: "琉森短停後搭 Luzern-Interlaken Express 進山,抵達 Grindelwald 連住 4 晚。",
+    tags: ["HFC", "Luzern 短停", "進山"],
+    items: [
+      ["09:10", "左右離開機場飯店,搭 09:15 Zürich Flughafen → Luzern 直達車,約 10:25 抵達 Luzern"],
+      ["抵達後", "Luzern 站寄物: SBB city level locker 有 S/M/L/XL,2026 高季最低 6 小時約 CHF 6/8/10/12 起；大型行李以現場尺寸與空位為準"],
+      ["10:25-15:00", "琉森市區彈性約 4 小時: 卡貝爾橋、舊城區、琉森湖畔、午餐/咖啡；腳程順可加獅子紀念碑"],
+      ["15:06", "Luzern → Interlaken Express 黃金列車東段,16:54 抵達 Interlaken Ost,接 17:04 區間火車,約 17:40 到 Grindelwald"],
+      ["傍晚", "入住後鎮上輕鬆散步、超市補給,早點休息"]
+    ],
+    hotel: ["grindelwald", "連住 4 晚 · 6/17-6/21", "第 1 晚 / 共 4 晚"]
+  },
+  {
+    n: 3, date: "6/18 四", title: "Männlichen / Kleine Scheidegg", image: "",
+    summary: "JTP4 Day 1。主走全景步道；Lauterbrunnen 是走不動時的低壓備案。",
+    tags: ["JTP4", "健行偏長", "瀑布鎮備案"],
+    items: [
+      ["出發前", "先看 Jungfrau Live Webcams 的 Männlichen / Kleine Scheidegg 雲況", [["Jungfrau Live Webcams", "https://webcams.jungfrau.ch/"]]],
+      ["早上", "Grindelwald Terminal 搭纜車上 Männlichen"],
+      ["上午", "Männlichen → Kleine Scheidegg 全景路線 4.7km,幾乎全下坡；純步行約 1.5-2 小時,T1 簡單"],
+      ["長輩版", "走路慢抓 2.5-3 小時含休息；長下坡帶登山杖護膝,起點/中途/終點有廁所"],
+      ["中午", "Kleine Scheidegg 午餐休息"],
+      ["下午", "有餘力可走 Eiger Walk: Eigergletscher → Kleine Scheidegg 約 2.5km、45-60 分,T1；膝蓋怕下坡可直接下山"]
+    ],
+    hotel: ["grindelwald", "連住 4 晚 · 6/17-6/21", "第 2 晚 / 共 4 晚"]
+  },
+  {
+    n: 4, date: "6/19 五", title: "First Cliff Walk + Bachalpsee", image: "",
+    summary: "JTP4 Day 2。First 纜車 covered,主軸是 Cliff Walk 與 Bachalpsee。",
+    tags: ["JTP4", "First", "Bachalpsee"],
+    items: [
+      ["出發前", "先看 Jungfrau Live Webcams 的 First 雲況", [["Jungfrau Live Webcams", "https://webcams.jungfrau.ch/"]]],
+      ["早上", "從 Grindelwald Firstbahn 搭纜車到 First"],
+      ["上午", "First Cliff Walk 懸崖步道約 20-40 分,簡單；懼高可略過懸空段"],
+      ["中午", "Bachalpsee 來回約 6km,含休息拍照約 2-3 小時,主線 T1"],
+      ["長輩版", "走路慢抓 3-3.5 小時；頭段小陡坡後幾近平坦,中途與湖畔有廁所"],
+      ["下午", "搭纜車回 Grindelwald 放鬆"]
+    ],
+    hotel: ["grindelwald", "連住 4 晚 · 6/17-6/21", "第 3 晚 / 共 4 晚"]
+  },
+  {
+    n: 5, date: "6/20 六", title: "Jungfraujoch 優先 / Harder Kulm 備援", image: "",
+    summary: "JTP4 Day 3。天氣好時優先 Jungfraujoch；Harder Kulm 放備援或傍晚加菜。",
+    tags: ["JTP4", "天氣決策", "JFJ 優先"],
+    items: [
+      ["早上", "看 Jungfrau 即時影像與雲況後買 JTP connecting ticket 並確認座位時段", [["Jungfrau Live Webcams", "https://webcams.jungfrau.ch/"]]],
+      ["上午/中午", "上 Jungfraujoch,高海拔站內慢走抓 1.5-2.5 小時；保暖、補水、放慢步調"],
+      ["下午", "下山回 Grindelwald 休息,不另外硬塞長健行"],
+      ["傍晚", "體力好可加 Harder Kulm: Interlaken Ost 步行到 Harderbahn 約 5-7 分,纜車約 10 分,山頂停留 30-60 分"]
+    ],
+    hotel: ["grindelwald", "連住 4 晚 · 6/17-6/21", "第 4 晚 / 共 4 晚"]
+  },
+  {
+    n: 6, date: "6/21 日", title: "Lake Brienz / Brienz / Iseltwald → Spiez", image: "https://bookingenginecdn.hostaway.com/listing/65032-353929-Q1MSD5EpIG4JkkZwfKRnPK3bqtKyVNAFoiJlnzs6u7I-67935e846a55a?width=720&height=450&quality=70&format=jpeg&v=2",
+    summary: "JTP4 Day 4。Interlaken Ost 寄大行李,輕裝玩 Brienz 與 Iseltwald,傍晚到 Spiez。",
+    tags: ["JTP4", "湖船", "寄行李"],
+    items: [
+      ["出發前", "先看 Brienzersee Webcam 的湖區天氣", [["Brienzersee Webcam", "https://www.brienzersee.ch/en/webcam"]]],
+      ["早上", "Grindelwald 退房,BOB 火車約 32 分到 Interlaken Ost,大行李寄站內 locker,全天輕裝遊湖"],
+      ["中午", "Interlaken Ost → Brienz 約 20 分,Brienz 湖邊散步與午餐"],
+      ["下午", "BLS 船 Brienz → Iseltwald 約 27 分,船班不固定,出發前重查官方時刻"],
+      ["下午", "Iseltwald 湖岸散步拍照,步行量可抓 30-60 分"],
+      ["傍晚", "PostBus 103 約 20-25 分回 Interlaken Ost 取行李,再搭火車約 21 分到 Spiez 入住"]
+    ],
+    hotel: ["spiez", "連住 2 晚 · 6/21-6/23", "第 1 晚 / 共 2 晚"]
+  },
+  {
+    n: 7, date: "6/22 一", title: "Oeschinensee / Kandersteg", image: "",
+    summary: "Spiez 出發的高山湖日。纜車加山上接駁可把步行量降到低。",
+    tags: ["HFC", "高山湖", "長輩友善"],
+    items: [
+      ["出發前", "先看 Oeschinensee 官網即時天氣與湖面狀況", [["Oeschinensee 官網", "https://www.oeschinensee.ch/en/"]]],
+      ["早上", "Spiez → Kandersteg 直達火車約 30 分"],
+      ["上午", "Kandersteg 站接駁巴士到纜車站,纜車上山到 Oeschinen 山上站約 7 分"],
+      ["上午", "山上電動接駁車約 5 分直達湖邊,長輩可省下下坡步行"],
+      ["中午", "Oeschinensee 湖畔餐廳午餐與拍照"],
+      ["下午", "湖畔平緩散步 30 分-1.5 小時,幾乎平路；之後原路回 Spiez"]
+    ],
+    hotel: ["spiez", "連住 2 晚 · 6/21-6/23", "第 2 晚 / 共 2 晚"]
+  },
+  {
+    n: 8, date: "6/23 二", title: "Spiez → Brig / Aletsch", image: "",
+    summary: "Brig 中繼日。天氣清楚時去 Riederalp / Moosfluh 看 Aletsch 冰河。",
+    tags: ["HFC", "Brig 暫定位", "Aletsch"],
+    items: [
+      ["早上", "Spiez 退房,搭車到 Brig"],
+      ["上午", "先處理大行李,暫以 Brig 車站周邊為住宿定位"],
+      ["中午/下午", "天氣清楚時去 Riederalp / Moosfluh 看 Aletsch 冰河,觀景短走抓 30-60 分"],
+      ["路線", "中繼加景點日: 火車與纜車轉乘較多,步行可控制在簡單到中等"],
+      ["傍晚", "Brig 老城、Stockalper Palace 或 Brigerbad,回車站周邊住宿"]
+    ],
+    hotel: ["brig", "1 晚 · 6/23 · 暫定位", "第 1 晚 / 共 1 晚"]
+  },
+  {
+    n: 9, date: "6/24 三", title: "Brig → Zermatt 鎮上適應", image: "https://a0.muscache.com/im/pictures/d9787197-4bee-4f7f-aff4-98784728fc0b.jpg?im_w=720&width=720&quality=70&auto=webp",
+    summary: "上午進 Zermatt。下午只排鎮上低強度散步,為後面高海拔做準備。",
+    tags: ["HFC", "海拔適應", "Zermatt"],
+    items: [
+      ["出發前", "先看 Matterhorn Paradise Panorama Live,確認 Zermatt / Sunnegga / Gornergrat 一帶雲況", [["Matterhorn Paradise Live", "https://www.matterhornparadise.ch/en/summer/panoramalive"]]],
+      ["上午", "Brig / Visp → Zermatt 約 1h15-1h25"],
+      ["中午", "Zermatt 站周邊午餐與行李處理"],
+      ["下午", "Hinterdorf 防鼠木屋區、馬特洪峰橋畔與咖啡休息,鎮上慢走約 1-1.5 小時,簡單"],
+      ["選配", "Zmutt 單程約 1h-1h20,來回約 2-2.5h；Zmutt Loop 約 5.5-6km、爬升 300-350m,T1-T2"],
+      ["傍晚", "入住 Heinz Julen Loft"]
+    ],
+    hotel: ["zermatt", "連住 3 晚 · 6/24-6/27", "第 1 晚 / 共 3 晚"]
+  },
+  {
+    n: 10, date: "6/25 四", title: "Matterhorn Glacier Paradise", image: "",
+    summary: "好天氣可上冰川天堂 3883m；下午視體力補 Sunnegga / Blauherd / Stellisee。",
+    tags: ["HFC", "3883m", "天氣決策"],
+    items: [
+      ["早上", "看 Matterhorn Paradise Panorama Live 狀態後買票", [["Matterhorn Paradise Live", "https://www.matterhornparadise.ch/en/summer/panoramalive"]]],
+      ["上午", "上 Glacier Paradise 3883m,高海拔短停慢走、保暖、補水"],
+      ["下午", "Sunnegga / Blauherd / Stellisee 視體力補景；Stellisee 短版純走來回 40-50 分,含拍照休息抓 1.5-2h,T1"],
+      ["延伸", "五湖全線 9.3-9.8km,Blauherd→Sunnegga 點對點約 3-4h,近 T2；只在體力和天氣都順時再走"],
+      ["傍晚", "回 Zermatt 鎮上休息"]
+    ],
+    hotel: ["zermatt", "連住 3 晚 · 6/24-6/27", "第 2 晚 / 共 3 晚"]
+  },
+  {
+    n: 11, date: "6/26 五", title: "Zermatt 彈性日", image: "",
+    summary: "保留給天氣、體力和補景。不搬行李,讓全程節奏喘一口氣。",
+    tags: ["HFC", "緩衝日", "不搬行李"],
+    items: [
+      ["全天", "補前一天沒看到的山景,或鎮上慢活；出門前先看 Matterhorn Paradise Live", [["Matterhorn Paradise Live", "https://www.matterhornparadise.ch/en/summer/panoramalive"]]],
+      ["選配", "Riffelsee / Gornergrat 沿線補景"],
+      ["選配", "Gorner Gorge 冰河峽谷: 鎮上步行約 20 分到入口,來回約 45-60 分,簡單；棧道與階梯可能濕滑"],
+      ["選配", "Bahnhofstrasse 紀念品、明信片與咖啡休息"],
+      ["晚上", "整理隔天上 Gornergrat 的過夜小包"]
+    ],
+    hotel: ["zermatt", "連住 3 晚 · 6/24-6/27", "第 3 晚 / 共 3 晚"]
+  },
+  {
+    n: 12, date: "6/27 六", title: "Gornergrat 3100 過夜", image: "https://www.gornergrat-kulm.ch/wp-content/uploads/2022/03/hotel-exterior-winter-daytime-2.jpg",
+    summary: "鎮上預適應後再上 3100m。只帶過夜小包,大行李留 Zermatt。",
+    tags: ["HFC", "高海拔過夜", "小包上山"],
+    items: [
+      ["出發前", "先看 Gornergrat Webcams 與 Matterhorn Paradise Live,確認山頂能見度", [["Gornergrat Webcams", "https://www.gornergrat.ch/en/stories/webcam"], ["Matterhorn Paradise Live", "https://www.matterhornparadise.ch/en/summer/panoramalive"]]],
+      ["上午", "Zermatt 鎮上整理過夜小包,大行李留鎮上"],
+      ["下午", "搭 Gornergrat Bahn 上山,車程約 33 分"],
+      ["下午", "Gornergrat 觀景與短走 30-60 分,慢走適應 3100m"],
+      ["晚上", "入住 3100 Kulmhotel,早睡準備日出"]
+    ],
+    hotel: ["gornergrat", "1 晚 · 6/27", "第 1 晚 / 共 1 晚"]
+  },
+  {
+    n: 13, date: "6/28 日", title: "Gornergrat → Spiez → Montreux", image: "",
+    summary: "看日出後下山取行李,搭 14:38 GoldenPass Express 到 Montreux。",
+    tags: ["HFC", "GPX 14:38", "Montreux 暫定位"],
+    items: [
+      ["清晨", "Gornergrat 看馬特洪峰日出,6 月底日出約 05:40 前後；清晨先看 Gornergrat Webcams", [["Gornergrat Webcams", "https://www.gornergrat.ch/en/stories/webcam"]]],
+      ["上午", "早餐後下山回 Zermatt 取大行李,預留轉乘與行李時間"],
+      ["14:38", "Spiez → Montreux,GoldenPass Express 1 等普通座"],
+      ["17:25", "抵達 Montreux,湖邊晚餐與住宿"],
+      ["路線", "全程最長移動日,以穩定接上 14:38 GPX 為主,步行量控制在車站與湖邊短散步"]
+    ],
+    hotel: ["montreux", "1 晚 · 6/28 · 暫定位", "第 1 晚 / 共 1 晚"]
+  },
+  {
+    n: 14, date: "6/29 一", title: "Montreux → Zürich HB", image: "",
+    summary: "上午湖邊短散步,午後回 Zürich HB 附近住宿,降低隔天機場壓力。",
+    tags: ["HFC", "湖畔短散步", "Zürich HB"],
+    items: [
+      ["上午", "Montreux 湖畔散步與咖啡,步行量抓 30-90 分"],
+      ["選配", "Chillon Castle 外觀或湖邊步道,時間與體力順再加"],
+      ["午後", "Montreux → Zürich HB 約 2.5-3 小時"],
+      ["傍晚", "Ruby Mimi Zurich 入住,整理行李與退稅資料"],
+      ["晚上", "Bahnhofstrasse、Altstadt 老城區或 Zürichsee 湖畔慢走"]
+    ],
+    hotel: ["zurich", "1 晚 · 6/29", "第 1 晚 / 共 1 晚"]
+  },
+  {
+    n: 15, date: "6/30 二", title: "Zürich → Seoul → Taipei", image: "",
+    summary: "早上從 Zürich HB 前往 ZRH。LX122 到 ICN,7/1 轉 BR169 抵台。",
+    tags: ["LX122", "ICN T1", "BR169"],
+    items: [
+      ["早上", "Ruby Mimi Zurich 退房,前往 Zürich Flughafen"],
+      ["10:15 前", "抵達 ZRH,辦理托運與退稅"],
+      ["13:15", "LX122 ZRH → ICN T1 07:30+1"],
+      ["7/1 12:00", "BR169 ICN T1 → TPE T2 13:35"]
+    ],
+    hotel: null
+  }
+];
+
+function escapeHTML(value) {
+  return String(value || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function mapsLink(query) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+const dayNavLabels = {
+  1: "蘇黎世",
+  2: "格林德瓦",
+  3: "格林德瓦",
+  4: "格林德瓦",
+  5: "格林德瓦",
+  6: "施皮茨",
+  7: "施皮茨",
+  8: "布里格",
+  9: "策馬特",
+  10: "策馬特",
+  11: "策馬特",
+  12: "3100",
+  13: "蒙特魯",
+  14: "蘇黎世",
+  15: "返程"
+};
+
+function tagIcon(label) {
+  if (/飛行|LX|BR|ICN|BKK|機場/.test(label)) return "✈️";
+  if (/JTP|HFC|Pass|GPX|GoldenPass/.test(label)) return "🎫";
+  if (/健行|湖|山|冰河|3883|3100|高海拔|高山|First|Bachalpsee|Oeschinensee/.test(label)) return "⛰️";
+  if (/天氣|緩衝|備案|決策/.test(label)) return "⛅";
+  if (/住宿|飯店|不搬|小包|寄行李|暫定位/.test(label)) return "🏨";
+  if (/船|湖船/.test(label)) return "⛵";
+  return "📍";
+}
+
+function timelineIcon(time, text) {
+  const value = `${time} ${text}`;
+  if (/BR|LX|起飛|抵達 ZRH|ICN|TPE|BKK|托運|退稅/.test(value)) return "✈️";
+  if (/火車|搭車|直達車|區間火車|Express|BOB|Gornergrat Bahn|GPX|GoldenPass|Zürich Flughafen|Zürich HB|Luzern|Interlaken|Spiez|Brig|Visp|Zermatt/.test(value)) return "🚆";
+  if (/纜車|Firstbahn|Harderbahn|山上站|Eiger Express/.test(value)) return "🚡";
+  if (/巴士|PostBus|接駁/.test(value)) return "🚌";
+  if (/船|BLS/.test(value)) return "⛵";
+  if (/行李|退房|入住|整理|寄/.test(value)) return "🧳";
+  if (/午餐|晚餐|早餐|咖啡|超市|補給/.test(value)) return "🍽️";
+  if (/Webcam|雲況|天氣|live|狀態/.test(value)) return "📹";
+  if (/健行|步道|散步|慢走|短走|湖畔|鎮上|老城|峽谷|Loop|Stellisee|Riffelsee|Cliff Walk|Bachalpsee|日出/.test(value)) return "🥾";
+  if (/高海拔|保暖|補水|放慢/.test(value)) return "⛰️";
+  return "📍";
+}
+
+// 中英切換：旅伴想全中文閱讀時，把常見地名與專有名詞轉成中文。
+const zhDict = [
+  ["2026 Swiss Trip", "2026 瑞士行程"],
+  ["Radisson Blu Zurich Airport", "麗笙酒店・蘇黎世機場"],
+  ["Radisson Blu Hotel Zurich Airport", "麗笙酒店・蘇黎世機場"],
+  ["Alpin Chic - Aare Jungfrau AG - Three-Bedroom Apartment", "阿爾卑斯山時尚公寓"],
+  ["Alpin Chic", "阿爾卑斯山時尚公寓"],
+  ["Aare Jungfrau AG", "阿勒少女峰公寓"],
+  ["Niesen Loft", "尼森閣樓"],
+  ["Heinz Julen Loft", "海因茲・朱倫閣樓"],
+  ["3100 Kulmhotel Gornergrat", "3100 庫爾姆酒店・戈爾內格拉特"],
+  ["Kulmhotel Gornergrat", "庫爾姆酒店・戈爾內格拉特"],
+  ["3100 Kulmhotel", "3100 庫爾姆酒店"],
+  ["Ruby Mimi Zurich", "Ruby Mimi 蘇黎世"],
+  ["Ruby Mimi Hotel Zurich", "Ruby Mimi 蘇黎世"],
+  ["Grindelwald 公寓", "格林德瓦公寓"],
+  ["Brig 車站周邊住宿", "布里格車站周邊住宿"],
+  ["Montreux 車站/湖畔住宿", "蒙特魯車站/湖畔住宿"],
+  ["Taipei", "台北"],
+  ["Bangkok", "曼谷"],
+  ["Seoul", "首爾"],
+  ["Zürich ZRH", "蘇黎世機場"],
+  ["Zürich Airport", "蘇黎世機場"],
+  ["Zurich Airport", "蘇黎世機場"],
+  ["Zürich Flughafen", "蘇黎世機場站"],
+  ["Zürich HB", "蘇黎世中央車站"],
+  ["Zurich HB", "蘇黎世中央車站"],
+  ["Zürich", "蘇黎世"],
+  ["Zurich", "蘇黎世"],
+  ["Luzern", "琉森"],
+  ["Lucerne", "琉森"],
+  ["Grindelwald Terminal", "格林德瓦轉運站"],
+  ["Grindelwald Firstbahn", "格林德瓦菲斯特纜車站"],
+  ["Grindelwald", "格林德瓦"],
+  ["Interlaken Ost", "茵特拉肯東站"],
+  ["Interlaken", "茵特拉肯"],
+  ["Brienz", "布里恩茨"],
+  ["Lake Brienz", "布里恩茨湖"],
+  ["Brienzersee", "布里恩茨湖"],
+  ["Iseltwald", "伊瑟爾特瓦爾德"],
+  ["Spiez", "施皮茨"],
+  ["Kandersteg", "坎德斯泰格"],
+  ["Oeschinensee", "厄希嫩湖"],
+  ["Brig Bahnhof", "布里格車站"],
+  ["Brig", "布里格"],
+  ["Brig / Aletsch", "布里格 / 阿萊奇冰河"],
+  ["Aletsch 冰河", "阿萊奇冰河"],
+  ["Aletsch", "阿萊奇"],
+  ["Riederalp", "里德阿普"],
+  ["Moosfluh", "莫斯福律"],
+  ["Stockalper Palace", "斯托卡爾珀宮"],
+  ["Visp", "菲斯普"],
+  ["Zermatt", "策馬特"],
+  ["Matterhorn Glacier Paradise", "馬特洪峰冰川天堂"],
+  ["Glacier Paradise", "冰川天堂"],
+  ["Matterhorn Paradise", "馬特洪峰天堂"],
+  ["Matterhorn", "馬特洪峰"],
+  ["Gornergrat Bahn", "戈爾內格拉特登山鐵道"],
+  ["Gornergrat", "戈爾內格拉特"],
+  ["Riffelsee", "利菲爾湖"],
+  ["Gorner Gorge", "戈爾納峽谷"],
+  ["Hinterdorf", "老村區"],
+  ["Bahnhofstrasse", "班霍夫大街"],
+  ["Sunnegga", "蘇內加"],
+  ["Blauherd", "布勞赫德"],
+  ["Stellisee", "施德利湖"],
+  ["Montreux Gare", "蒙特魯車站"],
+  ["Montreux", "蒙特魯"],
+  ["Chillon Castle", "西庸城堡"],
+  ["GoldenPass Express", "黃金列車"],
+  ["Männlichen", "曼利申"],
+  ["Kleine Scheidegg", "小夏戴克"],
+  ["Eigergletscher", "艾格冰川站"],
+  ["Jungfraujoch", "少女峰"],
+  ["Harder Kulm", "哈德昆觀景台"],
+  ["Lauterbrunnen", "勞特布魯嫩"],
+  ["First Cliff Walk", "菲斯特懸崖步道"],
+  ["Cliff Walk", "懸崖步道"],
+  ["Bachalpsee", "巴哈爾普湖"],
+  ["Eiger Express", "艾格快線"],
+  ["Jungfraubahn", "少女峰鐵路"],
+  ["Panorama Trail", "全景步道"],
+  ["Luzern-Interlaken Express", "琉森-茵特拉肯快車"],
+  ["Matterhorn Paradise live 狀態", "馬特洪峰天堂即時狀態"],
+  ["Matterhorn Paradise live", "馬特洪峰天堂即時狀態"],
+  ["First 纜車 covered", "菲斯特纜車包含"],
+  ["Cliff Walk 與 Bachalpsee", "懸崖步道與巴哈爾普湖"],
+  ["Swiss Half Fare Card", "瑞士半價卡"],
+  ["Jungfrau Travel Pass 4 日", "少女峰旅行通行證 4 日"],
+  ["Jungfrau Travel Pass", "少女峰旅行通行證"],
+  ["JTP connecting ticket", "少女峰通行證接續票"],
+  ["Connecting ticket", "接續票"],
+  ["JTP4 Day 1", "少女峰通行證第 1 天"],
+  ["JTP4 Day 2", "少女峰通行證第 2 天"],
+  ["JTP4 Day 3", "少女峰通行證第 3 天"],
+  ["JTP4 Day 4", "少女峰通行證第 4 天"],
+  ["JTP4", "少女峰通行證"],
+  ["HFC", "半價卡"],
+  ["SBB 官網", "瑞士國鐵官網"],
+  ["SBB", "瑞士國鐵"],
+  ["BLS 船", "BLS 遊船"],
+  ["Oeschinen", "厄希嫩"],
+  ["First", "菲斯特"],
+  ["PostBus", "郵政巴士"],
+  ["GPX", "黃金列車"],
+  ["JFJ", "少女峰"],
+  ["2.5-3h", "2.5-3 小時"],
+  ["3-3.5h", "3-3.5 小時"],
+  ["2h", "2 小時"],
+  ["6km", "6 公里"],
+  ["3883m", "3883 公尺"],
+  ["3100m", "3100 公尺"],
+  ["covered", "包含"],
+  ["loop", "路線"],
+  ["Switzerland", "瑞士"],
+  ["Swiss Alps", "瑞士阿爾卑斯山"],
+  ["Google Maps", "Google 地圖"],
+  ["Taipei → Bangkok → Zürich", "台北 → 曼谷 → 蘇黎世"],
+  ["Zürich → Seoul → Taipei", "蘇黎世 → 首爾 → 台北"],
+  ["Bangkok → Zürich", "曼谷 → 蘇黎世"],
+  ["Zürich → Seoul", "蘇黎世 → 首爾"],
+  ["Seoul → Taipei", "首爾 → 台北"],
+  ["Check-in", "入住"],
+  ["checkout", "退房"],
+  ["Check-out", "退房"],
+  ["Business", "商務艙"],
+  ["Flight", "航班"],
+  ["TPE", "桃園機場"],
+  ["BKK", "曼谷機場"],
+  ["ZRH", "蘇黎世機場"],
+  ["ICN", "仁川機場"]
+].sort((a, b) => b[0].length - a[0].length);
+
+const zhOriginalTexts = new WeakMap();
+window.zhMode = false;
+
+function collectTextNodes() {
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: node => {
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+      if (parent.closest("#langToggle")) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const nodes = [];
+  let node;
+  while ((node = walker.nextNode())) nodes.push(node);
+  return nodes;
+}
+
+function applyZhMode() {
+  collectTextNodes().forEach(node => {
+    if (window.zhMode) {
+      if (!zhOriginalTexts.has(node)) zhOriginalTexts.set(node, node.nodeValue);
+      let text = zhOriginalTexts.get(node);
+      zhDict.forEach(([source, target]) => {
+        text = text.split(source).join(target);
+      });
+      node.nodeValue = text;
+    } else if (zhOriginalTexts.has(node)) {
+      node.nodeValue = zhOriginalTexts.get(node);
+    }
+  });
+  const button = document.getElementById("langToggle");
+  if (button) {
+    button.innerHTML = `<span class="nav-icon" aria-hidden="true">🌐</span><span>${window.zhMode ? "還原原文" : "全中文"}</span>`;
+    button.classList.toggle("active", window.zhMode);
+  }
+}
+
+function setupLanguageToggle() {
+  const button = document.getElementById("langToggle");
+  if (!button) return;
+  button.addEventListener("click", () => {
+    window.zhMode = !window.zhMode;
+    try { localStorage.setItem("zhMode", String(window.zhMode)); } catch (error) {}
+    applyZhMode();
+  });
+  try {
+    if (localStorage.getItem("zhMode") === "true") {
+      window.zhMode = true;
+    }
+  } catch (error) {}
+}
+
+function renderNav() {
+  document.getElementById("quickNav").innerHTML = days.map(d => `
+    <a href="#day-${d.n}"><b>D${d.n}</b><span>${escapeHTML(d.date.split(" ")[0])}</span><small>${escapeHTML(dayNavLabels[d.n] || "")}</small></a>
+  `).join("");
+}
+
+function renderHotel(hotelSpec) {
+  if (!hotelSpec) return "";
+  const [key, nights, nightIndex] = hotelSpec;
+  const h = hotelLinks[key];
+  if (!h) return "";
+  const showStayDetails = !nightIndex || nightIndex.includes("第 1 晚");
+  const details = [nightIndex, ...(showStayDetails ? (h.details || []) : [])].filter(Boolean);
+  return `
+    <div class="hotel">
+      <div class="hotel-title"><span class="hotel-icon" aria-hidden="true">🏨</span><strong>住宿: ${escapeHTML(h.name)}</strong></div>
+      <small>${escapeHTML(nights)}</small>
+      ${details.map(line => `<small>${escapeHTML(line)}</small>`).join("")}
+      <div class="hotel-actions">
+        <a href="${mapsLink(h.maps)}" target="_blank" rel="noopener"><span aria-hidden="true">📍</span><span>Google Maps</span></a>
+        ${h.link ? `<a href="${h.link}" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span><span>住宿連結</span></a>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+function renderTimelineItem(item) {
+  const [time, text, links] = item;
+  const linkHTML = Array.isArray(links) && links.length
+    ? ` ${links.map(([label, href]) => `<a href="${escapeHTML(href)}" target="_blank" rel="noopener">${escapeHTML(label)}</a>`).join(" · ")}`
+    : "";
+  return `<li><span class="time">${escapeHTML(time)}</span><span class="step-icon" aria-hidden="true">${timelineIcon(time, text)}</span><span>${escapeHTML(text)}${linkHTML}</span></li>`;
+}
+
+function renderDays() {
+  document.getElementById("dayList").innerHTML = days.map(d => {
+    const image = d.image ? `<img class="day-media" src="${d.image}" alt="${escapeHTML(d.title)}" loading="lazy" decoding="async">` : "";
+    return `
+      <article class="day-card" id="day-${d.n}">
+        <div class="day-num">D${d.n}</div>
+        <div class="day-main">
+          ${image}
+          <div class="day-content">
+            <div class="day-date">${escapeHTML(d.date)}</div>
+            <h3 class="day-title">${escapeHTML(d.title)}</h3>
+            <p class="day-summary">${escapeHTML(d.summary)}</p>
+            <div class="tags">${d.tags.map(t => `<span class="tag"><span class="tag-icon" aria-hidden="true">${tagIcon(t)}</span><span>${escapeHTML(t)}</span></span>`).join("")}</div>
+            <ul class="timeline">
+              ${d.items.map(renderTimelineItem).join("")}
+            </ul>
+            ${renderHotel(d.hotel)}
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function formatCountdown(ms) {
+  if (ms <= 0) return "已起飛";
+  const totalMinutes = Math.floor(ms / 60000);
+  const daysLeft = Math.floor(totalMinutes / 1440);
+  const hoursLeft = Math.floor((totalMinutes % 1440) / 60);
+  const minutesLeft = totalMinutes % 60;
+  if (daysLeft > 0) return `倒數 ${daysLeft} 天 ${hoursLeft} 小時`;
+  if (hoursLeft > 0) return `倒數 ${hoursLeft} 小時 ${minutesLeft} 分`;
+  return `倒數 ${minutesLeft} 分`;
+}
+
+function updateFlightCountdowns() {
+  const now = new Date();
+  const flights = Array.from(document.querySelectorAll(".flight[data-departure]")).map(card => {
+    const departure = new Date(card.dataset.departure);
+    const ms = departure - now;
+    const code = card.dataset.flightCode || "";
+    const title = card.dataset.flightTitle || card.dataset.flightCode || "航班";
+    const status = {
+      href: card.dataset.statusUrl || "#",
+      label: code ? `${code} 第三方追蹤` : "第三方追蹤"
+    };
+    const display = formatCountdown(ms);
+    const countdown = card.querySelector("[data-flight-countdown]");
+    if (countdown) countdown.textContent = display;
+    const cardStatusLink = card.querySelector("[data-status-link]");
+    if (cardStatusLink) {
+      cardStatusLink.href = status.href;
+      cardStatusLink.textContent = status.label;
+    }
+    return { code, title, departure, ms, display, status };
+  });
+  const next = flights.filter(f => f.ms > 0).sort((a, b) => a.ms - b.ms)[0] || flights[flights.length - 1];
+  const main = document.getElementById("nextFlightCountdown");
+  const meta = document.getElementById("nextFlightMeta");
+  const statusLink = document.getElementById("nextFlightStatusLink");
+  if (!main || !meta || !next) return;
+  main.textContent = next.display;
+  meta.textContent = `${next.title} · ${next.departure.toLocaleString("zh-TW", {
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  })}`;
+  if (statusLink) {
+    statusLink.href = next.status.href;
+    statusLink.textContent = next.status.label;
+  }
+}
+
+function setupCompanionControls() {
+  function openDrawer(drawer) {
+    if (!drawer) return;
+    drawer.classList.add("is-open");
+    drawer.setAttribute("aria-hidden", "false");
+    document.body.classList.add("drawer-open");
+  }
+
+  function closeDrawer(drawer) {
+    if (!drawer) return;
+    drawer.classList.remove("is-open");
+    drawer.setAttribute("aria-hidden", "true");
+    if (!document.querySelector(".drawer-backdrop.is-open")) {
+      document.body.classList.remove("drawer-open");
+    }
+  }
+
+  document.querySelectorAll("[data-open-drawer]").forEach(control => {
+    control.addEventListener("click", () => {
+      openDrawer(document.getElementById(control.dataset.openDrawer));
+    });
+  });
+
+  document.querySelectorAll(".drawer-backdrop").forEach(drawer => {
+    drawer.addEventListener("click", event => {
+      if (event.target === drawer || event.target.closest("[data-close-drawer]")) {
+        closeDrawer(drawer);
+      }
+    });
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      document.querySelectorAll(".drawer-backdrop.is-open").forEach(closeDrawer);
+    }
+  });
+}
+
+renderNav();
+renderDays();
+setupLanguageToggle();
+setupCompanionControls();
+updateFlightCountdowns();
+applyZhMode();
+window.setInterval(updateFlightCountdowns, 60000);
+</script>
 </body>
 </html>
